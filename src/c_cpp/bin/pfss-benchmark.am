@@ -1,0 +1,35 @@
+##
+## For the copyright information for this file, please search up the
+## directory tree for the first COPYING file.
+##
+
+## begin_variables
+
+$(src_c_cpp_bin_pfss_benchmark_OBJECTS): src/c_cpp/libpfss.la
+
+bin_PROGRAMS += src/c_cpp/bin/pfss-benchmark
+
+src_c_cpp_bin_pfss_benchmark_CPPFLAGS = \
+  $(AM_CPPFLAGS) \
+$(prevent_a_blank_line)
+
+src_c_cpp_bin_pfss_benchmark_CXXFLAGS = \
+  $(AM_CXXFLAGS) \
+  $(EXE_CXXFLAGS) \
+$(prevent_a_blank_line)
+
+src_c_cpp_bin_pfss_benchmark_LDADD = \
+  src/c_cpp/libpfss.la \
+$(prevent_a_blank_line)
+
+src_c_cpp_bin_pfss_benchmark_LDFLAGS = \
+  $(AM_LDFLAGS) \
+  $(EXE_LDFLAGS) \
+$(prevent_a_blank_line)
+
+src_c_cpp_bin_pfss_benchmark_SOURCES =
+src_c_cpp_bin_pfss_benchmark_SOURCES += src/c_cpp/bin/pfss-benchmark.cpp
+src_c_cpp_bin_pfss_benchmark_SOURCES += src/c_cpp/misc/pfss/benchmark.cpp
+src_c_cpp_bin_pfss_benchmark_SOURCES += src/c_cpp/misc/pfss/benchmark.hpp
+
+## end_variables

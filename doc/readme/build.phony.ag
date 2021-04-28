@@ -1,0 +1,36 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+unset -v d
+unset -v xs
+
+sst_expect_source_path "$BASH_SOURCE"
+d=$(sst_get_prefix $BASH_SOURCE)
+
+sst_array_from_zterm xs git ls-files -z ${d}.
+sst_am_distribute_file "${xs[@]}"
+
+sst_ac_config_file ${d}config.adoc
+sst_am_distribute_file ${d}config.adoc
+
+sst_ihs <<<"
+
+  ${d}diag:
+  	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_TOP)
+  	\$(AM_V_GEN)\$(GATBPS_V_NOP)
+  	\$(GATBPS_at)rm -f -r \$@
+  	\$(GATBPS_at)\$(MKDIR_P) \$@
+  	\$(GATBPS_at)rm -f README.html
+  	\$(GATBPS_at)\$(MAKE) \$(AM_MAKEFLAGS) \\
+  	  ASCIIDOCTOR_FLAGS='-a readme_diagrams=' \\
+  	  README.html \\
+  	;
+  	\$(GATBPS_at)rm -f README.html
+  	\$(GATBPS_at)touch \$@
+  	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_BOT)
+
+  EXTRA_DIST += ${d}diag
+
+" | sst_am_append

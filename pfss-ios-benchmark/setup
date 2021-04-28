@@ -1,0 +1,62 @@
+#! /bin/bash -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e -u -o pipefail
+
+readonly macbook="$1"
+
+./autogen
+
+./configure \
+  ASCIIDOCTOR='build-aux/adock asciidoctor' \
+;
+
+make dist
+
+ssh $macbook bash -c \''
+  set -e -u -o pipefail
+  cd Desktop
+  rm -f -r pfss
+  mkdir pfss
+'\'
+
+scp pfss-*.tar.gz $macbook:Desktop/pfss
+
+ssh $macbook bash -c \''
+  set -e -u -o pipefail
+  cd Desktop/pfss
+  tar xzf pfss-*.tar.gz
+  rm -f -r pfss-*.tar.gz
+  mv pfss-* pfss
+  (
+    cd pfss
+    unset PS4
+    set -x
+    echo "
+      gatbps_cv_HAVE_AES_NI=no
+      gatbps_cv_HAVE_ARM_CRYPTO=yes
+      gatbps_cv_HAVE_NETTLE=no
+      gatbps_cv_HAVE_SSE2=no
+      gatbps_cv_HAVE_X86=no
+    " >config.cache
+    ./configure -C
+    make \
+      src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc \
+      src/c_cpp/include/pfss/switch_db_rb.h \
+    ;
+    cpp_files=$(find \
+      src/c_cpp/lib \
+      src/c_cpp/misc \
+      -name "*.cpp" \
+      "!" -name "*jni*" \
+    );
+    for x in $cpp_files; do
+      mkdir -p pfss-ios-benchmark/${x%/*}
+      cp $x pfss-ios-benchmark/$x
+    done
+   ) 2>&1 | tee build.log
+   cp pfss/config.log .
+'\'

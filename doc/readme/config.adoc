@@ -1,0 +1,16 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/config.liquid.in file. If you edit this file, you
+// might need to edit that file as well.
+//
+
+:PACKAGE_NAME: PFSS
+:PACKAGE_TARNAME: pfss
+:PACKAGE_VERSION: 0.12.2
+
+//

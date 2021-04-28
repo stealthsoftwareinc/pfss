@@ -1,0 +1,39 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/documentation.md file. If you edit this file, you
+// might need to edit that file as well.
+//
+
+== Documentation
+
+:fp_package_name: {PACKAGE_NAME}
+:fp_package_tarname: {PACKAGE_TARNAME}
+:fp_artifact: manual
+:fp_builtin_view_latest_url:
+:fp_builtin_view_pinned_url:
+:fp_builtin_download_latest_url: doc/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_builtin_download_pinned_url:
+:fp_github_view_latest_url: https://stealthsoftwareinc.github.io/{PACKAGE_TARNAME}/manual
+:fp_github_view_pinned_url:
+:fp_github_download_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/master/doc/manual/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_github_download_pinned_url:
+:fp_gitlab_view_latest_url:
+:fp_gitlab_view_pinned_url:
+:fp_gitlab_download_latest_url:
+:fp_gitlab_download_pinned_url:
+:fp_devel_view_latest_url: https://www.stealthsoftwareinc.io/{PACKAGE_TARNAME}/manual
+:fp_devel_view_pinned_url:
+:fp_devel_download_latest_url: https://www.stealthsoftwareinc.io/{PACKAGE_TARNAME}/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_devel_download_pinned_url:
+ifndef::in_source_repo[]
+:fp_github_download_pinned_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/v{PACKAGE_VERSION}/doc/{PACKAGE_TARNAME}-{PACKAGE_VERSION}-manual.tar.xz
+endif::[]
+
+include::artifact_links_fragment.adoc[]
+
+//

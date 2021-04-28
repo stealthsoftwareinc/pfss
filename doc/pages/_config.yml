@@ -1,0 +1,16 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+exclude:
+  - '*.ac'
+  - '*.ag'
+  - '*.am'
+  - '*.in'
+  - '*.out'
+  - Gemfile
+  - Gemfile.lock
+
+sass:
+  sourcemap: never

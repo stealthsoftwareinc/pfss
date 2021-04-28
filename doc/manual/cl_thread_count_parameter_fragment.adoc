@@ -1,0 +1,11 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[subs="attributes+"]
+{fp_thread_count} specifies the number of threads to use to perform the
+computation.
+This number should always be positive.
+
+//

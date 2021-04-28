@@ -1,0 +1,49 @@
+dnl
+dnl For the copyright information for this file, please search up the
+dnl directory tree for the first COPYING file.
+dnl
+
+AC_DEFUN_ONCE([DEFINE_HAVE_AES_NI], [[{
+
+]AC_REQUIRE([DEFINE_HAVE_CFLAG_MAES])[
+]AC_REQUIRE([DEFINE_WITH_AES_NI])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_HAVE_CFLAG_MSSE]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_HAVE_CFLAG_MSSE2]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_HAVE_CXXFLAG_MAES]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_HAVE_CXXFLAG_MSSE]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_HAVE_CXXFLAG_MSSE2]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_WITH_SSE]])[
+]GATBPS_SOFT_REQUIRE([[DEFINE_WITH_SSE2]])[
+
+]GATBPS_CHECK_VARS(
+  [AES-NI],
+  [HAVE_AES_NI],
+  [
+    HAVE_CFLAG_MAES
+    WITH_AES_NI
+    ]GATBPS_SOFT_VAR_DEP([[HAVE_CFLAG_MSSE]])[
+    ]GATBPS_SOFT_VAR_DEP([[HAVE_CFLAG_MSSE2]])[
+    ]GATBPS_SOFT_VAR_DEP([[HAVE_CXXFLAG_MAES]])[
+    ]GATBPS_SOFT_VAR_DEP([[HAVE_CXXFLAG_MSSE]])[
+    ]GATBPS_SOFT_VAR_DEP([[HAVE_CXXFLAG_MSSE2]])[
+    ]GATBPS_SOFT_VAR_DEP([[WITH_SSE]])[
+    ]GATBPS_SOFT_VAR_DEP([[WITH_SSE2]])[
+  ])[
+
+]GATBPS_ARG_WITH_BOOL(
+  [insistence to use AES-NI],
+  [WITH_AES_NI_OR_DIE],
+  [aes-ni-or-die],
+  [no],
+  [demand the use of AES-NI],
+  [defer to --with-aes-ni])[
+
+case $WITH_AES_NI_OR_DIE,$HAVE_AES_NI in
+  1,0)
+    ]GATBPS_MSG_ERROR([
+      You specified --with-aes-ni-or-die, but AES-NI is not available.
+    ])[
+  ;;
+esac
+
+:;}]])

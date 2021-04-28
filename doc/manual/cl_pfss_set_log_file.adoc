@@ -1,0 +1,22 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_set_log_file,pfss_set_log_file]]
+= The `pfss_set_log_file` function
+
+.C and {cpp}
+[source,subs="normal"]
+----
+FILE * pfss_set_log_file(
+  FILE * log_file
+);
+----
+
+The `pfss_set_log_file` function sets the <<logging,logging>>
+destination to `log_file` and returns the previous logging destination.
+
+include::cl_logging_fragment.adoc[]
+
+//

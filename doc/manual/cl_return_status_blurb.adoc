@@ -1,0 +1,9 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+This function returns `PFSS_OK` upon success, or another status code
+upon failure.
+You can use the <<cl_pfss_get_status_name>> function to convert the
+status code into a human readable name.
+//

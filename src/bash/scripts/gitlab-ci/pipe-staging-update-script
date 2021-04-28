@@ -1,0 +1,48 @@
+#! /bin/sh -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+# Load the prelude.
+case $0 in /*) x=$0 ;; *) x=./$0 ;; esac
+x=`dirname "$x"` || exit $?
+set -e || exit $?
+. "$x"/../../preludes/gitlab-ci.bash
+
+sst_install_utility \
+  git \
+;
+
+readonly dist_dir="$1"
+readonly repo_dir="$2"
+
+dist_dir_name=$(basename "$dist_dir")
+readonly dist_dir_name
+
+x=$(find . '!' -name . -prune -name 'milestone-*' \
+    | sed 's/.*-//' | sort -n -r | head -n 1)
+milestone_dir=$rundir/milestone-$((x + 1))
+readonly milestone_dir
+
+mkdir "$milestone_dir"
+
+if [[ -d "$repo_dir/pipe-benchmarks/$dist_dir_name" ]]; then
+  mkdir "$milestone_dir/benchmarks"
+  (
+    cd "$repo_dir/pipe-benchmarks/$dist_dir_name"
+    for x in \
+      **/hardware.txt \
+      **/pfss-standard-benchmark.txt \
+    ; do
+      d=$(dirname "./$x")
+      mkdir -p "$milestone_dir/benchmarks/$d"
+      cp "./$x" "$milestone_dir/benchmarks/$d"
+    done
+  )
+fi
+
+mkdir "$milestone_dir/$dist_dir_name"
+mv -f "$dist_dir"/* "$milestone_dir/$dist_dir_name"
+
+git add .

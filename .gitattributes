@@ -1,0 +1,35 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+#
+# Disable end-of-line normalization by default.
+#
+
+* -text
+
+#
+# Enable end-of-line normalization for various file extensions.
+#
+
+*.ac text
+*.adoc text
+*.ag text
+*.am text
+*.awk text
+*.bash text
+*.c text
+*.cfg text
+*.cpp text
+*.gmk text
+*.gyp text
+*.h text
+*.java text
+*.js text
+*.json text
+*.m4 text
+*.md text
+*.sh text
+*.vim text
+*.yml text

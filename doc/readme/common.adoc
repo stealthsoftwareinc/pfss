@@ -1,0 +1,32 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// The following files are similar:
+//
+//       doc/readme/common.adoc
+//       doc/pages/_includes/common.liquid
+//
+// If you edit one of these files, you may need to edit the other(s) as
+// well.
+//
+
+ifdef::readme_diagrams[]
+ifeval::["{readme_diagrams}" != ""]
+:in_source_repo:
+endif::[]
+endif::[]
+ifndef::readme_diagrams[]
+:in_source_repo: x
+endif::[]
+
+ifdef::in_source_repo[]
+include::config_source.adoc[]
+endif::[]
+ifndef::in_source_repo[]
+include::config.adoc[]
+endif::[]
+
+//

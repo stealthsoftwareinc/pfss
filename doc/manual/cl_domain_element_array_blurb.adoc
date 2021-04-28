@@ -1,0 +1,8 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+`{xs}` should point to the first byte of an array of `{xs_count}`
+unsigned integers, each of which consists of `{x_size}` bytes in
+`{x_endianness}` byte order.
+//

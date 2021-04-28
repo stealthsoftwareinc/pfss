@@ -1,0 +1,55 @@
+#! /bin/bash -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e
+. src/bash/preludes/gitlab-ci.bash
+
+sst_ubuntu_install_raw \
+  g++ \
+  gcc \
+  git \
+  gnupg \
+  gnupg1 \
+  jq \
+  lshw \
+  m4 \
+  make \
+  openssl \
+  sshpass \
+  wget \
+;
+
+dist_archive=$rundir/$(sst_find_dist_archive | sst_csf)
+sst_csf dist_archive
+readonly dist_archive
+
+cd "$tmpdir"
+
+(
+
+  unset PS4
+  set -x
+
+  sst_extract_archive "$dist_archive"
+  cd *
+
+  ./configure \
+    CFLAGS='-O2' \
+    CPPFLAGS='-DNDEBUG' \
+    CXXFLAGS='-O2' \
+  ;
+  cp config.log "$rundir"
+
+  make
+  sudo make install
+  sudo ldconfig
+
+  pfss-standard-benchmark >"$rundir/pfss-standard-benchmark.txt"
+
+  sudo lshw >"$rundir/hardware.txt"
+
+) 2>&1 | tee "$rundir/build.log"
+

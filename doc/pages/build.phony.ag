@@ -1,0 +1,66 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+sst_expect_source_path "$BASH_SOURCE"
+d=$(sst_get_prefix $BASH_SOURCE)
+
+#-----------------------------------------------------------------------
+
+leaves_var=pages_src_leaves
+clean_var=pages_src_clean
+src_var=pages_src
+src_nodist_var=pages_src_nodist
+
+sst_am_var_add $leaves_var
+sst_am_var_add $clean_var
+sst_am_var_add $src_var
+sst_am_var_add $src_nodist_var
+
+for leaf in ${d}**/*; do
+  sst_expect_source_path "$leaf"
+  if [[ ! -f $leaf ]]; then
+    continue
+  fi
+  case $leaf in
+    *.phony.ag | *.phony.ac | *.phony.am)
+      sst_${leaf##*.}_include $leaf
+      continue
+    ;;
+    *.ag | *.ac | *.am)
+      sst_${leaf##*.}_include $leaf
+      child=${leaf%.*}
+      slug=$(sst_underscore_slug $child)
+      sst_am_var_add_unique_word $leaves_var "\$(${slug}_leaves)"
+      # TODO: sst_am_var_add_unique_word $clean_var $child/clean
+      sst_am_var_add_unique_file $src_nodist_var $child
+    ;;
+    *.im.in)
+      sst_ac_config_file $leaf
+      child=${leaf%.im.in}
+      sst_am_var_add_unique_file $leaves_var $leaf
+      # TODO: sst_am_var_add_unique_word $clean_var $child/clean
+      sst_am_var_add_unique_file $src_nodist_var $child
+    ;;
+    *.in | *.im)
+      sst_ac_config_file $leaf
+      child=${leaf%.*}
+      sst_am_var_add_unique_file $leaves_var $leaf
+      # TODO: sst_am_var_add_unique_word $clean_var $child/clean
+      sst_am_var_add_unique_file $src_nodist_var $child
+    ;;
+    *)
+      child=$leaf
+      sst_am_var_add_unique_file $leaves_var $leaf
+      sst_am_var_add_unique_file $src_var $child
+    ;;
+  esac
+done
+
+#-----------------------------------------------------------------------
+
+sst_am_var_add_unique_word \
+  pages_src_nodist \
+  ${d}'$(PACKAGE_TARNAME)-manual.tar.xz' \
+;

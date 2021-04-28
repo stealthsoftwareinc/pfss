@@ -1,0 +1,54 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+[[c_api_pfss_gen]]
+= The `pfss_gen` function
+:stem: latexmath
+
+[source,c]
+----
+pfss_status pfss_gen(
+  uint32_t        domain_bits,
+  uint32_t        range_bits,
+  uint8_t const * alpha,
+  uint32_t        alpha_size,
+  pfss_endianness alpha_endianness,
+  uint8_t const * beta,
+  uint32_t        beta_size,
+  pfss_endianness beta_endianness,
+  uint8_t *       key1_blob,
+  uint8_t *       key2_blob,
+  uint8_t const * rand_buf
+);
+----
+
+The `pfss_gen` function generates two key blobs that form a secret
+sharing of the function
+stem:[f : \{0,1\}^\mathtt{domain\_bits} \rightarrow \{0,1\}^\mathtt{range\_bits}]
+defined by stem:[f(\mathtt{alpha}) = \mathtt{beta}] and stem:[f(x) = 0]
+everywhere else.
+
+`domain_bits` and `range_bits` should both be nonzero.
+
+:x: pass:q[`alpha`]
+:x_size: pass:q[`alpha_size`]
+:x_endianness: pass:q[`alpha_endianness`]
+:x_bits: pass:q[`domain_bits`]
+include::bitstring_definition.adoc[]
+
+:x: pass:q[`beta`]
+:x_size: pass:q[`beta_size`]
+:x_endianness: pass:q[`beta_endianness`]
+:x_bits: pass:q[`range_bits`]
+include::bitstring_definition.adoc[]
+
+The key blobs will be written to the `key1_blob` and `key2_blob` arrays.
+The size of both arrays should be the size obtained by a call to the
+<<c_api_pfss_gen_sizes,`pfss_gen_sizes`>> function with the same
+`domain_bits` and `range_bits` values.
+
+`rand_buf` should be an array of random bytes.
+The size of the array should be the size obtained by a call to the
+<<c_api_pfss_gen_sizes,`pfss_gen_sizes`>> function with the same
+`domain_bits` and `range_bits` values.

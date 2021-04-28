@@ -1,0 +1,39 @@
+#! /bin/bash -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e; . src/bash/preludes/standard.bash
+
+if ! command -v sudo >/dev/null; then
+  echo "Installing sudo with yum..."
+  su -c "yum install -y sudo" root
+fi
+
+echo "Installing various packages with yum..."
+sudo bash -c ': \
+  && yum -y install epel-release \
+  && dnf -y install "dnf-command(config-manager)" \
+  && dnf -y config-manager --set-enabled PowerTools \
+  && yum -y install \
+    diffutils \
+    gcc \
+    gcc-c++ \
+    git \
+    make \
+    nettle-devel \
+    openssl \
+    sshpass \
+    texinfo \
+  && : \
+;'
+
+./configure \
+;
+
+echo "Installing PFSS..."
+sudo make install
+
+echo "Running ldconfig..."
+sudo ldconfig

@@ -1,0 +1,72 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+sst_expect_source_path "$BASH_SOURCE"
+d=$(sst_get_prefix $BASH_SOURCE)
+if [[ "$d" != manual/ && "$d" != */manual/ ]]; then
+  sst_barf $(
+    )'file must live in a directory named "manual": %s'$(
+    ) \
+    $BASH_SOURCE \
+  ;
+fi
+
+dd=$(sst_get_prefix ${d%/})
+dd_slug=$(sst_underscore_slug "$dd")
+
+sst_ajh_asciidoctor_document ${d}*.html.ag.json
+
+sst_ihs <<<"
+
+  GATBPS_TAR(
+    [\$(manual_dst).tar],
+    [\$(manual_dst)])
+
+  GATBPS_XZ(
+    [\$(manual_dst).tar.xz],
+    [\$(manual_dst).tar],
+    [maintainer-clean],
+    [\$(manual_dst_leaves)])
+
+  GATBPS_CP(
+    [${dd}\$(PACKAGE_TARNAME)-manual.tar.xz],
+    [\$(manual_dst).tar.xz],
+    [file],
+    [maintainer-clean])
+
+" | sst_ac_append
+
+sst_ihs <<<"
+
+  manual_dst = ${dd}\$(PACKAGE_TARNAME)-\$(PACKAGE_VERSION)-manual
+
+  \$(manual_dst): ${dd}manual.tar
+  	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_TOP)
+  	\$(AM_V_GEN)\$(GATBPS_V_NOP)
+  	\$(AM_V_at)rm -f -r \$@ \$@\$(TSUF)*
+  	\$(AM_V_at)\$(MKDIR_P) \$@\$(TSUF)
+  	\$(AM_V_at)(cd \$@\$(TSUF) && \$(TAR) x) <${dd}manual.tar
+  	\$(AM_V_at)touch \$@\$(TSUF)/*
+  	\$(AM_V_at)mv -f \$@\$(TSUF)/* \$@
+  	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_BOT)
+
+  manual_dst_leaves = \$(${dd_slug}manual_tar_leaves)
+
+  \$(manual_dst)/clean: FORCE
+  \$(manual_dst)/clean: ${dd}manual.tar/clean
+  	-rm -f -r \$(@D) \$(@D)\$(TSUF)*
+
+  mostlyclean-local: \$(manual_dst)/clean
+
+  EXTRA_DIST += \$(manual_dst).tar.xz
+  EXTRA_DIST += ${dd}\$(PACKAGE_TARNAME)-manual.tar.xz
+
+  manual: FORCE
+  manual: \$(manual_dst)
+
+  clean-manual: FORCE
+  clean-manual: \$(manual_dst)/clean
+
+" | sst_am_append

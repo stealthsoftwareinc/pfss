@@ -1,0 +1,8 @@
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+source "https://rubygems.org"
+
+gem "jekyll"

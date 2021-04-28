@@ -1,0 +1,22 @@
+##
+## For the copyright information for this file, please search up the
+## directory tree for the first COPYING file.
+##
+
+doc_pages_manual_leaves = $(manual_dst_leaves)
+
+doc/pages/manual: $(manual_dst)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
+	$(AM_V_at)cp -R $(manual_dst) $@$(TSUF)
+	$(AM_V_at)mv -f $@$(TSUF) $@
+	$(AM_V_at)-rm -f -r $@$(TSUF)*
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+.PHONY: doc/pages/manual/clean
+doc/pages/manual/clean: FORCE
+doc/pages/manual/clean: $(manual_dst)/clean
+	-rm -f -r $(@D) $(@D)$(TSUF)*
+
+mostlyclean-local: doc/pages/manual/clean

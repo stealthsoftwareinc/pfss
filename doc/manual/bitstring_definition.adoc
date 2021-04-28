@@ -1,0 +1,9 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+{x} should be an unsigned integer that consists of {x_size} bytes in
+{x_endianness} byte order.
+The bits are ordered from least to most significant, and any bits above
+the least significant {x_bits} bits are ignored.
+{x_size} should be nonzero.

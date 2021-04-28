@@ -1,0 +1,18 @@
+dnl
+dnl For the copyright information for this file, please search up the
+dnl directory tree for the first COPYING file.
+dnl
+
+GATBPS_TAR(
+  [$(pages_dst).tar],
+  [$(pages_dst)])
+
+GATBPS_XZ(
+  [$(pages_dst).tar.xz],
+  [$(pages_dst).tar],
+  [maintainer-clean],
+  [$(pages_dst_leaves)])
+
+GATBPS_CP(
+  [doc/pages/$(PACKAGE_TARNAME)-manual.tar.xz],
+  [doc/$(PACKAGE_TARNAME)-manual.tar.xz])

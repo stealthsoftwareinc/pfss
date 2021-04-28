@@ -1,0 +1,17 @@
+#! /bin/bash -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e -u -o pipefail
+
+readonly macbook="$1"
+readonly outdir="$2"
+
+scp \
+  "$macbook":Desktop/pfss/build.log \
+  "$macbook":Desktop/pfss/config.log \
+  "$macbook":Desktop/pfss/pfss-standard-benchmark.txt \
+  "$outdir" \
+;

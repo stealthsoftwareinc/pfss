@@ -1,0 +1,150 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+= PFSS
+:attribute-missing: warn
+:gindent: {nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 5
+:sectnums:
+:stem: latexmath
+:toc: auto
+:toclevels: 5
+
+include::refs.adoc[]
+
+[#sec_introduction]
+== Introduction
+
+PFSS is a library for function secret sharing (FSS).
+
+The C API is defined in the
+link:src/c_cpp/include/pfss.h[`src/c_cpp/include/pfss.h`] file.
+
+To build PFSS, you'll need `make`, a C compiler, and a C++ compiler.
+
+PFSS also currently requires CPU or library support for certain
+cryptographic operations.
+This can be either the AES-NI extension for x86 family CPUs, the
+Cryptographic Extension for ARM family CPUs, or the
+https://www.lysator.liu.se/~nisse/nettle/[Nettle library].
+Nettle should be readily available through most package managers.
+For example, on Ubuntu, Nettle can be installed with
+`sudo apt-get install nettle-dev`.
+If you have AES-NI or ARM Crypto support, then Nettle is not required.
+If you have none of these, then `make` will fail.
+
+You can then build and install PFSS with the following commands:
+
+[source]
+----
+./configure
+make
+sudo make install
+----
+
+If you don't want to install PFSS to your system, you can replace the
+`sudo make install` command with `make DESTDIR="$(pwd)"/tmp install` to
+perform a staged install to a local directory `tmp`.
+You can then use those files however you want.
+
+:leveloffset: +1
+
+include::build_examples.adoc[]
+include::hardware_acceleration.adoc[]
+include::logging.adoc[]
+include::benchmarking.adoc[]
+include::c_api.adoc[]
+
+:leveloffset: -1
+
+== Using the Java bindings
+
+The Java bindings are defined in the
+link:src/java/com/stealthsoftwareinc/pfss/pfss.java[`src/java/com/stealthsoftwareinc/pfss/pfss.java`]
+file.
+
+PFSS detects whether `<jni.h>` is available at `./configure` time in
+order to decide whether to compile the Java bindings into `libpfss.so`:
+
+[source]
+----
+$ ./configure
+...
+checking for JNI... yes
+...
+----
+
+There are three ways you can run `./configure` depending on your needs:
+
+. `./configure`: Compile the Java bindings if `<jni.h>` is available.
+
+. `./configure --with-jni-or-die`: Compile the Java bindings, erroring
+out if `<jni.h>` is not available.
+
+. `./configure --without-jni`: Don't compile the Java bindings.
+
+If `<jni.h>` is not in your default include path, you should add any
+necessary `-I` options to `CPPFLAGS` at `./configure` time.
+For example:
+
+[source]
+----
+./configure --with-jni-or-die CPPFLAGS='-I/path/to/jni/dir'
+----
+
+If `./configure` is unexpectedly failing to detect that `<jni.h>` is
+available, you can search for `JNI` in `config.log` to see why.
+For example, here is a failure where an additional `-I` option was
+necessary for `<jni.h>` to find a dependent header `"jni_md.h"`:
+
+[source]
+----
+configure:9266: checking for JNI
+configure:9337: gcc -c -g -O2 -pthread -Wall -Wextra -I/usr/lib/jvm/java-11-openjdk-amd64/include conftest.c >&5
+In file included from conftest.c:54:0:
+/usr/lib/jvm/java-11-openjdk-amd64/include/jni.h:45:10: fatal error: jni_md.h: No such file or directory
+ #include "jni_md.h"
+          ^~~~~~~~~~
+----
+
+To use the Java bindings, the `pfss` class is provided in the
+link:src/java/com/stealthsoftwareinc/pfss/pfss.java[`src/java/com/stealthsoftwareinc/pfss/pfss.java`]
+file.
+This class is a minimal wrapper of the C API that's intended to be
+included in your own Java project along with `libpfss.so`.
+
+Pointers to arrays (including pointers to singular objects) are modeled
+as Java arrays, `uint32_t` values are modeled as Java `int` values, and
+opaque pointers are modeled as Java `long` values.
+Every array parameter is accompanied by an index parameter that
+specifies the starting point of the data in the array.
+
+You can import the `pfss` class with
+`import com.stealthsoftwareinc.pfss.pfss` and access its members with
+`pfss.<member>`, or you can import it with
+`import static com.stealthsoftwareinc.pfss.pfss.*` and access its
+members directly with `<member>`.
+
+For an example of using the Java bindings, see
+`src/java/com/stealthsoftwareinc/pfss/Example.java`.
+You can compile and run this example program as follows, where `<D>` is
+an absolute path to a directory that contains both `libpfss.so` and
+`libnettle.so`:
+
+[source]
+----
+javac -sourcepath src/java src/java/com/stealthsoftwareinc/pfss/Example.java
+java -cp src/java com.stealthsoftwareinc.pfss.Example [<D>]
+----
+
+If `<D>` is not given, it will be taken as the current directory.
+
+:leveloffset: +1
+
+include::node-bindings.adoc[]
+
+:leveloffset: -1

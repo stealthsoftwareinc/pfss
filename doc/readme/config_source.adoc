@@ -1,0 +1,9 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+:PACKAGE_NAME: SST
+:PACKAGE_TARNAME: sst
+
+//

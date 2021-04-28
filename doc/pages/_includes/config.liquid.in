@@ -1,0 +1,17 @@
+{%- comment -%}
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+{%- endcomment -%}
+
+{%- comment -%}
+//
+// This file should roughly mirror the doc/readme/config.adoc.in file.
+// If you edit this file, you might need to edit that file as well.
+//
+{%- endcomment -%}
+
+{%- assign PACKAGE_NAME = "@PACKAGE_NAME@" -%}
+{%- assign PACKAGE_TARNAME = "@PACKAGE_TARNAME@" -%}
+{%- assign PACKAGE_VERSION = "@PACKAGE_VERSION@" -%}

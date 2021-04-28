@@ -1,0 +1,70 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+:fl_view_source_text: &#91;View source&#93;
+:fl_download_source_text: &#91;Download source&#93;
+:fl_view_manual_text: &#91;View manual&#93;
+:fl_download_manual_text: &#91;Download manual&#93;
+
+:!fl_no_github:
+ifeval::["{fp_github_view_source_url}" == ""]
+ifeval::["{fp_github_download_source_url}" == ""]
+ifeval::["{fp_github_view_manual_url}" == ""]
+ifeval::["{fp_github_download_manual_url}" == ""]
+:fl_no_github:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+:!fl_no_gitlab:
+ifeval::["{fp_gitlab_view_source_url}" == ""]
+ifeval::["{fp_gitlab_download_source_url}" == ""]
+ifeval::["{fp_gitlab_view_manual_url}" == ""]
+ifeval::["{fp_gitlab_download_manual_url}" == ""]
+:fl_no_gitlab:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+{fp_package_name} {fp_package_version}::
+ifndef::fl_no_github[]
+* GitHub:
+ifeval::["{fp_github_view_source_url}" != ""]
+link:{fp_github_view_source_url}[{fl_view_source_text}]
+endif::[]
+ifeval::["{fp_github_download_source_url}" != ""]
+link:{fp_github_download_source_url}[{fl_download_source_text}]
+endif::[]
+ifeval::["{fp_github_view_manual_url}" != ""]
+link:{fp_github_view_manual_url}[{fl_view_manual_text}]
+endif::[]
+ifeval::["{fp_github_download_manual_url}" != ""]
+link:{fp_github_download_manual_url}[{fl_download_manual_text}]
+endif::[]
+endif::[]
+ifndef::fl_no_gitlab[]
+* GitHub:
+ifeval::["{fp_gitlab_view_source_url}" != ""]
+link:{fp_gitlab_view_source_url}[{fl_view_source_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_source_url}" != ""]
+link:{fp_gitlab_download_source_url}[{fl_download_source_text}]
+endif::[]
+ifeval::["{fp_gitlab_view_manual_url}" != ""]
+link:{fp_gitlab_view_manual_url}[{fl_view_manual_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_manual_url}" != ""]
+link:{fp_gitlab_download_manual_url}[{fl_download_manual_text}]
+endif::[]
+endif::[]
+ifdef::fl_no_github[]
+ifdef::fl_no_gitlab[]
+* No links available
+endif::[]
+endif::[]
+
+//

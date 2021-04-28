@@ -1,0 +1,230 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/artifact_links_fragment.md file. If you edit this
+// file, you might need to edit that file as well.
+//
+
+:fl_view_latest_text: &#91;View latest&#93;
+:fl_view_pinned_text: &#91;View pinned&#93;
+:fl_download_latest_text: &#91;Download latest&#93;
+:fl_download_pinned_text: &#91;Download pinned&#93;
+
+You can access
+ifdef::in_source_repo[]
+the public version of
+endif::[]
+the {fp_package_name} {fp_artifact}
+at any of the following links:
+
+ifndef::in_source_repo[]
+
+//----------------------------------------------------------------------
+// Builtin (public)
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "This repository" and "_devel"
+// replaced by "_builtin" everywhere.
+//
+
+:!fl_no_builtin:
+ifeval::["{fp_builtin_view_latest_url}" == ""]
+ifeval::["{fp_builtin_view_pinned_url}" == ""]
+ifeval::["{fp_builtin_download_latest_url}" == ""]
+ifeval::["{fp_builtin_download_pinned_url}" == ""]
+:fl_no_builtin:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_builtin[]
+* This repository:
+ifeval::["{fp_builtin_view_latest_url}" != ""]
+link:{fp_builtin_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_view_pinned_url}" != ""]
+link:{fp_builtin_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_builtin_download_latest_url}" != ""]
+link:{fp_builtin_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_download_pinned_url}" != ""]
+link:{fp_builtin_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+endif::[]
+
+//----------------------------------------------------------------------
+// GitHub
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitHub" and "_devel" replaced by
+// "_github" everywhere.
+//
+
+:!fl_no_github:
+ifeval::["{fp_github_view_latest_url}" == ""]
+ifeval::["{fp_github_view_pinned_url}" == ""]
+ifeval::["{fp_github_download_latest_url}" == ""]
+ifeval::["{fp_github_download_pinned_url}" == ""]
+:fl_no_github:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_github[]
+* GitHub:
+ifeval::["{fp_github_view_latest_url}" != ""]
+link:{fp_github_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_github_view_pinned_url}" != ""]
+link:{fp_github_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_github_download_latest_url}" != ""]
+link:{fp_github_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_github_download_pinned_url}" != ""]
+link:{fp_github_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+// GitLab
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitLab" and "_devel" replaced by
+// "_gitlab" everywhere.
+//
+
+:!fl_no_gitlab:
+ifeval::["{fp_gitlab_view_latest_url}" == ""]
+ifeval::["{fp_gitlab_view_pinned_url}" == ""]
+ifeval::["{fp_gitlab_download_latest_url}" == ""]
+ifeval::["{fp_gitlab_download_pinned_url}" == ""]
+:fl_no_gitlab:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_gitlab[]
+* GitLab:
+ifeval::["{fp_gitlab_view_latest_url}" != ""]
+link:{fp_gitlab_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_view_pinned_url}" != ""]
+link:{fp_gitlab_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_latest_url}" != ""]
+link:{fp_gitlab_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_pinned_url}" != ""]
+link:{fp_gitlab_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+ifdef::fl_no_builtin[]
+ifdef::fl_no_github[]
+ifdef::fl_no_gitlab[]
+* No links available
+endif::[]
+endif::[]
+endif::[]
+
+ifdef::in_source_repo[]
+
+You can access
+the development version of
+the {fp_package_name} {fp_artifact}
+at any of the following links:
+
+//----------------------------------------------------------------------
+// Builtin (development)
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "This repository" and "_devel"
+// replaced by "_builtin" everywhere.
+//
+
+:!fl_no_builtin:
+ifeval::["{fp_builtin_view_latest_url}" == ""]
+ifeval::["{fp_builtin_view_pinned_url}" == ""]
+ifeval::["{fp_builtin_download_latest_url}" == ""]
+ifeval::["{fp_builtin_download_pinned_url}" == ""]
+:fl_no_builtin:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_builtin[]
+* This repository:
+ifeval::["{fp_builtin_view_latest_url}" != ""]
+link:{fp_builtin_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_view_pinned_url}" != ""]
+link:{fp_builtin_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_builtin_download_latest_url}" != ""]
+link:{fp_builtin_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_download_pinned_url}" != ""]
+link:{fp_builtin_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+// Development
+//----------------------------------------------------------------------
+
+:!fl_no_devel:
+ifeval::["{fp_devel_view_latest_url}" == ""]
+ifeval::["{fp_devel_view_pinned_url}" == ""]
+ifeval::["{fp_devel_download_latest_url}" == ""]
+ifeval::["{fp_devel_download_pinned_url}" == ""]
+:fl_no_devel:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_devel[]
+* Stealth GitLab:
+ifeval::["{fp_devel_view_latest_url}" != ""]
+link:{fp_devel_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_devel_view_pinned_url}" != ""]
+link:{fp_devel_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_devel_download_latest_url}" != ""]
+link:{fp_devel_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_devel_download_pinned_url}" != ""]
+link:{fp_devel_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+ifdef::fl_no_devel[]
+* No links available
+endif::[]
+
+endif::[]
+
+//

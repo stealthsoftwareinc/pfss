@@ -1,0 +1,84 @@
+#! /bin/bash -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e
+. src/bash/preludes/gitlab-ci.bash
+
+sst_ubuntu_install_raw \
+  g++ \
+  gcc \
+  git \
+  gnupg \
+  gnupg1 \
+  jq \
+  lshw \
+  m4 \
+  make \
+  openjdk-11-jdk \
+  openssl \
+  sshpass \
+  unzip \
+  wget \
+;
+
+dist_archive=$rundir/$(sst_find_dist_archive | sst_csf)
+sst_csf dist_archive
+readonly dist_archive
+
+cd "$tmpdir"
+
+(
+
+  unset PS4
+  set -x
+
+  sst_extract_archive "$dist_archive"
+  cd *
+
+  ./configure
+  make build-aux/downloads/android-ndk-r21d-linux-x86_64.zip
+  unzip -qq build-aux/downloads/android-ndk-r21d-linux-x86_64.zip
+  make distclean
+
+  export NDK=$PWD/android-ndk-r21d
+  export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+  export TARGET=aarch64-linux-android
+  export API=26
+  export AR=$TOOLCHAIN/bin/$TARGET-ar
+  export AS=$TOOLCHAIN/bin/$TARGET-as
+  export CC=$TOOLCHAIN/bin/$TARGET$API-clang
+  export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
+  export LD=$TOOLCHAIN/bin/$TARGET-ld
+  export RANLIB=$TOOLCHAIN/bin/$TARGET-ranlib
+  export STRIP=$TOOLCHAIN/bin/$TARGET-strip
+
+  CPPFLAGS=
+  CPPFLAGS+=' -DNDEBUG'
+  CPPFLAGS+=' -I/usr/lib/jvm/java-11-openjdk-amd64/include'
+  CPPFLAGS+=' -I/usr/lib/jvm/java-11-openjdk-amd64/include/linux'
+  export CPPFLAGS
+
+  export CFLAGS="-O2 -march=armv8-a"
+  export CXXFLAGS="$CFLAGS"
+
+  ./configure \
+    --build x86_64-pc-linux-gnu \
+    --host $TARGET \
+    --with-arm-crypto-or-die \
+    --with-cross-cflag-march-arm-crypto \
+    --with-cross-cxxflag-march-arm-crypto \
+    --with-jni-or-die \
+  ;
+  cp config.log "$rundir"
+
+  make
+  make DESTDIR=$PWD/staged install
+
+  cp $NDK/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_shared.so $PWD/staged/usr/local/lib
+
+  tar czf "$rundir/staged.tar.gz" staged
+
+) 2>&1 | tee "$rundir/build.log"

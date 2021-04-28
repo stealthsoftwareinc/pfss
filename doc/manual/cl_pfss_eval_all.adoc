@@ -1,0 +1,68 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_eval_all,``pfss_eval_all``]]
+= The `pfss_eval_all` function
+
+.C and {cpp}
+[source,c]
+----
+pfss_status pfss_eval_all(
+  pfss_key const * key,
+  uint8_t const *  xp,
+  uint32_t         xp_bits,
+  pfss_endianness  xp_endianness,
+  uint8_t *        ys,
+  uint32_t         y_size,
+  pfss_endianness  y_endianness
+);
+----
+
+The `pfss_eval_all` function evaluates a key over a (partial) grid of
+domain elements to produce a (partial) grid of range elements.
+
+First, the stem:[\lceil \mathtt{xp\_bits} / 8 \rceil] bytes pointed to
+by `xp` are interpreted as an unsigned integer in `xp_endianness` byte
+order.
+All bits of this integer are ignored except for the least significant
+`xp_bits` bits, which form a value stem:[v].
+This value is shifted left by stem:[k = d - \mathtt{xp\_bits}] bits to
+form the first domain element stem:[x_1] at which `key` will be
+evaluated, where stem:[d] is the number of domain bits in `key`.
+In other words, stem:[x_1 = v \cdot 2^k].
+It is required that stem:[k \ge 0], i.e., that
+stem:[\mathtt{xp\_bits} \le d].
+
+Next, `key` is evaluated at each successive domain element up to and
+including stem:[x_{2^k} = x_1 + 2^k - 1], and each result is written to
+a specific location in the array of bytes pointed to by `ys`.
+The array of bytes is treated as an array of unsigned integers, each
+consisting of `y_size` bytes in `y_endianness` byte order.
+It is required that stem:[\mathtt{y\_size} \ge \lceil r / 8 \rceil],
+where stem:[r] is the number of range bits in `key`.
+The evaluation result of each stem:[x_i] is written to the stem:[x_i]'th
+element of the array.
+
+include::cl_return_status_blurb.adoc[]
+
+include::cl_key_concurrency_blurb.adoc[]
+
+.{empty}
+[example]
+====
+.Program
+[source,cpp]
+----
+include::cl_pfss_eval_all_example_1_program.cpp[]
+----
+
+.Possible output
+[source]
+----
+include::cl_pfss_eval_all_example_1_output.txt[]
+----
+====
+
+//

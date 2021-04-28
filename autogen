@@ -1,0 +1,109 @@
+#! /bin/sh -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+set -e
+. src/bash/preludes/standard.bash
+
+autogen_ac_start build-aux/autogen.ac
+autogen_am_start build-aux/autogen.am
+
+#-----------------------------------------------------------------------
+
+autogen_ac_append <<<''
+autogen_ac_append <<<"]AC_DEFUN_ONCE([DEFINE_ALL], [[{ :"
+for x in m4/DEFINE_*.m4; do
+  x=${x#m4/}
+  x=${x%.m4}
+  autogen_ac_append <<<"  ]AC_REQUIRE([$x])["
+done
+autogen_ac_append <<<'}]])['
+
+for x in CFLAG CXXFLAG LIB; do
+  autogen_ac_append <<<''
+  autogen_ac_append <<<"]AC_DEFUN_ONCE([DEFINE_${x}S], [[{ :"
+  for y in m4/DEFINE_HAVE_${x}_*.m4; do
+    y=${y#m4/}
+    y=${y%.m4}
+    autogen_ac_append <<<"  ]AC_REQUIRE([$y])["
+  done
+  autogen_ac_append <<<'}]])['
+done
+
+autogen_ac_append <<<''
+autogen_ac_append <<<']DEFINE_ALL['
+
+#-----------------------------------------------------------------------
+# Root .ag includes
+#-----------------------------------------------------------------------
+#
+# If an .ag file needs to be included and there's no more specific .ag
+# file in which to do it, then do it here.
+#
+
+sst_ag_include \
+  doc/manual/build.phony.ag \
+  doc/pages/build.phony.ag \
+  doc/readme/build.phony.ag \
+  src/c_cpp/include/pfss/switch_db_rb.h.ag \
+;
+
+#-----------------------------------------------------------------------
+# Root distributed files
+#-----------------------------------------------------------------------
+#
+# If a file needs to be distributed (i.e., included in the distribution
+# archive) and there's no more specific .ag, .ac, or .am file in which
+# to do it, then do it here.
+#
+
+for x in \
+  .clang-format \
+  .gitattributes \
+  COPYING \
+  README.adoc \
+  build-aux/DATE \
+  build-aux/DATE.sh \
+  build-aux/LTCURRENT \
+  build-aux/LTCURRENT.sh \
+  build-aux/VERSION \
+  build-aux/VERSION.sh \
+  build-aux/adock \
+  build-aux/echo.sh \
+  doc/* \
+  doc/manual/**/* \
+  install/**/* \
+  pfss-ios-benchmark/**/* \
+  src/bash/**/* \
+  src/c_cpp/misc/pfss/standard_benchmark_runner.cpp \
+  src/c_cpp/misc/pfss/standard_benchmark_runner.hpp \
+  src/install/**/* \
+  src/java/**/* \
+  src/node/**/* \
+; do
+  if [[ -f "$x" ]]; then
+    sst_am_distribute_file "$x"
+  fi
+done
+
+#-----------------------------------------------------------------------
+
+sst_ajh_download build-aux/downloads
+
+sst_ajh_c_cpp_test \
+  src/c_cpp/test \
+  src/c_cpp/libpfss.la \
+;
+
+autogen_am_var_append noinst_HEADERS \
+  src/c_cpp/test/**/*.h \
+;
+
+autogen_ac_finish
+autogen_am_finish
+
+autoreconf -f -i -v -W all
+
+echo success

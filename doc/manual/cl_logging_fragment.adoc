@@ -1,0 +1,12 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+A null pointer indicates logging is disabled.
+
+If logging was not enabled at build time with
+`./configure --with-logging`, getting and setting the logging
+destination still behaves normally, but logging is always disabled.
+
+//

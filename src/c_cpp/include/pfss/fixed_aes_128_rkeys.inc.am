@@ -1,0 +1,31 @@
+##
+## For the copyright information for this file, please search up the
+## directory tree for the first COPYING file.
+##
+
+## begin_rules
+
+.PHONY: src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc/clean
+
+mostlyclean-local: src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc/clean
+
+src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc: src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc.am
+src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc: src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc.c
+src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc: src/c_cpp/lib/pfss/generate_fixed_aes_rkeys.h
+	@$(MKDIR_P) $(@D)
+	@{ \
+	  x=src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc.c; \
+	  test -r $$x || x=$(srcdir)/$$x; \
+	  set x $(AM_CPPFLAGS); \
+	  shift; \
+	  AM_CPPFLAGS="$$*"; \
+	  printf 'c89 %s -o %s %s\n' "$$AM_CPPFLAGS" $@.out$(EXEEXT) $$x; \
+	  c89 $(AM_CPPFLAGS) -o $@.out$(EXEEXT) $$x || exit $$?; \
+	  printf './%s >%s\n' $@.out$(EXEEXT) $@; \
+	  ./$@.out$(EXEEXT) >$@ || exit $$?; \
+	}
+
+src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc/clean: FORCE
+	-rm -f $(@D) $(@D).out$(EXEEXT)
+
+## end_rules

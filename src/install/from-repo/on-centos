@@ -1,0 +1,24 @@
+#! /bin/sh -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+
+# Load the prelude.
+set -e || exit $?
+. src/bash/prelude.bash
+
+v=$(sed -n '1s/[^0-9]*\([0-9]*\).*/\1/p' /etc/redhat-release)
+readonly v
+
+on_x=on-centos-$v
+export on_x
+
+s=src/install/$from_w/$on_x
+readonly s
+
+if [[ ! -f "$s" && ! -h "$s" ]]; then
+  sst_barf 'Unsupported CentOS version: %s' "$v"
+fi
+
+"$s" "$@"

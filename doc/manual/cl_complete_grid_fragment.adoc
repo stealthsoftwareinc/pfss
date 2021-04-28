@@ -1,0 +1,16 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[subs="attributes+"]
+{fp_ys} should point to a complete grid of range elements, i.e., an
+array of stem:[2^d] unsigned integers where stem:[d] is the number of
+domain bits in {fp_key}.
+Each unsigned integer should consist of {fp_y_size} bytes in
+{fp_y_endianness} byte order.
+{fp_y_size} should always be positive.
+If {fp_keys_count} is zero, {fp_ys} will not be accessed but it should
+still be a valid pointer.
+
+//

@@ -1,0 +1,22 @@
+---
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+---
+
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
+
+body {
+  font-family: "Noto Serif", serif;
+  margin: 0;
+  padding: 0;
+}
+
+#page {
+  margin: 1em auto;
+  max-width: 100ch;
+  padding: 0 1em;
+}

@@ -1,0 +1,77 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+= Build examples
+
+This section provides several examples of building and installing PFSS.
+These examples will assume that we're building an application that's
+particularly interested in `domain_bits` = 80 and `range_bits` = 16.
+
+Building and installing on a typical x86-64 machine:
+
+[source,shell]
+----
+# Enable template optimizations only for (80,16).
+echo "80 16" >switch_db_rb.cfg
+
+# Set up our compiler flags.
+export CPPFLAGS="-DNDEBUG"
+export CFLAGS="-O2 -march=native"
+export CXXFLAGS="$CFLAGS"
+
+# Run ./configure, ensuring that it detects AES-NI.
+./configure --with-aes-ni-or-die
+
+# Compile, run the test suite, and install.
+make
+make check
+sudo make install
+----
+
+Cross compiling for Android ARMv8-A on a typical x86-64 Linux machine:
+
+[source,shell]
+----
+# Enable template optimizations only for (80,16).
+echo "80 16" >switch_db_rb.cfg
+
+# Download and extract the Android NDK.
+wget https://dl.google.com/android/repository/android-ndk-r21c-linux-x86_64.zip
+unzip android-ndk-r21c-linux-x86_64.zip
+
+# Set up the environment as recommended by
+# <https://developer.android.com/ndk/guides/other_build_systems>.
+export NDK=$(pwd)/android-ndk-r21c
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export TARGET=aarch64-linux-android
+export API=21
+export AR=$TOOLCHAIN/bin/$TARGET-ar
+export AS=$TOOLCHAIN/bin/$TARGET-as
+export CC=$TOOLCHAIN/bin/$TARGET$API-clang
+export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
+export LD=$TOOLCHAIN/bin/$TARGET-ld
+export RANLIB=$TOOLCHAIN/bin/$TARGET-ranlib
+export STRIP=$TOOLCHAIN/bin/$TARGET-strip
+
+# Set up our compiler flags.
+export CPPFLAGS="-DNDEBUG"
+export CFLAGS="-O2 -march=armv8-a"
+export CXXFLAGS="$CFLAGS"
+
+# Run ./configure, ensuring that it detects ARM Crypto and JNI.
+./configure --build x86_64-pc-linux-gnu --host $TARGET \
+  --with-arm-crypto-or-die --with-jni-or-die \
+  --with-cross-cflag-march-arm-crypto \
+  --with-cross-cxxflag-march-arm-crypto
+
+# Compile and do a staged install.
+make
+make DESTDIR=$(pwd)/staged install
+
+# List the files of the staged install.
+find staged ! -type d
+
+# You may also need the libc++_shared.so library from the NDK:
+# $NDK/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_shared.so
+----

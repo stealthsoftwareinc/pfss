@@ -1,0 +1,45 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+= Node.js bindings
+
+== General
+
+The Node.js bindings are provided in the
+link:src/node[`src/node`]
+directory, which is actually an example project.
+The intent is that you can take
+link:src/node/pfss-node.cpp[`pfss-node.cpp`]
+verbatim and adapt
+link:src/node/binding.gyp[`binding.gyp`]
+and
+link:src/node/package.json[`package.json`]
+into your own project.
+
+== Running the example project with Docker
+
+. Build a distribution archive (`pfss-*.tar.gz`) by running `make dist`
+(after `./configure`).
+
+. Copy the distribution archive into the `src/node` directory.
+Make sure you have exactly one such file in that directory.
+If you don't have exactly one, the image won't build.
+
+. Run `docker build -t pfss-node src/node` to build the image.
+
+. Run `docker run -i -t --rm pfss-node` to start a container.
+
+. In the container, run `npm install` followed by `node-gyp rebuild`.
+
+. In the container, run `node example.js`.
+
+== Reference
+
+:leveloffset: +1
+
+include::../../src/node/pfss-node.cpp[tag=node_tag_pfss_reduce_sum_async]
+
+include::../../src/node/pfss-node.cpp[tag=node_tag_pfss_map_eval_reduce_sum_async]
+
+:leveloffset: -1

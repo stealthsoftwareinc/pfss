@@ -1,0 +1,60 @@
+{%- comment -%}
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+{%- endcomment -%}
+
+{%- comment -%}
+//
+// The following files are similar:
+//
+//       doc/readme/common.adoc
+//       doc/pages/_includes/common.liquid
+//
+// If you edit one of these files, you may need to edit the other(s) as
+// well.
+//
+{%- endcomment -%}
+
+{%- comment -%}
+//----------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- include config.liquid -%}
+
+{%- comment -%}
+//----------------------------------------------------------------------
+// in_source_repo
+//----------------------------------------------------------------------
+//
+// For the pages site, we'll decide that we're in the source repo if the
+// version number contains a "+" character, i.e., if it looks something
+// like "0.15.1-269+gfce8230be" instead of "0.15.1".
+//
+{%- endcomment -%}
+
+{%- assign n = PACKAGE_VERSION | split: "+" | size -%}
+{%- if n > 1 -%}
+  {%- assign in_source_repo = true -%}
+{%- else -%}
+  {%- assign in_source_repo = false -%}
+{%- endif -%}
+
+{%- comment -%}
+//----------------------------------------------------------------------
+// root_prefix
+//----------------------------------------------------------------------
+//
+// Define root_prefix to be the path prefix that leads to the root
+// directory of the site. If we're not in a subdirectory, it's "". If
+// we're one subdirectory deep, it's "../". If we're two subdirectories
+// deep, it's "../../". And so on.
+//
+{%- endcomment -%}
+
+{%- assign root_prefix = "" -%}
+{%- assign n = page.url | append: "x" | split: "/" | size -%}
+{%- for i in (3..n) -%}
+  {%- assign root_prefix = root_prefix | append: "../" -%}
+{%- endfor -%}

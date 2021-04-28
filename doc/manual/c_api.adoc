@@ -1,0 +1,102 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+[[c_api]]
+= C API
+
+:leveloffset: +1
+
+include::cl_pfss_set_log_file.adoc[]
+include::cl_pfss_get_log_file.adoc[]
+
+:leveloffset: -1
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_status]
+
+:leveloffset: +1
+
+include::cl_pfss_get_status_name.adoc[]
+
+:leveloffset: -1
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_endianness]
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_gen_sizes]
+
+:leveloffset: +1
+
+include::c_api_pfss_gen.adoc[]
+
+:leveloffset: -1
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_map_gen]
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_key]
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_parse_key]
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_destroy_key]
+
+:leveloffset: +1
+
+include::cl_pfss_get_domain_bits.adoc[]
+include::cl_pfss_get_range_bits.adoc[]
+include::cl_pfss_eval.adoc[]
+
+:leveloffset: -1
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_PFSS_DEFINE_DIRECT_EVAL]
+
+include::../../src/c_cpp/include/pfss.h[tag=c_api_pfss_reduce_sum]
+
+:leveloffset: +1
+
+include::cl_pfss_map_eval.adoc[]
+include::cl_pfss_map_eval_reduce_sum.adoc[]
+include::cl_pfss_eval_all.adoc[]
+include::cl_pfss_eval_all_sum.adoc[]
+include::cl_pfss_eval_all_dot.adoc[]
+
+:leveloffset: -1
+
+== The `PFSS_SWITCH_DB_RB` macro
+
+[source,c]
+----
+#define PFSS_SWITCH_DB_RB( \
+    domain_bits, range_bits, template_code, standard_code)
+----
+
+The `PFSS_SWITCH_DB_RB` macro expands to a
+`+do { /* ... */ } while (0)+` block of code that calls either
+`+template_code((domain_bits), (range_bits))+` or `standard_code()`
+depending on whether PFSS was compiled with template optimizations
+enabled for the given `domain_bits` and `range_bits` combination via
+link:../switch_db_rb.cfg[`switch_db_rb.cfg`].
+`template_code` should be the name of a function-like macro that takes
+two parameters.
+The arguments passed to `template_code` will not actually be
+`domain_bits` and `range_bits`, but rather decimal constants whose
+values match `domain_bits` and `range_bits`, which allows them to be
+used as template arguments in {cpp}.
+`standard_code` should be the name of a function-like macro that takes
+no arguments.
+`template_code` and `standard_code` should each expand to a
+`+do { /* ... */ } while (0)+` block of code.
+`domain_bits` and `range_bits` will each be evaluated exactly once.
+
+Here is an example function that determines whether PFSS was compiled
+with template optimizations enabled for a given `domain_bits` and
+`range_bits` combination:
+
+[source,c]
+----
+int have_template_optimizations(int domain_bits, int range_bits) {
+#define T_CODE(db, rb) do { return 1; } while (0)
+#define S_CODE() do { return 0; } while (0)
+  PFSS_SWITCH_DB_RB(domain_bits, range_bits, T_CODE, S_CODE);
+#undef S_CODE
+#undef T_CODE
+}
+----

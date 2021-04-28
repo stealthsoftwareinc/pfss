@@ -1,0 +1,32 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[logging,Logging]]
+= Logging
+
+PFSS includes a logging layer that can be enabled at build time by
+specifying the `--with-logging` option to `./configure`.
+When logging is enabled and a log file has been set by calling the
+`<<cl_pfss_set_log_file>>` function, every call to the PFSS C API will
+write a line to the log file with information about the call.
+Each line has the following format, which is based on the format used by
+the `{strace}` utility:
+
+[source,subs="normal"]
+----
+__time__ __func__(__args__) = __ret__ <__dura__>
+----
+
+`__time__`:: The {Unix_time} at which the call was made, in nanoseconds.
+
+`__func__`:: The name of the function that was called.
+
+`__args__`:: The arguments that were passed to the function.
+
+`__ret__`:: The value the function returned.
+
+`__dura__`:: The amount of time the call took, in nanoseconds.
+
+//

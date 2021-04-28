@@ -1,0 +1,162 @@
+##
+## For the copyright information for this file, please search up the
+## directory tree for the first COPYING file.
+##
+
+##----------------------------------------------------------------------
+
+EXTRA_DIST += $(pages_src)
+
+##----------------------------------------------------------------------
+
+pages_jekyll_version = latest
+
+##----------------------------------------------------------------------
+
+doc_pages__site_leaves = $(pages_src_leaves)
+
+doc/pages/_site: $(pages_src)
+doc/pages/_site: $(pages_src_nodist)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@
+	$(AM_V_at){ \
+	  test -t 0 && t=-t || t=; \
+	  pwd=`pwd` || exit $$?; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in \
+	    x) \
+	      chmod -R a+rw doc/pages || exit $$?; \
+	    ;; \
+	  esac; \
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll build \
+	  || exit $$?; \
+	}
+	$(AM_V_at)touch $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+.PHONY: doc/pages/_site/clean
+doc/pages/_site/clean: FORCE
+doc/pages/_site/clean: $(pages_src_clean)
+	-rm -f -r $(@D)
+	-{ \
+	  test -t 0 && t=-t || t=; \
+	  pwd=`pwd` || exit $$?; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in \
+	    x) \
+	      chmod -R a+rw doc/pages || exit $$?; \
+	    ;; \
+	  esac; \
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll clean \
+	  || exit $$?; \
+	}
+
+mostlyclean-local: doc/pages/_site/clean
+
+##----------------------------------------------------------------------
+
+pages_dst = doc/$(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-pages
+
+pages_dst_leaves = $(doc_pages__site_leaves)
+
+$(pages_dst): doc/pages/_site
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
+	$(AM_V_at)$(MKDIR_P) $@$(TSUF)
+	$(AM_V_at)rmdir $@$(TSUF)
+	$(AM_V_at)cp -R doc/pages/_site $@$(TSUF)
+	$(AM_V_at)touch $@$(TSUF)
+	$(AM_V_at)mv -f $@$(TSUF) $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+.PHONY: $(pages_dst)/clean
+$(pages_dst)/clean: FORCE
+$(pages_dst)/clean: doc/pages/_site/clean
+	-rm -f -r $(@D) $(@D)$(TSUF)*
+
+mostlyclean-local: $(pages_dst)/clean
+
+EXTRA_DIST += $(pages_dst).tar.xz
+
+##----------------------------------------------------------------------
+
+docs: $(pages_dst_leaves)
+	$(AM_V_at)$(MAKE) $(pages_dst)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
+	$(AM_V_at)cp -R $(pages_dst) $@$(TSUF)
+	$(AM_V_at)touch $@$(TSUF)
+	$(AM_V_at)mv -f $@$(TSUF) $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+.PHONY: docs/clean
+docs/clean: FORCE
+docs/clean: $(pages_dst)/clean
+	-rm -f -r $(@D) $(@D)$(TSUF)*
+
+maintainer-clean-local: docs/clean
+
+EXTRA_DIST += docs
+
+##----------------------------------------------------------------------
+
+pages_preview_host = 0.0.0.0
+pages_preview_port = 4000
+pages_preview_name = pages-preview
+
+.PHONY: pages-preview
+pages-preview: FORCE
+pages-preview: $(pages_src)
+pages-preview: $(pages_src_nodist)
+	{ \
+	  test -t 0 && t=-t || t=; \
+	  pwd=`pwd` || exit $$?; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in \
+	    x) \
+	      chmod -R a+rw doc/pages || exit $$?; \
+	    ;; \
+	  esac; \
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    -p $(pages_preview_host):$(pages_preview_port):4000 \
+	    --name $(pages_preview_name) \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll serve \
+	  || exit $$?; \
+	}
+
+##----------------------------------------------------------------------
+
+## Touching everything helps Jekyll detect changes.
+.PHONY: pages-update
+pages-update: FORCE
+pages-update: $(pages_src_nodist)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_at){ \
+	  x=` \
+	    find $(pages_src_nodist) -exec touch '{}' ';' -o -print \
+	  ` || exit $$?; \
+	  case $$x in \
+	    ?*) \
+	      exit 1; \
+	    ;; \
+	  esac; \
+	}
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+##----------------------------------------------------------------------
+
+.PHONY: pages
+pages: FORCE
+pages: doc/pages/_site
+
+.PHONY: clean-pages
+clean-pages: FORCE
+clean-pages: doc/pages/_site/clean

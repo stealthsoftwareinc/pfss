@@ -1,0 +1,30 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_eval,``pfss_eval``]]
+= The `pfss_eval` function
+
+.C and {cpp}
+[source,c]
+----
+pfss_status pfss_eval(
+  pfss_key const * key,
+  uint8_t const *  x,
+  uint32_t         x_size,
+  pfss_endianness  x_endianness,
+  uint8_t *        y,
+  uint32_t         y_size,
+  pfss_endianness  y_endianness
+);
+----
+
+The `pfss_eval` function evaluates a key at a single domain element to
+produce a single range element.
+
+include::cl_return_status_blurb.adoc[]
+
+include::cl_key_concurrency_blurb.adoc[]
+
+//

@@ -1,0 +1,18 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+= The pages site
+
+This directory holds the pages site, which is a static website that can
+be hosted anywhere, but in particular on hosts like GitHub Pages and
+GitLab Pages.
+You might find redundant copies of this directory depending on how
+you're browsing the project.
+Such copies only exist to satisfy location requirements of certain
+hosts.
+The single source of truth is the `doc/pages` directory in the source
+repository.
+
+//

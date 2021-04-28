@@ -1,0 +1,13 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[subs="attributes+"]
+{fp_keys} should point to an array of {fp_keys_count} keys.
+All keys should have the same number of domain bits.
+All keys should have the same number of range bits.
+If {fp_keys_count} is zero, {fp_keys} will not be accessed but should
+still be a valid pointer.
+
+//

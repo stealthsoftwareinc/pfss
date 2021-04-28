@@ -1,0 +1,23 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_get_status_name,``pfss_get_status_name``]]
+= The `pfss_get_status_name` function
+
+.C and {cpp}
+[source,c]
+----
+char const * pfss_get_status_name(
+  pfss_status status
+);
+----
+
+The `pfss_get_status_name` function returns a pointer to a constant
+string with static storage duration that holds the name of the status
+code `status`.
+If `status` is not a valid status code, the string will be
+`"PFSS_UNKNOWN_STATUS"`.
+
+//

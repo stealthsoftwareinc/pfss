@@ -1,0 +1,9 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+`{y}` should point to the first byte of a range element (i.e., an
+unsigned integer) that consists of `{y_size}` bytes in `{y_endianness}`
+byte order.
+It is also required that
+//

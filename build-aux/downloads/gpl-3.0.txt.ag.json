@@ -1,0 +1,20 @@
+{
+
+  "handler": "sst_ajh_download",
+
+  "hashes": {
+    "md5": "1ebbd3e34237af26da5dc08a4e440464",
+    "sha1": "31a3d460bb3c7d98845187c716a30db81c44b615",
+    "sha224": "96cc91845c85fd7c787ba00adb8ed231f4d30d4d03b4dd7c6fd6c021",
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "sha384": "cbd88145dc06c3001fce1e90150c511605835b2d7d53e2d88ade2591f035f4a616c1f6f171053fafa548dcbe7322fcf7",
+    "sha512": "d361e5e8201481c6346ee6a886592c51265112be550d5224f1a7a6e116255c2f1ab8788df579d9b8372ed7bfd19bac4b6e70e00b472642966ab5b319b99a2686"
+  },
+
+  "urls": [
+    "https://www.gnu.org/licenses/gpl-3.0.txt",
+    "https://git.savannah.gnu.org/cgit/coreutils.git/plain/COPYING?h=v8.32",
+    "https://github.com/coreutils/coreutils/raw/v8.32/COPYING"
+  ]
+
+}

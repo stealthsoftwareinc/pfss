@@ -1,0 +1,49 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_map_eval_reduce_sum,``pfss_map_eval_reduce_sum``]]
+= The `pfss_map_eval_reduce_sum` function
+
+.C and {cpp}
+[source,c]
+----
+pfss_status pfss_map_eval_reduce_sum(
+  pfss_key const * key,
+  uint8_t const *  xs,
+  uint32_t         xs_count,
+  uint32_t         x_size,
+  pfss_endianness  x_endianness,
+  uint8_t *        y,
+  uint32_t         y_size,
+  pfss_endianness  y_endianness
+);
+----
+
+The `pfss_map_eval_reduce_sum` function evaluates a key over a list of
+domain elements and sums the resulting range elements to produce a
+single range element.
+
+:xs: xs
+:xs_count: xs_count
+:x_size: x_size
+:x_endianness: x_endianness
+include::cl_domain_element_array_blurb.adoc[]
+
+:y: y
+:y_size: y_size
+:y_endianness: y_endianness
+include::cl_single_range_element_blurb_1a.adoc[]
+stem:[\mathtt{y\_size} \ge \lceil r / 8 \rceil],
+include::cl_single_range_element_blurb_1b.adoc[]
+
+The key is evaluated at each domain element in the `xs` array, the
+resulting range elements are summed modulo stem:[2^r], and the sum is
+written to the range element pointed to by `y`.
+
+include::cl_return_status_blurb.adoc[]
+
+include::cl_key_concurrency_blurb.adoc[]
+
+//

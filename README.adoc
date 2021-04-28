@@ -1,0 +1,472 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the doc/pages/index.md file. If you
+// edit this file, you might need to edit that file as well.
+//
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// The following files are similar:
+//
+//       doc/readme/common.adoc
+//       doc/pages/_includes/common.liquid
+//
+// If you edit one of these files, you may need to edit the other(s) as
+// well.
+//
+
+ifdef::readme_diagrams[]
+ifeval::["{readme_diagrams}" != ""]
+endif::[]
+endif::[]
+ifndef::readme_diagrams[]
+endif::[]
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/config.liquid.in file. If you edit this file, you
+// might need to edit that file as well.
+//
+
+:PACKAGE_NAME: PFSS
+:PACKAGE_TARNAME: pfss
+:PACKAGE_VERSION: 0.12.2
+
+//
+
+//
+
+= {PACKAGE_NAME} {PACKAGE_VERSION}
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the doc/pages/_includes/main.md file.
+// If you edit this file, you might need to edit that file as well.
+//
+
+PFSS is a library for function secret sharing (FSS) developed by Stealth
+Software Technologies,{nbsp}Inc.{nbsp}(Stealth).
+Our library provides APIs for performing an efficient two-way sharing of
+point functions based on the work from Gilboa-Ishai (EUROCRYPT 2014) and
+Boyle-Gilboa-Ishai (EUROCRYPT 2015) with optimizations from the
+Boyle-Gilboa-Ishai (CCS 2016) result.
+We also provide batched APIs to reduce overhead, which is useful for
+applications that use FSS for large-scale computations, such as our
+recent work of applying FSS to various flavors of Private Set
+Intersection.
+For the latter work, we provide a reference to Dittmer et al. on
+link:https://arxiv.org/abs/2012.13053[arXiv]
+and
+link:https://eprint.iacr.org/2020/1599[IACR ePrint].
+
+//
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the doc/pages/_includes/source.md
+// file. If you edit this file, you might need to edit that file as
+// well.
+//
+
+== Source
+
+:fp_package_name: {PACKAGE_NAME}
+:fp_package_tarname: {PACKAGE_TARNAME}
+:fp_artifact: source
+:fp_builtin_view_latest_url:
+:fp_builtin_view_pinned_url:
+:fp_builtin_download_latest_url:
+:fp_builtin_download_pinned_url:
+:fp_github_view_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/tree/master
+:fp_github_view_pinned_url:
+:fp_github_download_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/archive/refs/heads/master.tar.gz
+:fp_github_download_pinned_url:
+:fp_gitlab_view_latest_url:
+:fp_gitlab_view_pinned_url:
+:fp_gitlab_download_latest_url:
+:fp_gitlab_download_pinned_url:
+:fp_devel_view_latest_url: https://gitlab.stealthsoftwareinc.com/stealth/{PACKAGE_TARNAME}/-/tree/master
+:fp_devel_view_pinned_url:
+:fp_devel_download_latest_url:
+:fp_devel_download_pinned_url:
+:fp_github_download_pinned_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/archive/refs/tags/v{PACKAGE_VERSION}.tar.gz
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/artifact_links_fragment.md file. If you edit this
+// file, you might need to edit that file as well.
+//
+
+:fl_view_latest_text: &#91;View latest&#93;
+:fl_view_pinned_text: &#91;View pinned&#93;
+:fl_download_latest_text: &#91;Download latest&#93;
+:fl_download_pinned_text: &#91;Download pinned&#93;
+
+You can access
+the {fp_package_name} {fp_artifact}
+at any of the following links:
+
+
+//----------------------------------------------------------------------
+// Builtin (public)
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "This repository" and "_devel"
+// replaced by "_builtin" everywhere.
+//
+
+:!fl_no_builtin:
+ifeval::["{fp_builtin_view_latest_url}" == ""]
+ifeval::["{fp_builtin_view_pinned_url}" == ""]
+ifeval::["{fp_builtin_download_latest_url}" == ""]
+ifeval::["{fp_builtin_download_pinned_url}" == ""]
+:fl_no_builtin:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_builtin[]
+* This repository:
+ifeval::["{fp_builtin_view_latest_url}" != ""]
+link:{fp_builtin_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_view_pinned_url}" != ""]
+link:{fp_builtin_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_builtin_download_latest_url}" != ""]
+link:{fp_builtin_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_download_pinned_url}" != ""]
+link:{fp_builtin_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------
+// GitHub
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitHub" and "_devel" replaced by
+// "_github" everywhere.
+//
+
+:!fl_no_github:
+ifeval::["{fp_github_view_latest_url}" == ""]
+ifeval::["{fp_github_view_pinned_url}" == ""]
+ifeval::["{fp_github_download_latest_url}" == ""]
+ifeval::["{fp_github_download_pinned_url}" == ""]
+:fl_no_github:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_github[]
+* GitHub:
+ifeval::["{fp_github_view_latest_url}" != ""]
+link:{fp_github_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_github_view_pinned_url}" != ""]
+link:{fp_github_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_github_download_latest_url}" != ""]
+link:{fp_github_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_github_download_pinned_url}" != ""]
+link:{fp_github_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+// GitLab
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitLab" and "_devel" replaced by
+// "_gitlab" everywhere.
+//
+
+:!fl_no_gitlab:
+ifeval::["{fp_gitlab_view_latest_url}" == ""]
+ifeval::["{fp_gitlab_view_pinned_url}" == ""]
+ifeval::["{fp_gitlab_download_latest_url}" == ""]
+ifeval::["{fp_gitlab_download_pinned_url}" == ""]
+:fl_no_gitlab:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_gitlab[]
+* GitLab:
+ifeval::["{fp_gitlab_view_latest_url}" != ""]
+link:{fp_gitlab_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_view_pinned_url}" != ""]
+link:{fp_gitlab_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_latest_url}" != ""]
+link:{fp_gitlab_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_pinned_url}" != ""]
+link:{fp_gitlab_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+ifdef::fl_no_builtin[]
+ifdef::fl_no_github[]
+ifdef::fl_no_gitlab[]
+* No links available
+endif::[]
+endif::[]
+endif::[]
+
+
+//
+
+//
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/documentation.md file. If you edit this file, you
+// might need to edit that file as well.
+//
+
+== Documentation
+
+:fp_package_name: {PACKAGE_NAME}
+:fp_package_tarname: {PACKAGE_TARNAME}
+:fp_artifact: manual
+:fp_builtin_view_latest_url:
+:fp_builtin_view_pinned_url:
+:fp_builtin_download_latest_url: doc/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_builtin_download_pinned_url:
+:fp_github_view_latest_url: https://stealthsoftwareinc.github.io/{PACKAGE_TARNAME}/manual
+:fp_github_view_pinned_url:
+:fp_github_download_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/master/doc/manual/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_github_download_pinned_url:
+:fp_gitlab_view_latest_url:
+:fp_gitlab_view_pinned_url:
+:fp_gitlab_download_latest_url:
+:fp_gitlab_download_pinned_url:
+:fp_devel_view_latest_url: https://www.stealthsoftwareinc.io/{PACKAGE_TARNAME}/manual
+:fp_devel_view_pinned_url:
+:fp_devel_download_latest_url: https://www.stealthsoftwareinc.io/{PACKAGE_TARNAME}/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_devel_download_pinned_url:
+:fp_github_download_pinned_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/v{PACKAGE_VERSION}/doc/{PACKAGE_TARNAME}-{PACKAGE_VERSION}-manual.tar.xz
+
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the
+// doc/pages/_includes/artifact_links_fragment.md file. If you edit this
+// file, you might need to edit that file as well.
+//
+
+:fl_view_latest_text: &#91;View latest&#93;
+:fl_view_pinned_text: &#91;View pinned&#93;
+:fl_download_latest_text: &#91;Download latest&#93;
+:fl_download_pinned_text: &#91;Download pinned&#93;
+
+You can access
+the {fp_package_name} {fp_artifact}
+at any of the following links:
+
+
+//----------------------------------------------------------------------
+// Builtin (public)
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "This repository" and "_devel"
+// replaced by "_builtin" everywhere.
+//
+
+:!fl_no_builtin:
+ifeval::["{fp_builtin_view_latest_url}" == ""]
+ifeval::["{fp_builtin_view_pinned_url}" == ""]
+ifeval::["{fp_builtin_download_latest_url}" == ""]
+ifeval::["{fp_builtin_download_pinned_url}" == ""]
+:fl_no_builtin:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_builtin[]
+* This repository:
+ifeval::["{fp_builtin_view_latest_url}" != ""]
+link:{fp_builtin_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_view_pinned_url}" != ""]
+link:{fp_builtin_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_builtin_download_latest_url}" != ""]
+link:{fp_builtin_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_builtin_download_pinned_url}" != ""]
+link:{fp_builtin_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------
+// GitHub
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitHub" and "_devel" replaced by
+// "_github" everywhere.
+//
+
+:!fl_no_github:
+ifeval::["{fp_github_view_latest_url}" == ""]
+ifeval::["{fp_github_view_pinned_url}" == ""]
+ifeval::["{fp_github_download_latest_url}" == ""]
+ifeval::["{fp_github_download_pinned_url}" == ""]
+:fl_no_github:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_github[]
+* GitHub:
+ifeval::["{fp_github_view_latest_url}" != ""]
+link:{fp_github_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_github_view_pinned_url}" != ""]
+link:{fp_github_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_github_download_latest_url}" != ""]
+link:{fp_github_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_github_download_pinned_url}" != ""]
+link:{fp_github_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+// GitLab
+//----------------------------------------------------------------------
+//
+// This section should be the same as the Development section except
+// with "Stealth GitLab" replaced by "GitLab" and "_devel" replaced by
+// "_gitlab" everywhere.
+//
+
+:!fl_no_gitlab:
+ifeval::["{fp_gitlab_view_latest_url}" == ""]
+ifeval::["{fp_gitlab_view_pinned_url}" == ""]
+ifeval::["{fp_gitlab_download_latest_url}" == ""]
+ifeval::["{fp_gitlab_download_pinned_url}" == ""]
+:fl_no_gitlab:
+endif::[]
+endif::[]
+endif::[]
+endif::[]
+
+ifndef::fl_no_gitlab[]
+* GitLab:
+ifeval::["{fp_gitlab_view_latest_url}" != ""]
+link:{fp_gitlab_view_latest_url}[{fl_view_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_view_pinned_url}" != ""]
+link:{fp_gitlab_view_pinned_url}[{fl_view_pinned_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_latest_url}" != ""]
+link:{fp_gitlab_download_latest_url}[{fl_download_latest_text}]
+endif::[]
+ifeval::["{fp_gitlab_download_pinned_url}" != ""]
+link:{fp_gitlab_download_pinned_url}[{fl_download_pinned_text}]
+endif::[]
+endif::[]
+
+//----------------------------------------------------------------------
+
+ifdef::fl_no_builtin[]
+ifdef::fl_no_github[]
+ifdef::fl_no_gitlab[]
+* No links available
+endif::[]
+endif::[]
+endif::[]
+
+
+//
+
+//
+
+
+== License
+
+PFSS is licensed under GPLv3.
+See the
+link:COPYING[`COPYING`]
+and
+link:COPYING.GPL3[`COPYING.GPL3`]
+files for more information.
+
+For other licensing opportunities, please reach out to us at
+mailto:contact@stealthsoftwareinc.com[].
+
+== Acknowledgments
+
+This research was developed with funding from the Defense Advanced
+Research Projects Agency (DARPA).
+This work was supported by DARPA and NIWC Pacific under contract
+N66001-15-C-4065 and by DARPA, AFRL/RIKD, USAF, and AFMC under
+FA8750-18-C-0054.
+The U.S. Government is authorized to reproduce and distribute reprints
+for Governmental purposes not withstanding any copyright notation
+thereon.
+The views, opinions and/or findings expressed are those of the author
+and should not be interpreted as representing the official views or
+policies of the Department of Defense or the U.S. Government.
+
+Distribution Statement "A" (Approved for Public Release, Distribution Unlimited)
+
+//

@@ -1,0 +1,47 @@
+#! /bin/sh -
+#
+# For the copyright information for this file, please search up the
+# directory tree for the first COPYING file.
+#
+# This script uses the SST Bash library to bootstrap from /bin/sh into
+# bash. See the Bash library > Bootstrapping section of the SST manual
+# for more information.
+#
+
+# Load the prelude.
+case $0 in /*) x=$0 ;; *) x=./$0 ;; esac
+r='\(.*/\)'
+x=`expr "$x" : "$r"` || exit $?
+set -e || exit $?
+. "$x"../../prelude.bash
+
+sst_ubuntu_install_raw \
+  autoconf \
+  automake \
+  g++ \
+  gcc \
+  git \
+  gnupg \
+  gnupg1 \
+  jq \
+  libtool \
+  m4 \
+  make \
+  openssl \
+  sshpass \
+  texinfo \
+  wget \
+;
+
+./autogen
+
+kv_ASCIIDOCTOR=
+if [[ -x build-aux/adock ]]; then
+  kv_ASCIIDOCTOR='ASCIIDOCTOR="build-aux/adock asciidoctor"'
+fi
+
+eval ./configure \
+  "$kv_ASCIIDOCTOR" \
+;
+
+make dist

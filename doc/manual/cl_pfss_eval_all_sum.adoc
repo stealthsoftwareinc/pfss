@@ -1,0 +1,63 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_eval_all_sum,pfss_eval_all_sum]]
+= The `pfss_eval_all_sum` function
+
+.C and {cpp}
+[source,c]
+----
+pfss_status pfss_eval_all_sum(
+  pfss_key const * const * keys,
+  uint32_t                 keys_count,
+  uint8_t *                ys,
+  uint32_t                 y_size,
+  pfss_endianness          y_endianness,
+  uint32_t                 thread_count
+);
+----
+
+The `pfss_eval_all_sum` function evaluates multiple keys over the
+complete grid of domain elements and sums the resulting grids into an
+existing grid.
+
+:fp_keys: `keys`
+:fp_keys_count: `keys_count`
+include::cl_homogeneous_key_array_fragment.adoc[]
+
+:fp_ys: `ys`
+:fp_key: each key
+:fp_y_size: `y_size`
+:fp_y_endianness: `y_endianness`
+:fp_keys_count: `keys_count`
+include::cl_complete_grid_fragment.adoc[]
+
+Each key is evaluated at all domain elements to produce an intermediate
+grid, which is then summed into `ys`.
+
+:fp_thread_count: `thread_count`
+include::cl_thread_count_parameter_fragment.adoc[]
+
+include::cl_return_status_blurb.adoc[]
+
+include::cl_key_concurrency_blurb.adoc[]
+
+.{empty}
+[example]
+====
+.Program
+[source,cpp]
+----
+include::cl_pfss_eval_all_sum_example_1_program.cpp[]
+----
+
+.Output
+[source]
+----
+include::cl_pfss_eval_all_sum_example_1_output.txt[]
+----
+====
+
+//

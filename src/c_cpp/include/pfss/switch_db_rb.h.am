@@ -1,0 +1,28 @@
+##
+## For the copyright information for this file, please search up the
+## directory tree for the first COPYING file.
+##
+
+## begin_rules
+
+.PHONY: src/c_cpp/include/pfss/switch_db_rb.h/clean
+
+mostlyclean-local: src/c_cpp/include/pfss/switch_db_rb.h/clean
+
+src/c_cpp/include/pfss/switch_db_rb.h: src/c_cpp/include/pfss/switch_db_rb.h.am
+src/c_cpp/include/pfss/switch_db_rb.h: src/c_cpp/include/pfss/switch_db_rb.h.awk
+src/c_cpp/include/pfss/switch_db_rb.h: switch_db_rb.cfg
+	@$(MKDIR_P) $(@D)
+	@{ \
+	  x1=src/c_cpp/include/pfss/switch_db_rb.h.awk; \
+	  x2=switch_db_rb.cfg; \
+	  test -r $$x1 || x1='$(srcdir)'/$$x1; \
+	  test -r $$x2 || x2='$(srcdir)'/$$x2; \
+	  printf '%s -f %s <%s >$@\n' '$(AWK)' "$$x1" "$$x2"; \
+	  $(AWK) -f "$$x1" <"$$x2" >$@; \
+	}
+
+src/c_cpp/include/pfss/switch_db_rb.h/clean: FORCE
+	-rm -f $(@D)
+
+## end_rules

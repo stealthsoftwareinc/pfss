@@ -1,0 +1,25 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_get_domain_bits,``pfss_get_domain_bits``]]
+= The `pfss_get_domain_bits` function
+
+.C and {cpp}
+[source,c]
+----
+pfss_status pfss_get_domain_bits(
+  pfss_key const * key,
+  uint32_t *       domain_bits
+);
+----
+
+The `pfss_get_domain_bits` function sets `*domain_bits` to the number of
+domain bits in `*key`.
+
+include::cl_return_status_blurb.adoc[]
+
+include::cl_key_concurrency_blurb.adoc[]
+
+//

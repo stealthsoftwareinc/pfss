@@ -1,0 +1,23 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//----------------------------------------------------------------------
+// Utilities
+//----------------------------------------------------------------------
+
+:strace_url: https://manpages.debian.org/strace
+:strace: link:{strace_url}[strace]
+
+//----------------------------------------------------------------------
+// Miscellaneous
+//----------------------------------------------------------------------
+
+:Unix_clock_url: https://en.wikipedia.org/wiki/Unix_time
+:Unix_clock: link:{Unix_clock_url}[Unix clock]
+
+:Unix_time_url: https://en.wikipedia.org/wiki/Unix_time
+:Unix_time: link:{Unix_time_url}[Unix time]
+
+//

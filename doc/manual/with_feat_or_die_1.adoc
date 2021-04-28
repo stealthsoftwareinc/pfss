@@ -1,0 +1,8 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+If you're expecting one or more of these {features} to be available and
+you want to ensure that they're being detected properly, you can specify
+the appropriate combination of the following options when running
+`./configure`:

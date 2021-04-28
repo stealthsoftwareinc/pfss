@@ -1,0 +1,24 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+//
+// This file should roughly mirror the doc/pages/_includes/license.md
+// file. If you edit this file, you might need to edit that file as
+// well.
+//
+
+== License
+
+PFSS is licensed under GPLv3.
+See the
+link:COPYING[`COPYING`]
+and
+link:COPYING.GPL3[`COPYING.GPL3`]
+files for more information.
+
+For other licensing opportunities, please reach out to us at
+mailto:contact@stealthsoftwareinc.com[].
+
+//

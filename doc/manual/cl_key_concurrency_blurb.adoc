@@ -1,0 +1,8 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+Note that this function takes a `pfss_key const *`, not a `pfss_key *`.
+By convention, all functions that take a `pfss_key const *` are safe to
+call from multiple threads at the same time on the same key.
+//

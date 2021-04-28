@@ -1,0 +1,22 @@
+//
+// For the copyright information for this file, please search up the
+// directory tree for the first COPYING file.
+//
+
+[[cl_pfss_get_log_file,pfss_get_log_file]]
+= The `pfss_get_log_file` function
+
+.C and {cpp}
+[source,subs="normal"]
+----
+FILE * pfss_get_log_file(
+  void
+);
+----
+
+The `pfss_get_log_file` function returns the <<logging,logging>>
+destination.
+
+include::cl_logging_fragment.adoc[]
+
+//
