@@ -20,7 +20,7 @@
 :fp_builtin_download_pinned_url:
 :fp_github_view_latest_url: https://stealthsoftwareinc.github.io/{PACKAGE_TARNAME}/manual
 :fp_github_view_pinned_url:
-:fp_github_download_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/master/doc/manual/{PACKAGE_TARNAME}-manual.tar.xz
+:fp_github_download_latest_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/master/doc/{PACKAGE_TARNAME}-manual.tar.xz
 :fp_github_download_pinned_url:
 :fp_gitlab_view_latest_url:
 :fp_gitlab_view_pinned_url:

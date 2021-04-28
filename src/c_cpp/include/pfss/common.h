@@ -789,11 +789,12 @@ public:
         p_(std::forward<Args>(args)...) {
   }
 
-  dot_accumulator & operator=(dot_accumulator const & other) noexcept {
-    dot_ = other.dot_;
-    p_ = other.p_;
-    return *this;
-  }
+  ~dot_accumulator() noexcept = default;
+  dot_accumulator(dot_accumulator const &) noexcept = default;
+  dot_accumulator &
+  operator=(dot_accumulator const &) noexcept = default;
+  dot_accumulator(dot_accumulator &&) noexcept = default;
+  dot_accumulator & operator=(dot_accumulator &&) noexcept = default;
 
   template<class Arg,
            typename std::enable_if<std::is_integral<Arg>::value,

@@ -22,7 +22,7 @@
 {% assign fp_builtin_download_pinned_url = "" %}
 {% assign fp_github_view_latest_url = "https://stealthsoftwareinc.github.io/" | append: PACKAGE_TARNAME | append: "/manual" %}
 {% assign fp_github_view_pinned_url = "" %}
-{% assign fp_github_download_latest_url = "https://github.com/stealthsoftwareinc/" | append: PACKAGE_TARNAME | append: "/raw/master/doc/manual/" | append: PACKAGE_TARNAME | append: "-manual.tar.xz" %}
+{% assign fp_github_download_latest_url = "https://github.com/stealthsoftwareinc/" | append: PACKAGE_TARNAME | append: "/raw/master/doc/" | append: PACKAGE_TARNAME | append: "-manual.tar.xz" %}
 {% assign fp_github_download_pinned_url = "" %}
 {% assign fp_gitlab_view_latest_url = "" %}
 {% assign fp_gitlab_view_pinned_url = "" %}
