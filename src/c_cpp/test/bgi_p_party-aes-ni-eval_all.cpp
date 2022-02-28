@@ -15,7 +15,7 @@ using namespace pfss;
 int main() {
   static constexpr int num_parties = 5;
   try {
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
     using block_type = m128i_block;
     using scheme_type = bgip<num_parties,
                              20,

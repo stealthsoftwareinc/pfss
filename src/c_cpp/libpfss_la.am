@@ -18,34 +18,38 @@ EXTRA_DIST += src/c_cpp/lib/pfss/generate_fixed_aes_rkeys.h
 
 include_HEADERS += src/c_cpp/include/pfss.h
 
-include_pfss_DATA = COPYING
+nodist_include_pfss_DATA = COPYING.adoc
+
+include_pfssdir = $(includedir)/pfss
 
 include_pfss_HEADERS =
 include_pfss_HEADERS += src/c_cpp/include/pfss/base.hpp
 include_pfss_HEADERS += src/c_cpp/include/pfss/bgi1.h
+include_pfss_HEADERS += src/c_cpp/include/pfss/bgi1_z2n_group.h
 include_pfss_HEADERS += src/c_cpp/include/pfss/bgi4.h
 include_pfss_HEADERS += src/c_cpp/include/pfss/bgi_p_way.h
-include_pfss_HEADERS += src/c_cpp/include/pfss/mu_lut.hpp
+include_pfss_HEADERS += src/c_cpp/include/pfss/bko_1-3_cnf_fss.h
+include_pfss_HEADERS += src/c_cpp/include/pfss/bko_two_party_ms_dpf_plus.h
+include_pfss_HEADERS += src/c_cpp/include/pfss/bko_ms_dpf_plus.h
 include_pfss_HEADERS += src/c_cpp/include/pfss/common.h
 include_pfss_HEADERS += src/c_cpp/include/pfss/fixed_aes_128_key.inc
-
-include_pfssdir = $(includedir)/pfss
-
-lib_LTLIBRARIES += src/c_cpp/libpfss.la
-
-mostlyclean-local: src/c_cpp/prereqs.empty/clean
+include_pfss_HEADERS += src/c_cpp/include/pfss/mu_lut.hpp
 
 nodist_include_pfss_HEADERS =
 nodist_include_pfss_HEADERS += src/c_cpp/include/pfss/config.h
 nodist_include_pfss_HEADERS += src/c_cpp/include/pfss/fixed_aes_128_rkeys.inc
 nodist_include_pfss_HEADERS += src/c_cpp/include/pfss/switch_db_rb.h
 
+lib_LTLIBRARIES += src/c_cpp/libpfss.la
+
+mostlyclean-local: src/c_cpp/prereqs.empty/clean
+
 src/c_cpp/prereqs.empty/clean: FORCE
 	-rm -f $(@D)
 
 src/c_cpp/prereqs.empty:
 	@{ \
-	  case $(HAVE_AES_NI)$(HAVE_ARM_CRYPTO)$(HAVE_NETTLE) in \
+	  case $(WITH_AES_NI)$(WITH_ARM_CRYPTO)$(WITH_NETTLE) in \
 	    000) \
 	      printf 'You must have AES-NI, ARM Crypto, or Nettle to build the PFSS C library.\n' >&2; \
 	      exit 1; \
@@ -63,6 +67,7 @@ $(prevent_a_blank_line)
 src_c_cpp_libpfss_la_CPPFLAGS = \
   $(AM_CPPFLAGS) \
   -D PFSS_BUILD \
+  -D PFSS_SST_BUILD \
 $(prevent_a_blank_line)
 
 src_c_cpp_libpfss_la_CXXFLAGS = \
@@ -84,10 +89,10 @@ src_c_cpp_libpfss_la_SOURCES =
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss.h
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/base.hpp
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/bgi1.h
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/bgi1_z2n_group.h
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/bgi4.h
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/common.h
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/include/pfss/ds.h
-src_c_cpp_libpfss_la_SOURCES += src/c_cpp/lib/base.cpp
 src_c_cpp_libpfss_la_SOURCES += src/c_cpp/lib/pfss.cpp
 
 ## end_variables
@@ -105,7 +110,6 @@ $(src_c_cpp_libpfss_la_OBJECTS): src/c_cpp/prereqs.empty
 ##----------------------------------------------------------------------
 
 if WITH_JNI
-if HAVE_JNI
 
 ## begin_variables
 
@@ -115,5 +119,4 @@ src_c_cpp_libpfss_la_SOURCES += src/c_cpp/lib/pfss-jni.cpp
 
 ## end_variables
 
-endif HAVE_JNI
 endif WITH_JNI

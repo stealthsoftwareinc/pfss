@@ -1,11 +1,27 @@
-#! /bin/bash -
+#! /bin/sh -
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
+#
+# This script uses the SST Bash library to bootstrap from /bin/sh into
+# bash. See the Bash library > Bootstrapping section of the SST manual
+# for more information.
 #
 
-set -e
-. src/bash/preludes/gitlab-ci.bash
+#-----------------------------------------------------------------------
+# Include the SST Bash library
+#-----------------------------------------------------------------------
+
+set -e || exit $?
+if test -f sst.bash; then
+  . ./sst.bash
+else
+  . sst.bash
+fi
+
+#-----------------------------------------------------------------------
 
 sst_ubuntu_install_raw \
   g++ \
@@ -37,9 +53,9 @@ cd "$tmpdir"
   cd *
 
   ./configure \
-    CFLAGS='-O2' \
+    CFLAGS='-O2 -march=native' \
     CPPFLAGS='-DNDEBUG' \
-    CXXFLAGS='-O2' \
+    CXXFLAGS='-O2 -march=native' \
   ;
   cp config.log "$rundir"
 

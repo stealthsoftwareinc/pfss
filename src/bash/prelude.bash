@@ -31,6 +31,31 @@ esac
 unset SST_BASH_BOOTSTRAP
 
 #-----------------------------------------------------------------------
+# Locale
+#-----------------------------------------------------------------------
+#
+# Use the C locale by default. This is the best approach, as most code
+# is written with the C locale in mind, and other locales tend to break
+# such code in strange, subtle ways. The locale affects the behavior of
+# many fundamental programs, like awk, grep, sed, and the current shell
+# instance itself. When the caller knows better, they can freely adjust
+# LC_ALL and the other locale variables as they see fit.
+#
+# This section is written in portable shell to ensure it works properly
+# in arbitrarily old versions of Bash.
+#
+
+case ${LC_ALL+x} in
+  ?*)
+    sst_old_LC_ALL=$LC_ALL
+  ;;
+esac
+readonly sst_old_LC_ALL
+
+LC_ALL=C
+export LC_ALL
+
+#-----------------------------------------------------------------------
 # Outdated Bash detection
 #-----------------------------------------------------------------------
 #
@@ -45,13 +70,13 @@ case ${BASH_VERSION-} in
     :
   ;;
   *)
-    sst_x="$0: error: Your Bash version is too old"
+    sst_x="$0: error: bash 4.1 or newer is required."
+    sst_x=$sst_x' Your Bash version is too old'
     case ${BASH_VERSION+x} in
-      x) sst_x=$sst_x' (Bash '$BASH_VERSION').' ;;
-      *) sst_x=$sst_x' (the BASH_VERSION variable is not even set).' ;;
+      ?*) sst_x=$sst_x' (Bash '$BASH_VERSION').' ;;
+      '') sst_x=$sst_x' (the BASH_VERSION variable is not even set).' ;;
     esac
-    sst_x=$sst_x' Bash 4.1 or newer is required.'
-    if command -v sw_vers >/dev/null; then
+    if command -v sw_vers >/dev/null 2>&1; then
       sst_x=$sst_x' It looks like you'\''re on macOS, in which case the'
       sst_x=$sst_x' plain "bash" command may be mapped to the operating'
       sst_x=$sst_x' system copy of Bash (the /bin/bash file), which may'
@@ -69,16 +94,17 @@ case ${BASH_VERSION-} in
 esac
 
 #-----------------------------------------------------------------------
+# Blank slating
+#-----------------------------------------------------------------------
+
+unset sst_root_tmpdir
+
+#-----------------------------------------------------------------------
 # Error handling
 #-----------------------------------------------------------------------
 
-set -o errexit || exit
-
-set -o errtrace
+set -E -e -u -o pipefail || exit
 trap exit ERR
-
-set -o nounset
-set -o pipefail
 
 #-----------------------------------------------------------------------
 
@@ -98,8 +124,6 @@ shopt -s \
   globstar \
   nullglob \
 ;
-
-export LC_ALL=C
 
 #-----------------------------------------------------------------------
 # sst_root
@@ -142,14 +166,15 @@ unset sst_name
 #-----------------------------------------------------------------------
 #
 # We support Bash 4.1, which does not support declare -g, so ideally
-# we'd like to declare the appropriate global associative arrays with
-# declare -A just before each function. However, our automatic function
+# we'd like to use declare -A to declare any global associative arrays
+# in any function file that needs them. However, our automatic function
 # loading mechanism loads function files in function scope, not in the
-# global scope, so those declarations wouldn't be in the global scope.
+# global scope, so these declarations wouldn't be in the global scope.
 # As a workaround, we declare all global associative arrays here.
 #
 
 declare -A sst_am_var_value
+declare -A sst_am_var_value_files
 declare -A sst_centos_install_raw_seen
 declare -A sst_cygwin_install_raw_seen
 declare -A sst_cygwin_install_utility_seen
@@ -161,17 +186,18 @@ declare -A sst_utility_seen
 declare -A sst_utility_suffixes
 
 #-----------------------------------------------------------------------
-# errtrace forwarding
+# ERR forwarding
 #-----------------------------------------------------------------------
 #
-# Upgrade the ERR trap to try call sst_barf instead of just exiting.
+# Overwrite the ERR trap to call sst_barf instead of just exiting.
 #
 
 trap '
-  sst_trap_entry_status=$?
-  sst_barf "command exited with status %s: %s" \
-           $sst_trap_entry_status "$BASH_COMMAND" || :
-  exit $sst_trap_entry_status
+  sst_s=$?
+  sst_x="command exited with status $sst_s: $BASH_COMMAND"
+  sst_barf "$sst_x" || :
+  printf '\''%s\n'\'' "$0: error: $sst_x" >&2 || :
+  exit $sst_s
 ' ERR
 
 #-----------------------------------------------------------------------
@@ -281,9 +307,10 @@ else
 fi
 chmod 700 "$sst_tmpdir"
 
-# We need to be careful to only set sst_root_tmpdir after the directory
-# is ready, otherwise sst_barf may try to use it prematurely.
-readonly sst_root_tmpdir="$sst_tmpdir"
+# Only set sst_root_tmpdir after the directory is ready, otherwise
+# sst_barf may try to use it prematurely.
+sst_root_tmpdir=$sst_tmpdir
+readonly sst_root_tmpdir
 
 sst_trap_append 'rm -f -r "$sst_root_tmpdir" || :' EXIT
 

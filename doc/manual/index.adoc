@@ -26,22 +26,22 @@ link:src/c_cpp/include/pfss.h[`src/c_cpp/include/pfss.h`] file.
 
 To build PFSS, you'll need `make`, a C compiler, and a C++ compiler.
 
-PFSS also currently requires CPU or library support for certain
-cryptographic operations.
+PFSS requires CPU or library support for certain cryptographic
+operations.
 This can be either the AES-NI extension for x86 family CPUs, the
 Cryptographic Extension for ARM family CPUs, or the
 https://www.lysator.liu.se/~nisse/nettle/[Nettle library].
 Nettle should be readily available through most package managers.
 For example, on Ubuntu, Nettle can be installed with
 `sudo apt-get install nettle-dev`.
-If you have AES-NI or ARM Crypto support, then Nettle is not required.
-If you have none of these, then `make` will fail.
+If you have AES-NI or ARM Crypto, Nettle is not required.
+If you have none of these, `make` will fail.
 
-You can then build and install PFSS with the following commands:
+You can build and install PFSS with the following commands:
 
 [source]
 ----
-./configure
+./configure CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'
 make
 sudo make install
 ----

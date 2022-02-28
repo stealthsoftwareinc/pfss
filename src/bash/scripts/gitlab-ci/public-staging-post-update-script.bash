@@ -1,19 +1,27 @@
 #! /bin/sh -
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
 #
-# This script bootstraps into Bash. The shebang is only for portability.
-# For more information, see the Bash library > Bootstrapping section of
-# the SST manual.
+# For the complete copyright information, please see the
+# associated README file.
+#
+# This script uses the SST Bash library to bootstrap from /bin/sh into
+# bash. See the Bash library > Bootstrapping section of the SST manual
+# for more information.
 #
 
-# Load the prelude.
-case $0 in /*) x=$0 ;; *) x=./$0 ;; esac
-x=`dirname "$x"` || exit $?
-case $x in /) x= ;; esac
+#-----------------------------------------------------------------------
+# Include the SST Bash library
+#-----------------------------------------------------------------------
+
 set -e || exit $?
-. "$x"/../../prelude.bash
+if test -f sst.bash; then
+  . ./sst.bash
+else
+  . sst.bash
+fi
+
+#-----------------------------------------------------------------------
 
 sst_install_utility \
   cat \

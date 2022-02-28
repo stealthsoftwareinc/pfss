@@ -17,6 +17,7 @@
 #include <memory>
 #include <pfss.h>
 #include <pfss/base.hpp>
+#include <pfss/sst/catalog/crypto_rng_t.hpp>
 #include <pfss/config.h>
 #include <random>
 #include <stdexcept>
@@ -27,23 +28,23 @@
 #include <bit>
 #endif
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 #include <wmmintrin.h>
 #endif
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
 #include <arm_neon.h>
 #endif
 
-#if PFSS_HAVE_AVX_512_F
+#if PFSS_WITH_AVX_512_F
 #include <immintrin.h>
 #endif
 
-#if PFSS_HAVE_NETTLE
+#if PFSS_WITH_NETTLE
 #include <nettle/aes.h>
 #endif
 
-#if PFSS_HAVE_SSE2
+#if PFSS_WITH_SSE2
 #include <emmintrin.h>
 #endif
 
@@ -53,7 +54,7 @@ struct error final {
   pfss_status status;
 
   explicit constexpr error(pfss_status const status) : status(status) {
-    PFSS_CONSTEXPR_ASSERT(status != PFSS_OK);
+    PFSS_SST_CONSTEXPR_ASSERT(status != PFSS_OK);
   }
 };
 
@@ -63,11 +64,7 @@ constexpr int type_bits() noexcept {
 }
 
 constexpr int uchar_bits = type_bits<unsigned char>();
-constexpr unsigned char uchar_max = type_max<unsigned char>();
-constexpr unsigned char uchar_msb = uchar_max ^ (uchar_max >> 1);
-constexpr unsigned char uchar_msb_neg = uchar_max >> 1;
-
-constexpr std::size_t size_max = type_max<std::size_t>();
+constexpr unsigned char uchar_msb_neg = uchar_max::value >> 1;
 
 //
 // Determines how many bytes are needed to hold n bits.
@@ -75,8 +72,8 @@ constexpr std::size_t size_max = type_max<std::size_t>();
 
 template<class T>
 constexpr T bits_to_bytes(T const n) noexcept {
-  PFSS_STATIC_ASSERT(std::is_integral<T>::value);
-  PFSS_CONSTEXPR_ASSERT(n >= 0);
+  PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
+  PFSS_SST_CONSTEXPR_ASSERT(n >= 0);
   return static_cast<T>(n / uchar_bits + (n % uchar_bits != 0));
 }
 
@@ -118,7 +115,7 @@ inline bool system_is_little_endian() noexcept {
 
 template<class T>
 T reverse_bytes(T x) {
-  PFSS_STATIC_ASSERT(std::is_trivial<T>::value);
+  PFSS_SST_STATIC_ASSERT(std::is_trivial<T>::value);
   unsigned char * const p = reinterpret_cast<unsigned char *>(&x);
   std::size_t const n = sizeof(x);
   for (std::size_t i = 0; i != n / 2; ++i) {
@@ -161,9 +158,9 @@ struct is_non_cvb_integer<
 
 template<class T>
 constexpr T get_mask(int const n) noexcept {
-  PFSS_STATIC_ASSERT(is_non_cv_integer<T>::value);
-  PFSS_CONSTEXPR_ASSERT(!pfss::is_negative(n));
-  PFSS_CONSTEXPR_ASSERT(n <= type_bits<T>());
+  PFSS_SST_STATIC_ASSERT(is_non_cv_integer<T>::value);
+  PFSS_SST_CONSTEXPR_ASSERT(!pfss::is_negative(n));
+  PFSS_SST_CONSTEXPR_ASSERT(n <= type_bits<T>());
   return n == 0 ? static_cast<T>(0) :
                   static_cast<T>(type_max<T>() >> (type_bits<T>() - n));
 }
@@ -211,7 +208,7 @@ constexpr bool getbitx(T const & x, Index const i) {
 
 template<class T, class Dst>
 Dst serialize_integer(int const bits, T src, Dst dst) noexcept {
-  PFSS_STATIC_ASSERT(is_non_cvb_integer<T>::value);
+  PFSS_SST_STATIC_ASSERT(is_non_cvb_integer<T>::value);
   assert(bits >= 1);
   assert(src >= 0);
   int const n = bits / uchar_bits + (bits % uchar_bits != 0);
@@ -225,7 +222,7 @@ Dst serialize_integer(int const bits, T src, Dst dst) noexcept {
 
 template<class T, class Src>
 Src deserialize_integer(int const bits, T & dst, Src src) {
-  PFSS_STATIC_ASSERT(is_non_cvb_integer<T>::value);
+  PFSS_SST_STATIC_ASSERT(is_non_cvb_integer<T>::value);
   assert(bits >= 1);
   assert(bits <= type_bits<T>());
   int const nq = bits / uchar_bits;
@@ -250,7 +247,7 @@ constexpr bool endianness_is_valid(pfss_endianness const e) noexcept {
 }
 
 constexpr bool fold_endianness(pfss_endianness const e) noexcept {
-  PFSS_CONSTEXPR_ASSERT(endianness_is_valid(e));
+  PFSS_SST_CONSTEXPR_ASSERT(endianness_is_valid(e));
   return e == PFSS_NATIVE_ENDIAN ? system_is_little_endian() :
                                    e == PFSS_LITTLE_ENDIAN;
 }
@@ -377,7 +374,7 @@ public:
 
   template<class IntType>
   uint_buf & operator=(IntType x) noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<IntType>::value);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<IntType>::value);
     assert(x >= 0);
     vsize_value = 0;
     for (SizeType i = 0; i != size; ++i) {
@@ -415,7 +412,7 @@ public:
 
   template<class T>
   T get_as() const noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<T>::value);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
     typename promote_unsigned<T>::type x = 0;
     for (SizeType i = 0; i != vsize(); ++i) {
       x <<= uchar_bits - 1;
@@ -433,7 +430,7 @@ public:
 
   template<class T>
   bool getbitx(T const i) const noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<T>::value);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
     assert(i >= 0);
     using U = typename promote_unsigned<T>::type;
     U const q = static_cast<U>(i / uchar_bits);
@@ -488,7 +485,7 @@ public:
 
 template<class ValueType, bool Aligned, bool Reversed>
 class uint_buf<void, ValueType, Aligned, Reversed> final {
-  PFSS_STATIC_ASSERT(
+  PFSS_SST_STATIC_ASSERT(
       (std::is_same<typename std::remove_const<ValueType>::type,
                     std::uint8_t>::value
        || std::is_same<typename std::remove_const<ValueType>::type,
@@ -539,7 +536,7 @@ public:
   uint_buf & operator=(uint_buf &&) noexcept = default;
 
   template<class T,
-           typename std::enable_if<sst::is_unsigned_integer<T>::value,
+           typename std::enable_if<pfss::is_unsigned_integer<T>::value,
                                    int>::type = 0>
   explicit operator T() const noexcept {
     value_type x;
@@ -592,19 +589,19 @@ public:
            typename std::enable_if<std::is_integral<T>::value,         \
                                    int>::type = 0>                     \
   auto operator op(T const b) const noexcept->decltype(                \
-      sst::to_unsigned(value_type()) op sst::to_unsigned(T())) {       \
-    return sst::to_unsigned(static_cast<value_type>(*this))            \
-        op sst::to_unsigned(b);                                        \
+      pfss::to_unsigned(value_type()) op pfss::to_unsigned(T())) {       \
+    return pfss::to_unsigned(static_cast<value_type>(*this))            \
+        op pfss::to_unsigned(b);                                        \
   }                                                                    \
                                                                        \
   template<class T,                                                    \
            typename std::enable_if<std::is_integral<T>::value,         \
                                    int>::type = 0>                     \
   friend auto operator op(T const a, uint_buf const & b) noexcept      \
-      ->decltype(sst::to_unsigned(T())                                 \
-                     op sst::to_unsigned(uint_buf::value_type())) {    \
-    return sst::to_unsigned(a)                                         \
-        op sst::to_unsigned(static_cast<uint_buf::value_type>(b));     \
+      ->decltype(pfss::to_unsigned(T())                                 \
+                     op pfss::to_unsigned(uint_buf::value_type())) {    \
+    return pfss::to_unsigned(a)                                         \
+        op pfss::to_unsigned(static_cast<uint_buf::value_type>(b));     \
   }
 
   PFSS_OP(+)
@@ -619,8 +616,8 @@ public:
                                        && !std::is_const<V>::value,
                                    int>::type = 0>
   uint_buf & operator+=(T const b) noexcept {
-    return *this = sst::to_unsigned(static_cast<value_type>(*this))
-                   + sst::to_unsigned(b);
+    return *this = pfss::to_unsigned(static_cast<value_type>(*this))
+                   + pfss::to_unsigned(b);
   }
 
   template<class T,
@@ -629,8 +626,8 @@ public:
                                        && !std::is_const<V>::value,
                                    int>::type = 0>
   uint_buf & operator*=(T const b) noexcept {
-    return *this = sst::to_unsigned(static_cast<value_type>(*this))
-                   * sst::to_unsigned(b);
+    return *this = pfss::to_unsigned(static_cast<value_type>(*this))
+                   * pfss::to_unsigned(b);
   }
 
   template<class T,
@@ -639,8 +636,8 @@ public:
                                        && !std::is_const<V>::value,
                                    int>::type = 0>
   uint_buf & operator&=(T const b) noexcept {
-    return *this = sst::to_unsigned(static_cast<value_type>(*this))
-                   & sst::to_unsigned(b);
+    return *this = pfss::to_unsigned(static_cast<value_type>(*this))
+                   & pfss::to_unsigned(b);
   }
 
   template<
@@ -800,7 +797,7 @@ public:
            typename std::enable_if<std::is_integral<Arg>::value,
                                    int>::type = 0>
   dot_accumulator & operator=(Arg const arg) {
-    *dot_ = T(sst::to_unsigned(*dot_) + p_ * arg);
+    *dot_ = T(pfss::to_unsigned(*dot_) + p_ * arg);
     return *this;
   }
 
@@ -808,7 +805,7 @@ public:
            typename std::enable_if<std::is_integral<Arg>::value,
                                    int>::type = 0>
   dot_accumulator const & operator=(Arg const arg) const {
-    *dot_ = T(sst::to_unsigned(*dot_) + p_ * arg);
+    *dot_ = T(pfss::to_unsigned(*dot_) + p_ * arg);
     return *this;
   }
 };
@@ -876,10 +873,10 @@ public:
 
 template<class RawType, class uint_T>
 void raw_from_uint_general(RawType & raw, uint_T const x) noexcept {
-  PFSS_STATIC_ASSERT(is_exact_width_integer<uint_T>::value);
-  PFSS_STATIC_ASSERT(std::is_unsigned<uint_T>::value);
-  PFSS_STATIC_ASSERT(sizeof(uint_T) <= sizeof(RawType));
-  PFSS_STATIC_ASSERT(is_little_endian<uint_T>::value
+  PFSS_SST_STATIC_ASSERT(is_exact_width_integer<uint_T>::value);
+  PFSS_SST_STATIC_ASSERT(std::is_unsigned<uint_T>::value);
+  PFSS_SST_STATIC_ASSERT(sizeof(uint_T) <= sizeof(RawType));
+  PFSS_SST_STATIC_ASSERT(is_little_endian<uint_T>::value
                      || is_big_endian<uint_T>::value);
   auto const src = reinterpret_cast<unsigned char const *>(&x);
   auto const dst = reinterpret_cast<unsigned char *>(&raw);
@@ -901,12 +898,12 @@ template<class ChunkType, int ChunkCount>
 class chunked_block final {
 
   using chunk_type = typename remove_cvref<ChunkType>::type;
-  PFSS_STATIC_ASSERT(is_unsigned_integer<chunk_type>());
+  PFSS_SST_STATIC_ASSERT(is_unsigned_integer<chunk_type>());
   static constexpr int chunk_bits = type_bits<chunk_type>();
-  PFSS_STATIC_ASSERT(chunk_bits % uchar_bits == 0);
-  PFSS_STATIC_ASSERT(chunk_bits / uchar_bits == sizeof(chunk_type));
-  PFSS_STATIC_ASSERT(ChunkCount > 0);
-  PFSS_STATIC_ASSERT(chunk_bits <= type_max<int>() / ChunkCount);
+  PFSS_SST_STATIC_ASSERT(chunk_bits % uchar_bits == 0);
+  PFSS_SST_STATIC_ASSERT(chunk_bits / uchar_bits == sizeof(chunk_type));
+  PFSS_SST_STATIC_ASSERT(ChunkCount > 0);
+  PFSS_SST_STATIC_ASSERT(chunk_bits <= type_max<int>() / ChunkCount);
 
   //
   // We need to make sure that raw_ doesn't have any padding in order to
@@ -970,13 +967,13 @@ public:
   //--------------------------------------------------------------------
 
   bool get_msb() const noexcept {
-    return static_cast<bool>((*this)[size() - 1] & uchar_msb);
+    return static_cast<bool>((*this)[size() - 1] & uchar_msb::value);
   }
 
   chunked_block set_msb(bool const b) const noexcept {
     chunked_block x = *this;
     if (b) {
-      x[x.size() - 1] |= uchar_msb;
+      x[x.size() - 1] |= uchar_msb::value;
     } else {
       x[x.size() - 1] &= uchar_msb_neg;
     }
@@ -985,7 +982,7 @@ public:
 
   chunked_block flip_msb() const noexcept {
     chunked_block x = *this;
-    x[x.size() - 1] ^= uchar_msb;
+    x[x.size() - 1] ^= uchar_msb::value;
     return x;
   }
 
@@ -1035,11 +1032,11 @@ using basic_block = chunked_block<std::uint64_t, 2>;
 // pfss::m128i_block
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_SSE2
+#if PFSS_WITH_SSE2
 
 class m128i_block final {
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
   template<bool Aligned>
   friend class aes_ni_128_rand_perm;
 #endif
@@ -1061,11 +1058,11 @@ public:
 
   template<class uint_T>
   static m128i_block from_uint(uint_T x) noexcept {
-    PFSS_STATIC_ASSERT(is_exact_width_integer<uint_T>::value);
-    PFSS_STATIC_ASSERT(std::is_unsigned<uint_T>::value);
-    PFSS_STATIC_ASSERT(sizeof(uint_T) <= sizeof(m128i_block));
-    PFSS_STATIC_ASSERT(   is_little_endian<uint_T>::value);
-    PFSS_STATIC_ASSERT(value_bits<uint_T>::value <= 64);
+    PFSS_SST_STATIC_ASSERT(is_exact_width_integer<uint_T>::value);
+    PFSS_SST_STATIC_ASSERT(std::is_unsigned<uint_T>::value);
+    PFSS_SST_STATIC_ASSERT(sizeof(uint_T) <= sizeof(m128i_block));
+    PFSS_SST_STATIC_ASSERT(   is_little_endian<uint_T>::value);
+    PFSS_SST_STATIC_ASSERT(value_bits<uint_T>::value <= 64);
     m128i_block b;
     b.raw() = _mm_set_epi64x(0, x);
     return b;
@@ -1162,13 +1159,13 @@ public:
   }
 };
 
-#endif // PFSS_HAVE_SSE2
+#endif // PFSS_WITH_SSE2
 
 //----------------------------------------------------------------------
 // pfss::m512i_block
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_AVX_512_F
+#if PFSS_WITH_AVX_512_F
 
 class m512i_block final {
 
@@ -1194,13 +1191,13 @@ public:
   }
 };
 
-#endif // PFSS_HAVE_AVX_512_F
+#endif // PFSS_WITH_AVX_512_F
 
 //----------------------------------------------------------------------
 // pfss::uint8x16_block
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
 
 class uint8x16_block final {
 
@@ -1269,13 +1266,13 @@ public:
   //--------------------------------------------------------------------
 
   bool get_msb() const noexcept {
-    return (*this)[size() - 1] & uchar_msb;
+    return (*this)[size() - 1] & uchar_msb::value;
   }
 
   uint8x16_block set_msb(bool const b) const noexcept {
     uint8x16_block x = *this;
     if (b) {
-      x[x.size() - 1] |= uchar_msb;
+      x[x.size() - 1] |= uchar_msb::value;
     } else {
       x[x.size() - 1] &= uchar_msb_neg;
     }
@@ -1284,7 +1281,7 @@ public:
 
   uint8x16_block flip_msb() const noexcept {
     uint8x16_block x = *this;
-    x[x.size() - 1] ^= uchar_msb;
+    x[x.size() - 1] ^= uchar_msb::value;
     return x;
   }
 
@@ -1324,7 +1321,7 @@ operator^(uint8x16_block lhs, uint8x16_block const & rhs) noexcept {
   return lhs;
 }
 
-#endif // PFSS_HAVE_ARM_CRYPTO
+#endif // PFSS_WITH_ARM_CRYPTO
 
 //----------------------------------------------------------------------
 // default_block_t
@@ -1337,13 +1334,13 @@ struct default_block_t {};
 
 template<>
 struct default_block_t<128> {
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
   using type = m128i_block;
-#elif PFSS_HAVE_ARM_CRYPTO
+#elif PFSS_WITH_ARM_CRYPTO
   using type = uint8x16_block;
-#elif PFSS_HAVE_SSE2
+#elif PFSS_WITH_SSE2
   using type = m128i_block;
-#elif PFSS_HAVE_UINT64
+#elif PFSS_HAVE_UINT64_T
   using type = chunked_block<uint64_t, 2>;
 #endif
 };
@@ -1351,7 +1348,7 @@ struct default_block_t<128> {
 } // namespace detail
 
 template<int Bits = 128>
-using default_block_t = typename detail::default_block_t<Bits>::type;
+using default_block_t = typename ::pfss::detail::default_block_t<Bits>::type;
 
 //----------------------------------------------------------------------
 //
@@ -1360,7 +1357,7 @@ using default_block_t = typename detail::default_block_t<Bits>::type;
 template<class T, class SizeType = std::size_t>
 class buffered_rng final {
 
-  PFSS_STATIC_ASSERT(std::is_trivial<T>::value);
+  PFSS_SST_STATIC_ASSERT(std::is_trivial<T>::value);
 
   unsigned char const * buf;
 
@@ -1371,8 +1368,8 @@ public:
   explicit constexpr buffered_rng(
       unsigned char const * const buf, size_type const buf_size)
       : buf(buf), size(buf_size) {
-    PFSS_CONSTEXPR_ASSERT(buf != nullptr);
-    PFSS_CONSTEXPR_ASSERT(buf_size != 0);
+    PFSS_SST_CONSTEXPR_ASSERT(buf != nullptr);
+    PFSS_SST_CONSTEXPR_ASSERT(buf_size != 0);
   }
 
   ~buffered_rng() noexcept = default;
@@ -1413,18 +1410,13 @@ public:
   }
 };
 
-//
-// C++'s <random> with std::random_device("/dev/urandom").
-//
-
 template<class Block>
 class cpp_urandom_rng final {
-  std::random_device rd;
+  pfss::crypto_rng_t rd;
   std::uniform_int_distribution<unsigned char> dist;
 
 public:
-  cpp_urandom_rng()
-      : rd("/dev/urandom"), dist(0, type_max<unsigned char>()) {
+  cpp_urandom_rng() : dist(0, type_max<unsigned char>()) {
   }
   Block operator()() {
     Block b;
@@ -1491,7 +1483,7 @@ void SubWord(W w) {
 
 template<int Nk, class Key, class W>
 void KeyExpansion(Key key, W w) {
-  PFSS_STATIC_ASSERT(Nk == 4 || Nk == 6 || Nk == 8);
+  PFSS_SST_STATIC_ASSERT(Nk == 4 || Nk == 6 || Nk == 8);
   constexpr int Nr = Nk + 6;
   unsigned char temp[Nb];
   int i = 0;
@@ -1544,12 +1536,12 @@ constexpr std::array<unsigned char, 704> fixed_aes_128_rkeys_x4 = {
 // rand_perm_nettle_aes128
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_NETTLE
+#if PFSS_WITH_NETTLE
 
 template<class Block>
 Block nettle_aes_128_encrypt(
     Block block, aes128_ctx const & rkeys) noexcept {
-  PFSS_STATIC_ASSERT(sizeof(Block) == 16);
+  PFSS_SST_STATIC_ASSERT(sizeof(Block) == 16);
   auto const p = reinterpret_cast<unsigned char *>(&block);
   aes128_encrypt(&rkeys, 16, p, p);
   return block;
@@ -1562,7 +1554,7 @@ class rand_perm_nettle_aes128 final {
 
 public:
   using block_type = BlockType;
-  PFSS_STATIC_ASSERT(block_type::bits == 128);
+  PFSS_SST_STATIC_ASSERT(block_type::bits == 128);
 
   rand_perm_nettle_aes128(void const * const key) noexcept {
     assert(key != nullptr);
@@ -1597,13 +1589,13 @@ struct fixed_nettle_aes_128_rand_perm final {
   }
 };
 
-#endif // PFSS_HAVE_NETTLE
+#endif // PFSS_WITH_NETTLE
 
 //----------------------------------------------------------------------
 // aes_ni_128_encrypt
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 
 inline __m128i aes_ni_128_encrypt(
     __m128i block, __m128i const * const rkeys) noexcept {
@@ -1622,13 +1614,13 @@ inline __m128i aes_ni_128_encrypt(
   return block;
 }
 
-#endif // PFSS_HAVE_AES_NI
+#endif // PFSS_WITH_AES_NI
 
 //----------------------------------------------------------------------
 // aes_ni_128_rand_perm
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 
 template<bool Aligned = false>
 class aes_ni_128_rand_perm final {
@@ -1693,13 +1685,13 @@ public:
   }
 };
 
-#endif // PFSS_HAVE_AES_NI
+#endif // PFSS_WITH_AES_NI
 
 //----------------------------------------------------------------------
 // fixed_aes_ni_128_rand_perm
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 
 constexpr std::array<unsigned char, 176>
     fixed_aes_ni_128_rkeys_data alignas(__m128i) = fixed_aes_128_rkeys;
@@ -1713,13 +1705,13 @@ struct fixed_aes_ni_128_rand_perm final {
   }
 };
 
-#endif // PFSS_HAVE_AES_NI
+#endif // PFSS_WITH_AES_NI
 
 //----------------------------------------------------------------------
 // arm_crypto_aes_128_rand_perm
 //----------------------------------------------------------------------
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
 
 inline uint8x16_t arm_aes_128_encrypt(
     uint8x16_t block, uint8x16_t const * const rkeys) noexcept {
@@ -1784,7 +1776,7 @@ struct fixed_arm_aes_128_rand_perm final {
   }
 };
 
-#endif // PFSS_HAVE_ARM_CRYPTO
+#endif // PFSS_WITH_ARM_CRYPTO
 
 //----------------------------------------------------------------------
 // default_rand_perm_t
@@ -1795,28 +1787,28 @@ namespace detail {
 template<class Block>
 struct default_rand_perm_t {};
 
-#if PFSS_HAVE_UINT64
+#if PFSS_HAVE_UINT64_T
 template<>
 struct default_rand_perm_t<chunked_block<uint64_t, 2>> {
-#if PFSS_HAVE_NETTLE
+#if PFSS_WITH_NETTLE
   using type =
       fixed_nettle_aes_128_rand_perm<chunked_block<uint64_t, 2>>;
 #endif
 };
 #endif
 
-#if PFSS_HAVE_SSE2
+#if PFSS_WITH_SSE2
 template<>
 struct default_rand_perm_t<m128i_block> {
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
   using type = fixed_aes_ni_128_rand_perm;
-#elif PFSS_HAVE_NETTLE
+#elif PFSS_WITH_NETTLE
   using type = fixed_nettle_aes_128_rand_perm<m128i_block>;
 #endif
 };
 #endif
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
 template<>
 struct default_rand_perm_t<uint8x16_block> {
   using type = fixed_arm_aes_128_rand_perm;
@@ -1827,7 +1819,7 @@ struct default_rand_perm_t<uint8x16_block> {
 
 template<class Block = default_block_t<>>
 using default_rand_perm_t =
-    typename detail::default_rand_perm_t<Block>::type;
+    typename ::pfss::detail::default_rand_perm_t<Block>::type;
 
 //----------------------------------------------------------------------
 // default_rng_t

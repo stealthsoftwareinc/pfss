@@ -3,7 +3,7 @@
 // directory tree for the first COPYING file.
 //
 
-:PACKAGE_NAME: SST
-:PACKAGE_TARNAME: sst
+:PACKAGE_NAME: PFSS
+:PACKAGE_TARNAME: pfss
 
 //

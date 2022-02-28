@@ -13,13 +13,13 @@
 
 using namespace pfss;
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 using block_type = m128i_block;
 using rand_perm_type = aes_ni_128_rand_perm<>;
-#elif PFSS_HAVE_ARM_CRYPTO
+#elif PFSS_WITH_ARM_CRYPTO
 using block_type = uint8x16_block;
 using rand_perm_type = arm_crypto_aes_128_rand_perm;
-#elif PFSS_HAVE_SSE2
+#elif PFSS_WITH_SSE2
 using block_type = m128i_block;
 using rand_perm_type = rand_perm_nettle_aes128<block_type>;
 #else

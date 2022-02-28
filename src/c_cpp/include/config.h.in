@@ -3,180 +3,65 @@
 /* asciidoctor command */
 #undef ASCIIDOCTOR
 
-/* asciidoctor-pdf command */
-#undef ASCIIDOCTOR_PDF
+/* awk command */
+#undef AWK
 
-/* Define to 1 if you have openssl -non-fips-allow, or 0 if not. */
-#undef GATBPS_HAVE_NON_FIPS_ALLOW
+/* curl command */
+#undef CURL
 
-/* Define to 1 if you have AES-NI, or 0 if not. */
-#undef HAVE_AES_NI
+/* docker command */
+#undef DOCKER
 
-/* Define to 1 if you have ARM Crypto, or 0 if not. */
-#undef HAVE_ARM_CRYPTO
+/* git command */
+#undef GIT
+
+/* grep command */
+#undef GREP
+
+/* gunzip command */
+#undef GUNZIP
 
 /* asciidoctor command availability */
 #undef HAVE_ASCIIDOCTOR
 
-/* asciidoctor-pdf command availability */
-#undef HAVE_ASCIIDOCTOR_PDF
+/* awk command availability */
+#undef HAVE_AWK
 
-/* Define to 1 if you have AVX-512 F, or 0 if not. */
-#undef HAVE_AVX_512_F
-
-/* Define to 1 if you have AVX-512 VAES, or 0 if not. */
-#undef HAVE_AVX_512_VAES
-
-/* Define to 1 if you have AVX-512 VL, or 0 if not. */
-#undef HAVE_AVX_512_VL
-
-/* Define to 1 if you have CFLAGS += -maes (run), or 0 if not. */
-#undef HAVE_CFLAG_MAES
-
-/* Define to 1 if you have CFLAGS += -maes (compile 1), or 0 if not. */
-#undef HAVE_CFLAG_MAES_COMPILE_1
-
-/* Define to 1 if you have CFLAGS += -maes (compile 2), or 0 if not. */
-#undef HAVE_CFLAG_MAES_COMPILE_2
-
-/* Define to 1 if you have CFLAGS[-march=arm*] += +crypto (run), or 0 if not.
-   */
-#undef HAVE_CFLAG_MARCH_ARM_CRYPTO
-
-/* Define to 1 if you have CFLAGS[-march=arm*] += +crypto (compile), or 0 if
-   not. */
-#undef HAVE_CFLAG_MARCH_ARM_CRYPTO_COMPILE
-
-/* Define to 1 if you have CFLAGS += -mavx512f (run), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512F
-
-/* Define to 1 if you have CFLAGS += -mavx512f (compile 1), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512F_COMPILE_1
-
-/* Define to 1 if you have CFLAGS += -mavx512f (compile 2), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512F_COMPILE_2
-
-/* Define to 1 if you have CFLAGS += -mavx512vl (run), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512VL
-
-/* Define to 1 if you have CFLAGS += -mavx512vl (compile 1), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512VL_COMPILE_1
-
-/* Define to 1 if you have CFLAGS += -mavx512vl (compile 2), or 0 if not. */
-#undef HAVE_CFLAG_MAVX512VL_COMPILE_2
-
-/* Define to 1 if you have CFLAGS += -msse2 (run), or 0 if not. */
-#undef HAVE_CFLAG_MSSE2
-
-/* Define to 1 if you have CFLAGS += -msse2 (compile 1), or 0 if not. */
-#undef HAVE_CFLAG_MSSE2_COMPILE_1
-
-/* Define to 1 if you have CFLAGS += -msse2 (compile 2), or 0 if not. */
-#undef HAVE_CFLAG_MSSE2_COMPILE_2
-
-/* Define to 1 if you have CFLAGS += -mvaes (run), or 0 if not. */
-#undef HAVE_CFLAG_MVAES
-
-/* Define to 1 if you have CFLAGS += -mvaes (compile 1), or 0 if not. */
-#undef HAVE_CFLAG_MVAES_COMPILE_1
-
-/* Define to 1 if you have CFLAGS += -mvaes (compile 2), or 0 if not. */
-#undef HAVE_CFLAG_MVAES_COMPILE_2
-
-/* Define to 1 if you have CFLAGS += -Wall, or 0 if not. */
-#undef HAVE_CFLAG_WALL
-
-/* Define to 1 if you have CFLAGS += -Wextra, or 0 if not. */
-#undef HAVE_CFLAG_WEXTRA
-
-/* Define to 1 if you have #include <jni.h> (C++), or 0 if not. */
-#undef HAVE_CPP_INCLUDE_JNI_H
-
-/* Define to 1 if you have CXXFLAGS += -maes (run), or 0 if not. */
-#undef HAVE_CXXFLAG_MAES
-
-/* Define to 1 if you have CXXFLAGS += -maes (compile 1), or 0 if not. */
-#undef HAVE_CXXFLAG_MAES_COMPILE_1
-
-/* Define to 1 if you have CXXFLAGS += -maes (compile 2), or 0 if not. */
-#undef HAVE_CXXFLAG_MAES_COMPILE_2
-
-/* Define to 1 if you have CXXFLAGS[-march=arm*] += +crypto (run), or 0 if
-   not. */
-#undef HAVE_CXXFLAG_MARCH_ARM_CRYPTO
-
-/* Define to 1 if you have CXXFLAGS[-march=arm*] += +crypto (compile), or 0 if
-   not. */
-#undef HAVE_CXXFLAG_MARCH_ARM_CRYPTO_COMPILE
-
-/* Define to 1 if you have CXXFLAGS += -mavx512f (run), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512F
-
-/* Define to 1 if you have CXXFLAGS += -mavx512f (compile 1), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512F_COMPILE_1
-
-/* Define to 1 if you have CXXFLAGS += -mavx512f (compile 2), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512F_COMPILE_2
-
-/* Define to 1 if you have CXXFLAGS += -mavx512vl (run), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512VL
-
-/* Define to 1 if you have CXXFLAGS += -mavx512vl (compile 1), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512VL_COMPILE_1
-
-/* Define to 1 if you have CXXFLAGS += -mavx512vl (compile 2), or 0 if not. */
-#undef HAVE_CXXFLAG_MAVX512VL_COMPILE_2
-
-/* Define to 1 if you have CXXFLAGS += -msse2 (run), or 0 if not. */
-#undef HAVE_CXXFLAG_MSSE2
-
-/* Define to 1 if you have CXXFLAGS += -msse2 (compile 1), or 0 if not. */
-#undef HAVE_CXXFLAG_MSSE2_COMPILE_1
-
-/* Define to 1 if you have CXXFLAGS += -msse2 (compile 2), or 0 if not. */
-#undef HAVE_CXXFLAG_MSSE2_COMPILE_2
-
-/* Define to 1 if you have CXXFLAGS += -mvaes (run), or 0 if not. */
-#undef HAVE_CXXFLAG_MVAES
-
-/* Define to 1 if you have CXXFLAGS += -mvaes (compile 1), or 0 if not. */
-#undef HAVE_CXXFLAG_MVAES_COMPILE_1
-
-/* Define to 1 if you have CXXFLAGS += -mvaes (compile 2), or 0 if not. */
-#undef HAVE_CXXFLAG_MVAES_COMPILE_2
-
-/* Define to 1 if you have CXXFLAGS += -std=c++11, or 0 if not. */
-#undef HAVE_CXXFLAG_STD_CPP11
-
-/* Define to 1 if you have CXXFLAGS += -Wall, or 0 if not. */
-#undef HAVE_CXXFLAG_WALL
-
-/* Define to 1 if you have CXXFLAGS += -Wextra, or 0 if not. */
-#undef HAVE_CXXFLAG_WEXTRA
-
-/* Define to 1 if you have #include <jni.h> (C), or 0 if not. */
-#undef HAVE_C_INCLUDE_JNI_H
+/* curl command availability */
+#undef HAVE_CURL
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* docker command availability */
+#undef HAVE_DOCKER
+
+/* git command availability */
+#undef HAVE_GIT
+
+/* grep command availability */
+#undef HAVE_GREP
+
+/* gunzip command availability */
+#undef HAVE_GUNZIP
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have JNI, or 0 if not. */
-#undef HAVE_JNI
-
-/* Define to 1 if you have -lnettle, or 0 if not. */
-#undef HAVE_LIB_NETTLE
+/* ln -s command availability */
+#undef HAVE_LN_S
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
-/* Define to 1 if you have Nettle, or 0 if not. */
-#undef HAVE_NETTLE
+/* mkdir -p command availability */
+#undef HAVE_MKDIR_P
 
-/* Define to 1 if you have SSE2, or 0 if not. */
-#undef HAVE_SSE2
+/* openssl command availability */
+#undef HAVE_OPENSSL
+
+/* sed command availability */
+#undef HAVE_SED
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
@@ -202,20 +87,44 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to 1 if you have x86 CPU features, or 0 if not. */
-#undef HAVE_X86
+/* wget command availability */
+#undef HAVE_WGET
 
-/* Define to 1 if you have x86 (C), or 0 if not. */
-#undef HAVE_X86_C
+/* Result of checking for the x86-32 instruction set (all). */
+#undef HAVE_X86_32
 
-/* Define to 1 if you have x86 (C++), or 0 if not. */
-#undef HAVE_X86_CPP
+/* Result of checking for the x86-32 instruction set (C++ link). */
+#undef HAVE_X86_32_CPP_LINK
+
+/* Result of checking for the x86-32 instruction set (C link). */
+#undef HAVE_X86_32_C_LINK
+
+/* Result of checking for the x86-64 instruction set (all). */
+#undef HAVE_X86_64
+
+/* Result of checking for the x86-64 instruction set (C++ link). */
+#undef HAVE_X86_64_CPP_LINK
+
+/* Result of checking for the x86-64 instruction set (C link). */
+#undef HAVE_X86_64_C_LINK
 
 /* xz command availability */
 #undef HAVE_XZ
 
+/* zip command availability */
+#undef HAVE_ZIP
+
+/* ln -s command */
+#undef LN_S
+
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
+
+/* mkdir -p command */
+#undef MKDIR_P
+
+/* openssl command */
+#undef OPENSSL
 
 /* Name of package */
 #undef PACKAGE
@@ -397,6 +306,9 @@
    "0.1.0-4927+g88a52bb", then this should be "0.@:1.@:0-4927+g88a52bb". */
 #undef PACKAGE_VERSION_TEXI
 
+/* sed command */
+#undef SED
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
@@ -406,101 +318,203 @@
 /* Version number of package */
 #undef VERSION
 
-/* Define to 1 if you have permission to use AES-NI, or 0 if not. */
+/* wget command */
+#undef WGET
+
+/* Result of checking for the AES-NI instruction set (all). */
 #undef WITH_AES_NI
 
-/* Define to 1 if you have insistence to use AES-NI, or 0 if not. */
-#undef WITH_AES_NI_OR_DIE
+/* Result of checking for the AES-NI instruction set (C++ link). */
+#undef WITH_AES_NI_CPP_LINK
 
-/* Define to 1 if you have permission to use ARM Crypto, or 0 if not. */
+/* Result of checking for the AES-NI instruction set (C++ run). */
+#undef WITH_AES_NI_CPP_RUN
+
+/* Result of checking for the AES-NI instruction set (C link). */
+#undef WITH_AES_NI_C_LINK
+
+/* Result of checking for the AES-NI instruction set (C run). */
+#undef WITH_AES_NI_C_RUN
+
+/* Result of checking for the ARM Crypto instruction set (all). */
 #undef WITH_ARM_CRYPTO
 
-/* Define to 1 if you have insistence to use ARM Crypto, or 0 if not. */
-#undef WITH_ARM_CRYPTO_OR_DIE
+/* Result of checking for the ARM Crypto instruction set (C++ link). */
+#undef WITH_ARM_CRYPTO_CPP_LINK
 
-/* Define to 1 if you have permission to use AVX-512 F, or 0 if not. */
+/* Result of checking for the ARM Crypto instruction set (C++ run). */
+#undef WITH_ARM_CRYPTO_CPP_RUN
+
+/* Result of checking for the ARM Crypto instruction set (C link). */
+#undef WITH_ARM_CRYPTO_C_LINK
+
+/* Result of checking for the ARM Crypto instruction set (C run). */
+#undef WITH_ARM_CRYPTO_C_RUN
+
+/* Result of checking for the AVX-512 BW instruction set (all). */
+#undef WITH_AVX_512_BW
+
+/* Result of checking for the AVX-512 BW instruction set (C++ link). */
+#undef WITH_AVX_512_BW_CPP_LINK
+
+/* Result of checking for the AVX-512 BW instruction set (C++ run). */
+#undef WITH_AVX_512_BW_CPP_RUN
+
+/* Result of checking for the AVX-512 BW instruction set (C link). */
+#undef WITH_AVX_512_BW_C_LINK
+
+/* Result of checking for the AVX-512 BW instruction set (C run). */
+#undef WITH_AVX_512_BW_C_RUN
+
+/* Result of checking for the AVX-512 F instruction set (all). */
 #undef WITH_AVX_512_F
 
-/* Define to 1 if you have insistence to use AVX-512 F, or 0 if not. */
-#undef WITH_AVX_512_F_OR_DIE
+/* Result of checking for the AVX-512 F instruction set (C++ link). */
+#undef WITH_AVX_512_F_CPP_LINK
 
-/* Define to 1 if you have permission to use AVX-512 VAES, or 0 if not. */
-#undef WITH_AVX_512_VAES
+/* Result of checking for the AVX-512 F instruction set (C++ run). */
+#undef WITH_AVX_512_F_CPP_RUN
 
-/* Define to 1 if you have insistence to use AVX-512 VAES, or 0 if not. */
-#undef WITH_AVX_512_VAES_OR_DIE
+/* Result of checking for the AVX-512 F instruction set (C link). */
+#undef WITH_AVX_512_F_C_LINK
 
-/* Define to 1 if you have permission to use AVX-512 VL, or 0 if not. */
+/* Result of checking for the AVX-512 F instruction set (C run). */
+#undef WITH_AVX_512_F_C_RUN
+
+/* Result of checking for the AVX-512 VL instruction set (all). */
 #undef WITH_AVX_512_VL
 
-/* Define to 1 if you have insistence to use AVX-512 VL, or 0 if not. */
-#undef WITH_AVX_512_VL_OR_DIE
+/* Result of checking for the AVX-512 VL instruction set (C++ link). */
+#undef WITH_AVX_512_VL_CPP_LINK
 
-/* Define to 1 if you have CFLAGS += -maes (cross), or 0 if not. */
-#undef WITH_CROSS_CFLAG_MAES
+/* Result of checking for the AVX-512 VL instruction set (C++ run). */
+#undef WITH_AVX_512_VL_CPP_RUN
 
-/* Define to 1 if you have CFLAGS[-march=arm*] += +crypto (cross), or 0 if
-   not. */
-#undef WITH_CROSS_CFLAG_MARCH_ARM_CRYPTO
+/* Result of checking for the AVX-512 VL instruction set (C link). */
+#undef WITH_AVX_512_VL_C_LINK
 
-/* Define to 1 if you have CFLAGS += -mavx512f (cross), or 0 if not. */
-#undef WITH_CROSS_CFLAG_MAVX512F
+/* Result of checking for the AVX-512 VL instruction set (C run). */
+#undef WITH_AVX_512_VL_C_RUN
 
-/* Define to 1 if you have CFLAGS += -mavx512vl (cross), or 0 if not. */
-#undef WITH_CROSS_CFLAG_MAVX512VL
+/* Result of checking CFLAGS += -Wall. */
+#undef WITH_CFLAG_WALL
 
-/* Define to 1 if you have CFLAGS += -msse2 (cross), or 0 if not. */
-#undef WITH_CROSS_CFLAG_MSSE2
+/* Result of checking CFLAGS += -Wextra. */
+#undef WITH_CFLAG_WEXTRA
 
-/* Define to 1 if you have CFLAGS += -mvaes (cross), or 0 if not. */
-#undef WITH_CROSS_CFLAG_MVAES
+/* Result of checking whether C++11 is enabled (3). */
+#undef WITH_CXXFLAG_CPP11
 
-/* Define to 1 if you have CXXFLAGS += -maes (cross), or 0 if not. */
-#undef WITH_CROSS_CXXFLAG_MAES
+/* Result of checking whether C++11 is enabled (1). */
+#undef WITH_CXXFLAG_CPP11_1
 
-/* Define to 1 if you have CXXFLAGS[-march=arm*] += +crypto (cross), or 0 if
-   not. */
-#undef WITH_CROSS_CXXFLAG_MARCH_ARM_CRYPTO
+/* Result of checking whether C++11 is enabled (2). */
+#undef WITH_CXXFLAG_CPP11_2
 
-/* Define to 1 if you have CXXFLAGS += -mavx512f (cross), or 0 if not. */
-#undef WITH_CROSS_CXXFLAG_MAVX512F
+/* Result of checking CXXFLAGS += -Wall. */
+#undef WITH_CXXFLAG_WALL
 
-/* Define to 1 if you have CXXFLAGS += -mavx512vl (cross), or 0 if not. */
-#undef WITH_CROSS_CXXFLAG_MAVX512VL
+/* Result of checking CXXFLAGS += -Wextra. */
+#undef WITH_CXXFLAG_WEXTRA
 
-/* Define to 1 if you have CXXFLAGS += -msse2 (cross), or 0 if not. */
-#undef WITH_CROSS_CXXFLAG_MSSE2
-
-/* Define to 1 if you have CXXFLAGS += -mvaes (cross), or 0 if not. */
-#undef WITH_CROSS_CXXFLAG_MVAES
-
-/* Define to 1 if you have permission to use JNI, or 0 if not. */
+/* Result of checking for the Java Native Interface (all). */
 #undef WITH_JNI
 
-/* Define to 1 if you have insistence to use JNI, or 0 if not. */
-#undef WITH_JNI_OR_DIE
+/* Result of checking for the Java Native Interface (C++ compile). */
+#undef WITH_JNI_CPP_COMPILE
 
-/* Define to 1 if you have --with-logging, or 0 if not. */
+/* Result of checking for the Java Native Interface (C compile). */
+#undef WITH_JNI_C_COMPILE
+
+/* Result of checking --with-logging. */
 #undef WITH_LOGGING
 
-/* Define to 1 if you have permission to use Nettle's -lnettle, or 0 if not.
-   */
+/* Result of checking for the Nettle nettle library (all). */
 #undef WITH_NETTLE
 
-/* Define to 1 if you have insistence to use Nettle, or 0 if not. */
-#undef WITH_NETTLE_OR_DIE
+/* Result of checking for the Nettle nettle library (C++ link). */
+#undef WITH_NETTLE_CPP_LINK
 
-/* Define to 1 if you have permission to use SSE2, or 0 if not. */
+/* Result of checking for the Nettle nettle library (C++ run). */
+#undef WITH_NETTLE_CPP_RUN
+
+/* Result of checking for the Nettle nettle library (C link). */
+#undef WITH_NETTLE_C_LINK
+
+/* Result of checking for the Nettle nettle library (C run). */
+#undef WITH_NETTLE_C_RUN
+
+/* Result of checking for the SSE instruction set (all). */
+#undef WITH_SSE
+
+/* Result of checking for the SSE2 instruction set (all). */
 #undef WITH_SSE2
 
-/* Define to 1 if you have insistence to use SSE2, or 0 if not. */
-#undef WITH_SSE2_OR_DIE
+/* Result of checking for the SSE2 instruction set (C++ link). */
+#undef WITH_SSE2_CPP_LINK
 
-/* Define to 1 if you have permission to use x86 CPU features, or 0 if not. */
+/* Result of checking for the SSE2 instruction set (C++ run). */
+#undef WITH_SSE2_CPP_RUN
+
+/* Result of checking for the SSE2 instruction set (C link). */
+#undef WITH_SSE2_C_LINK
+
+/* Result of checking for the SSE2 instruction set (C run). */
+#undef WITH_SSE2_C_RUN
+
+/* Result of checking for the SSE instruction set (C++ link). */
+#undef WITH_SSE_CPP_LINK
+
+/* Result of checking for the SSE instruction set (C++ run). */
+#undef WITH_SSE_CPP_RUN
+
+/* Result of checking for the SSE instruction set (C link). */
+#undef WITH_SSE_C_LINK
+
+/* Result of checking for the SSE instruction set (C run). */
+#undef WITH_SSE_C_RUN
+
+/* Result of checking for the Windows bcrypt API (all). */
+#undef WITH_WINDOWS_BCRYPT
+
+/* Result of checking for the Windows bcrypt API (C++ link). */
+#undef WITH_WINDOWS_BCRYPT_CPP_LINK
+
+/* Result of checking for the Windows bcrypt API (C++ run). */
+#undef WITH_WINDOWS_BCRYPT_CPP_RUN
+
+/* Result of checking for the Windows bcrypt API (C link). */
+#undef WITH_WINDOWS_BCRYPT_C_LINK
+
+/* Result of checking for the Windows bcrypt API (C run). */
+#undef WITH_WINDOWS_BCRYPT_C_RUN
+
+/* Result of checking for the Windows kernel32 API (all). */
+#undef WITH_WINDOWS_KERNEL32
+
+/* Result of checking for the Windows kernel32 API (C++ link). */
+#undef WITH_WINDOWS_KERNEL32_CPP_LINK
+
+/* Result of checking for the Windows kernel32 API (C++ run). */
+#undef WITH_WINDOWS_KERNEL32_CPP_RUN
+
+/* Result of checking for the Windows kernel32 API (C link). */
+#undef WITH_WINDOWS_KERNEL32_C_LINK
+
+/* Result of checking for the Windows kernel32 API (C run). */
+#undef WITH_WINDOWS_KERNEL32_C_RUN
+
+/* Result of checking whether an x86 instruction set is being used. */
 #undef WITH_X86
 
-/* Define to 1 if you have insistence to use x86 CPU features, or 0 if not. */
-#undef WITH_X86_OR_DIE
+/* Result of checking whether to use the x86-32 instruction set (result). */
+#undef WITH_X86_32
+
+/* Result of checking whether to use the x86-64 instruction set (result). */
+#undef WITH_X86_64
 
 /* xz command */
 #undef XZ
+
+/* zip command */
+#undef ZIP

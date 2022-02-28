@@ -1,6 +1,8 @@
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //

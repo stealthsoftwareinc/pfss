@@ -1,22 +1,23 @@
 ##
-## For the copyright information for this file, please search up the
-## directory tree for the first COPYING file.
+## Copyright (C) Stealth Software Technologies, Inc.
+##
+## For the complete copyright information, please see the
+## associated README file.
 ##
 
-doc_pages_manual_leaves = $(manual_dst_leaves)
+doc_pages_manual_leaves = $(manual_dst).tar.xz
 
-doc/pages/manual: $(manual_dst)
+doc/pages/manual: $(manual_dst).tar.xz
 	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
 	$(AM_V_GEN)$(GATBPS_V_NOP)
 	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
-	$(AM_V_at)cp -R $(manual_dst) $@$(TSUF)
-	$(AM_V_at)mv -f $@$(TSUF) $@
-	$(AM_V_at)-rm -f -r $@$(TSUF)*
+	$(AM_V_at)$(XZ) -d <$(manual_dst).tar.xz >$@$(TSUF)1
+	$(AM_V_at)$(MKDIR_P) $@$(TSUF)2
+	$(AM_V_at)(cd $@$(TSUF)2 && $(TAR) x) <$@$(TSUF)1
+	$(AM_V_at)cp -R $@$(TSUF)2/* $@$(TSUF)3
+	$(AM_V_at)touch $@$(TSUF)3
+	$(AM_V_at)mv -f $@$(TSUF)3 $@
+	$(AM_V_at)rm -f -r $@$(TSUF)*
 	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
 
-.PHONY: doc/pages/manual/clean
-doc/pages/manual/clean: FORCE
-doc/pages/manual/clean: $(manual_dst)/clean
-	-rm -f -r $(@D) $(@D)$(TSUF)*
-
-mostlyclean-local: doc/pages/manual/clean
+GATBPS_MOSTLYCLEANFILES += doc/pages/manual/clean

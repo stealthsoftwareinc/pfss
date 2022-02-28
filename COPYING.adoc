@@ -1,0 +1,2 @@
+Copyright (C) 2020 Stealth Software Technologies, Inc.
+All rights reserved.

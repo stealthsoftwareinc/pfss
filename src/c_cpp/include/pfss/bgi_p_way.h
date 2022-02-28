@@ -59,7 +59,9 @@ struct bgip_common {
   using rand_perm_type = typename remove_cvref<RandPermType>::type;
   using rng_type = typename remove_cvref<RngType>::type;
 
-  PFSS_STATIC_ASSERT(is_unsigned_integer<range_type>::value);
+  using block_size_type = typename block_type::size_type;
+
+  PFSS_SST_STATIC_ASSERT(is_unsigned_integer<range_type>::value);
 
   static constexpr int range_type_bits = type_bits<range_type>();
   using nice_range_type = typename promote_unsigned<range_type>::type;
@@ -70,7 +72,7 @@ struct bgip_common {
   }
 
   static constexpr std::size_t
-  key_blob_size(int const num_parties,
+  key_blob_size(std::size_t const num_parties,
                 std::size_t const nu,
                 std::size_t const num_blocks) noexcept {
     // clang-format off
@@ -98,7 +100,7 @@ struct bgip_common {
   static ContiguousByteOutputIt
   serialize_key(int const domain_bits,
                 int const range_bits,
-                int const party,
+                std::size_t const party,
                 std::vector<std::vector<block_type>> const & sigma,
                 std::vector<std::vector<block_type>> const & cws,
                 ContiguousByteOutputIt out) noexcept {
@@ -201,7 +203,7 @@ struct bgip_common {
 
   static constexpr std::size_t
   compute_min_prg_output_size(int const range_bits,
-                              int const mu) noexcept {
+                              domain_type const mu) noexcept {
     return (range_bits * mu) / uchar_bits
            + ((range_bits * mu) % uchar_bits == 0 ? 0 : 1);
   }
@@ -233,7 +235,7 @@ struct bgip_common {
   // iterator along with the resuling sampled integer T stored
   // inside 'result'.
   template<class T>
-  static RandBytesBufIt sample_ep_or_op(const int num_parties,
+  static RandBytesBufIt sample_ep_or_op(const std::size_t num_parties,
                                         const bool even,
                                         RandBytesBufIt it,
                                         T & result) {
@@ -244,7 +246,7 @@ struct bgip_common {
       result <<= n;
       result |= static_cast<T>(*it++);
     }
-    result &= get_mask<T>(num_parties);
+    result = static_cast<T>(result & get_mask<T>(static_cast<int>(num_parties)));
     result ^= (even == compute_parity(result));
     return it;
   }
@@ -252,7 +254,7 @@ struct bgip_common {
   template<class KeyType>
   static void gen(int const domain_bits,
                   int const range_bits,
-                  int const num_parties,
+                  std::size_t const num_parties,
                   std::vector<KeyType> & key,
                   domain_type const & alpha,
                   range_type beta,
@@ -320,12 +322,12 @@ struct bgip_common {
     // Find the byte index and offset at which b begins.
     std::size_t byte_index = delta * range_bits / uchar_bits;
     std::size_t block_index = byte_index / e_delta_beta[0].size();
-    std::size_t byte_offset = byte_index % e_delta_beta[0].size();
+    block_size_type byte_offset = static_cast<block_size_type>(byte_index % e_delta_beta[0].size());
     std::size_t bit_offset = delta * range_bits % uchar_bits;
 
     // Copy beta's bytes into e_delta_beta, starting at the
     // byte_offset'th bit of the byte_index'th byte.
-    unsigned char mask = static_cast<unsigned char>(1) << bit_offset;
+    unsigned char mask = static_cast<unsigned char>(1U << bit_offset);
     for (int i = 0; i < range_bits; i++) {
       if (mask == 0) {
         byte_offset++;
@@ -340,10 +342,12 @@ struct bgip_common {
       if (beta & 1) {
         e_delta_beta[block_index][byte_offset] |= mask;
       } else {
-        e_delta_beta[block_index][byte_offset] &= ~mask;
+        e_delta_beta[block_index][byte_offset] = 
+            static_cast<unsigned char>(
+                e_delta_beta[block_index][byte_offset] & ~mask);
       }
 
-      beta >>= 1;
+      beta = static_cast<range_type>(beta >> 1);
       mask = static_cast<unsigned char>(mask << 1);
     }
 
@@ -373,7 +377,7 @@ struct bgip_common {
     std::vector<std::vector<std::vector<block_type>>> sigma(
         num_parties,
         std::vector<std::vector<block_type>>(nu));
-    for (int i = 0; i < num_parties; i++) {
+    for (std::size_t i = 0; i < num_parties; i++) {
       // TODO: do not hard code this to uint64_t. See the TODO item above about
       // determining a uint to hold just p bits.
       uint64_t party_mask = static_cast<uint64_t>(1) << i;
@@ -391,7 +395,7 @@ struct bgip_common {
     }
 
     // Lines 9 + 10.
-    for (int i = 0; i < num_parties; i++) {
+    for (std::size_t i = 0; i < num_parties; i++) {
       key[i].party = i;
       key[i].cws = cws;
       key[i].sigma = sigma[i];
@@ -401,13 +405,13 @@ struct bgip_common {
   template<class KeyType>
   static range_type eval(int const domain_bits,
                          int const range_bits,
-                         int const num_parties,
+                         std::size_t const num_parties,
                          KeyType const & key,
                          domain_type const & x,
                          rand_perm_type & pi) {
     const domain_type mu =
         compute_mu<domain_type>(domain_bits, num_parties);
-    const auto nu = compute_nu<decltype(mu)>(domain_bits, mu);
+
 
     // Obtain the number of total bytes that are needed as output
     // from the prg.
@@ -429,7 +433,7 @@ struct bgip_common {
     std::vector<block_type> prg_output;
     for (std::size_t j = 0; j < num_cws; j++) {
       bool prg_seed_is_zero = true;
-      for (std::size_t k = 0; k < key.sigma[gamma][j].size(); k++) {
+      for (block_size_type k = 0; k < key.sigma[gamma][j].size(); k++) {
         if (key.sigma[gamma][j][k] != 0) {
           prg_seed_is_zero = false;
         }
@@ -452,13 +456,13 @@ struct bgip_common {
     std::size_t byte_index = delta * range_bits / uchar_bits;
     std::size_t block_index =
         byte_index / eval_result_in_here[0].size();
-    std::size_t byte_offset =
-        byte_index % eval_result_in_here[0].size();
+    block_size_type byte_offset =
+        static_cast<block_size_type>(byte_index % eval_result_in_here[0].size());
     std::size_t bit_offset = delta * range_bits % uchar_bits;
 
     // Copy eval result into y, starting at the
     // byte_offset'th bit of the byte_index'th byte.
-    unsigned char mask = static_cast<unsigned char>(1) << bit_offset;
+    unsigned char mask = static_cast<unsigned char>(1U << bit_offset);
     nice_range_type result_mask = 1;
     std::size_t n_bytes_copied = 0;
     for (int i = 0; i < range_bits; i++) {
@@ -599,7 +603,7 @@ public:
 
     static constexpr int domain_bits = DomainBits;
     static constexpr int range_bits = RangeBits;
-    int party;
+    std::size_t party;
     std::vector<std::vector<block_type>> sigma;
     std::vector<std::vector<block_type>> cws;
 
@@ -788,7 +792,6 @@ public:
     assert(range_bits <= range_type_bits);
     assert(range_bits < block_type::bits);
     assert(NumParties <= 64);
-    assert(NumParties < domain_bits);
   }
 
   ~bgip_v() noexcept = default;
@@ -822,19 +825,19 @@ public:
 
     int const domain_bits;
     int const range_bits;
-    int party;
+    std::size_t party;
     std::vector<std::vector<block_type>> sigma;
     std::vector<std::vector<block_type>> cws;
 
     // Unlike the above member variables, these
     // three member variables are not serialized.
-    int NumParties;
+    std::size_t NumParties;
     std::size_t nu;
     std::size_t num_blocks;
 
     key_type(int const domain_bits,
              int const range_bits,
-             int const NumParties,
+             std::size_t const NumParties,
              std::size_t const nu,
              std::size_t const num_blocks)
         : domain_bits(domain_bits),

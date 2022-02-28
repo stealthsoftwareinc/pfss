@@ -1,52 +1,172 @@
 #! /bin/sh -
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
+#
+# This script uses the SST Bash library to bootstrap from /bin/sh into
+# bash. See the Bash library > Bootstrapping section of the SST manual
+# for more information.
 #
 
-set -e
-. src/bash/preludes/standard.bash
+#-----------------------------------------------------------------------
+# Include the SST Bash library
+#-----------------------------------------------------------------------
+
+set -e || exit $?
+if test -f sst.bash; then
+  . ./sst.bash
+else
+  . sst.bash
+fi
+
+#-----------------------------------------------------------------------
 
 autogen_ac_start build-aux/autogen.ac
 autogen_am_start build-aux/autogen.am
 
 #-----------------------------------------------------------------------
-
-autogen_ac_append <<<''
-autogen_ac_append <<<"]AC_DEFUN_ONCE([DEFINE_ALL], [[{ :"
-for x in m4/DEFINE_*.m4; do
-  x=${x#m4/}
-  x=${x%.m4}
-  autogen_ac_append <<<"  ]AC_REQUIRE([$x])["
-done
-autogen_ac_append <<<'}]])['
-
-for x in CFLAG CXXFLAG LIB; do
-  autogen_ac_append <<<''
-  autogen_ac_append <<<"]AC_DEFUN_ONCE([DEFINE_${x}S], [[{ :"
-  for y in m4/DEFINE_HAVE_${x}_*.m4; do
-    y=${y#m4/}
-    y=${y%.m4}
-    autogen_ac_append <<<"  ]AC_REQUIRE([$y])["
-  done
-  autogen_ac_append <<<'}]])['
-done
-
-autogen_ac_append <<<''
-autogen_ac_append <<<']DEFINE_ALL['
-
-#-----------------------------------------------------------------------
-# Root .ag includes
+# Generate any implied ordering macros
 #-----------------------------------------------------------------------
 #
-# If an .ag file needs to be included and there's no more specific .ag
-# file in which to do it, then do it here.
+# Consider the set of all pairs (X, Y) implied by the existence of any
+# GATBPS_BEFORE([$0], [Y]) call in any m4/X.m4 macro. For each unique Y
+# for which m4/Y.m4 does not exist, we want to generate m4/Y.m4 and make
+# it call GATBPS_REQUIRE([X]) for every corresponding X.
+#
+
+f() {
+
+  declare    x
+  declare    x_file
+  declare    y
+  declare    y_file
+  declare -A y_to_xs
+  declare    ys
+
+  y_to_xs=()
+
+  for x_file in m4/*.m4; do
+    x=$x_file
+    x=${x##*/}
+    x=${x%.*}
+    ys=$(
+      sed -n '
+        s/.*GATBPS_BEFORE(\[\$0\], \[\([^]]*\)\]).*/\1/p
+      ' $x_file
+    )
+    for y in $ys; do
+      y_to_xs[$y]+=" $x"
+    done
+  done
+
+  for y in ${!y_to_xs[@]}; do
+    y_file=m4/$y.m4
+    if [[ ! -e $y_file ]]; then
+
+      sst_info "Generating: $y_file"
+
+      >$y_file
+
+      sst_ihs <<<'
+        dnl
+        dnl Copyright (C) Stealth Software Technologies, Inc.
+        dnl
+        dnl For the complete copyright information, please see the
+        dnl associated README file.
+        dnl
+
+        AC_DEFUN_ONCE(['$y'], [
+        GATBPS_CALL_COMMENT([$0]m4_if(m4_eval([$# > 0]), [1], [, $@]))
+        { :
+      ' >>$y_file
+
+      for x in ${y_to_xs[$y]}; do
+        sst_ihs -2 <<<'
+          GATBPS_REQUIRE(['$x'])
+        ' >>$y_file
+      done
+
+      sst_ihs <<<'
+        }])
+      ' >>$y_file
+
+    fi
+  done
+
+}; f
+
+#-----------------------------------------------------------------------
+# Generate CALL_EVERYTHING
+#-----------------------------------------------------------------------
+#
+# It's important that this is the last m4/*.m4 macro we generate, as we
+# need to analyze all other m4/*.m4 macros to generate it.
+#
+
+f() {
+
+  declare    x
+  declare    xs
+  declare    y
+
+  xs=$(sst_grep -l AC_DEFUN_ONCE m4/*.m4)
+  readonly xs
+
+  y=m4/CALL_EVERYTHING.m4
+  readonly y
+
+  sst_expect_not_exist "$y"
+
+  >$y
+
+  sst_ihs <<<'
+    dnl
+    dnl Copyright (C) Stealth Software Technologies, Inc.
+    dnl
+    dnl For the complete copyright information, please see the
+    dnl associated README file.
+    dnl
+
+    AC_DEFUN_ONCE([CALL_EVERYTHING], [
+    GATBPS_CALL_COMMENT([$0]m4_if(m4_eval([$# > 0]), [1], [, $@]))
+    { :
+  ' >>$y
+
+  sst_push_var IFS
+
+  for x in $xs; do
+    x=${x##*/}
+    x=${x%.*}
+    sst_ihs -2 <<<'
+      GATBPS_REQUIRE(['"$x"'])
+    ' >>$y
+  done
+
+  sst_pop_var IFS
+
+  sst_ihs <<<'
+    }])
+  ' >>$y
+
+  sst_ac_append <<<'CALL_EVERYTHING'
+
+}; f
+
+#-----------------------------------------------------------------------
+# Root .ag files
+#-----------------------------------------------------------------------
+#
+# If an .ag file needs to be included and there's no more specific place
+# to do it, then do it here.
 #
 
 sst_ag_include \
   doc/manual/build.phony.ag \
   doc/pages/build.phony.ag \
   doc/readme/build.phony.ag \
+  src/c_cpp/build.phony.ag \
   src/c_cpp/include/pfss/switch_db_rb.h.ag \
 ;
 
@@ -54,24 +174,24 @@ sst_ag_include \
 # Root distributed files
 #-----------------------------------------------------------------------
 #
-# If a file needs to be distributed (i.e., included in the distribution
-# archive) and there's no more specific .ag, .ac, or .am file in which
+# If a file needs to be distributed and there's no more specific place
 # to do it, then do it here.
 #
 
-for x in \
+sst_am_distribute_if_not_dir \
   .clang-format \
   .gitattributes \
-  COPYING \
+  COPYING.adoc \
   README.adoc \
-  build-aux/DATE \
-  build-aux/DATE.sh \
-  build-aux/LTCURRENT \
-  build-aux/LTCURRENT.sh \
-  build-aux/VERSION \
-  build-aux/VERSION.sh \
   build-aux/adock \
-  build-aux/echo.sh \
+  build-aux/gatbps-echo.sh \
+  build-aux/gatbps-gen-date.sh \
+  build-aux/gatbps-gen-date.sh.cache \
+  build-aux/gatbps-gen-libtool-c.sh \
+  build-aux/gatbps-gen-libtool-c.sh.cache \
+  build-aux/gatbps-gen-version.sh \
+  build-aux/gatbps-gen-version.sh.cache \
+  build-aux/pfss.srcdir \
   doc/* \
   doc/manual/**/* \
   install/**/* \
@@ -82,11 +202,8 @@ for x in \
   src/install/**/* \
   src/java/**/* \
   src/node/**/* \
-; do
-  if [[ -f "$x" ]]; then
-    sst_am_distribute_file "$x"
-  fi
-done
+  sst.bash \
+;
 
 #-----------------------------------------------------------------------
 
@@ -95,10 +212,6 @@ sst_ajh_download build-aux/downloads
 sst_ajh_c_cpp_test \
   src/c_cpp/test \
   src/c_cpp/libpfss.la \
-;
-
-autogen_am_var_append noinst_HEADERS \
-  src/c_cpp/test/**/*.h \
 ;
 
 autogen_ac_finish

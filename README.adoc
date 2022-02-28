@@ -9,8 +9,10 @@
 //
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
@@ -23,6 +25,14 @@
 // well.
 //
 
+//
+// The readme_diagrams attribute can be either unset, set to the empty
+// string, or set to any nonempty string. Unset means diagrams are not
+// being generated, the empty string means diagrams are being generated
+// for the distribution archive, and any nonempty string means diagrams
+// are being generated for the source repository.
+//
+
 ifdef::readme_diagrams[]
 ifeval::["{readme_diagrams}" != ""]
 endif::[]
@@ -31,8 +41,10 @@ ifndef::readme_diagrams[]
 endif::[]
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
@@ -43,7 +55,7 @@ endif::[]
 
 :PACKAGE_NAME: PFSS
 :PACKAGE_TARNAME: pfss
-:PACKAGE_VERSION: 0.12.5
+:PACKAGE_VERSION: 1.0.0
 
 //
 
@@ -79,17 +91,19 @@ link:https://eprint.iacr.org/2020/1599[IACR ePrint].
 //
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
-// This file should roughly mirror the doc/pages/_includes/source.md
-// file. If you edit this file, you might need to edit that file as
-// well.
+// This file should roughly mirror the
+// doc/pages/_includes/source_code.md file. If you edit this file, you
+// might need to edit that file as well.
 //
 
-== Source
+== Source code
 
 :fp_package_name: {PACKAGE_NAME}
 :fp_package_tarname: {PACKAGE_TARNAME}
@@ -113,8 +127,10 @@ link:https://eprint.iacr.org/2020/1599[IACR ePrint].
 :fp_github_download_pinned_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/archive/refs/tags/v{PACKAGE_VERSION}.tar.gz
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
@@ -260,8 +276,10 @@ endif::[]
 //
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
@@ -294,8 +312,10 @@ endif::[]
 :fp_github_download_pinned_url: https://github.com/stealthsoftwareinc/{PACKAGE_TARNAME}/raw/v{PACKAGE_VERSION}/doc/{PACKAGE_TARNAME}-{PACKAGE_VERSION}-manual.tar.xz
 
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //

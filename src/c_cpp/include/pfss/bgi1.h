@@ -18,6 +18,9 @@
 //           note = {\url{https://eprint.iacr.org/2018/707}},
 //       }
 //
+// TODO: serialize/deserialize range type containers -- perhaps add those as
+// member functions of a z2n group class. Modify the convert portions of gen
+// and eval. Write unit test.
 
 // Include first to test independence.
 #include <pfss.h>
@@ -53,13 +56,13 @@ template<class DomainType,
          class PrgConvert>
 struct bgi1_common {
 
-  PFSS_STATIC_ASSERT(
+  PFSS_SST_STATIC_ASSERT(
       (std::is_same<typename remove_cvref<RangePack>::type,
                     std::true_type>::value
        || std::is_same<typename remove_cvref<RangePack>::type,
                        std::false_type>::value));
 
-  PFSS_STATIC_ASSERT(
+  PFSS_SST_STATIC_ASSERT(
       (std::is_same<typename remove_cvref<PrgConvert>::type,
                     std::true_type>::value
        || std::is_same<typename remove_cvref<PrgConvert>::type,
@@ -75,7 +78,7 @@ struct bgi1_common {
   static constexpr bool prg_convert =
       remove_cvref<PrgConvert>::type::value;
 
-  PFSS_STATIC_ASSERT(is_unsigned_integer<range_type>::value);
+  PFSS_SST_STATIC_ASSERT(is_unsigned_integer<range_type>::value);
 
   static constexpr int range_type_bits = type_bits<range_type>();
   using nice_range_type = typename promote_unsigned<range_type>::type;
@@ -630,9 +633,9 @@ public:
   // DEPRECATED
   using NiceRangeType = nice_range_type;
 
-  PFSS_STATIC_ASSERT(domain_bits > 0);
-  PFSS_STATIC_ASSERT(range_bits > 0);
-  PFSS_STATIC_ASSERT(range_bits <= range_type_bits);
+  PFSS_SST_STATIC_ASSERT(domain_bits > 0);
+  PFSS_SST_STATIC_ASSERT(range_bits > 0);
+  PFSS_SST_STATIC_ASSERT(range_bits <= range_type_bits);
 
   static constexpr range_type range_mask =
       get_mask<range_type>(range_bits);
@@ -659,7 +662,7 @@ public:
   // Ensure that at least one range element fits into a cw_last blob.
   //
 
-  PFSS_STATIC_ASSERT(range_bits <= cw_last_bits);
+  PFSS_SST_STATIC_ASSERT(range_bits <= cw_last_bits);
 
 private:
   static constexpr bool L = 0;
@@ -712,7 +715,7 @@ public:
     bool party;
     block_type s;
     std::array<cw_type, v> cw;
-    PFSS_STATIC_ASSERT(unsigned_le(1 << n_minus_v, size_max));
+    PFSS_SST_STATIC_ASSERT(unsigned_le(1 << n_minus_v, size_max::value));
     std::array<range_type, 1 << n_minus_v> cw_last;
 
     static constexpr std::size_t size() noexcept {

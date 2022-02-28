@@ -1,18 +1,62 @@
 dnl
-dnl For the copyright information for this file, please search up the
-dnl directory tree for the first COPYING file.
+dnl Copyright (C) Stealth Software Technologies, Inc.
+dnl
+dnl For the complete copyright information, please see the
+dnl associated README file.
 dnl
 
+dnl---------------------------------------------------------------------
 
 AC_INIT(
   [[PFSS]],
   m4_esyscmd_s([
-    sh build-aux/VERSION.sh
-  ])m4_if(m4_sysval, [0], [], [m4_fatal([VERSION.sh failed])]),
+    sh build-aux/gatbps-gen-version.sh
+  ])m4_if(m4_sysval, 0, [], [
+    m4_fatal([gatbps-gen-version.sh failed.])
+  ]),
   [[pfss@stealthsoftwareinc.com]],
   [[pfss]])
 
+dnl---------------------------------------------------------------------
+
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_SRCDIR([build-aux/pfss.srcdir])
+
+AM_INIT_AUTOMAKE([
+  -Wall
+  foreign
+  nostdinc
+  subdir-objects
+  tar-ustar
+])
+
+dnl---------------------------------------------------------------------
+
 m4_include([build-aux/gatbps.ac])
+
+dnl---------------------------------------------------------------------
+dnl Program checks
+dnl---------------------------------------------------------------------
+
+GATBPS_PROG_ASCIIDOCTOR
+GATBPS_PROG_AWK
+GATBPS_PROG_CURL
+GATBPS_PROG_DOCKER
+GATBPS_PROG_GIT
+GATBPS_PROG_GREP
+GATBPS_PROG_GUNZIP
+GATBPS_PROG_LN_S
+GATBPS_PROG_MKDIR_P
+GATBPS_PROG_OPENSSL
+GATBPS_PROG_SED
+GATBPS_PROG_TAR
+GATBPS_PROG_WGET
+GATBPS_PROG_XZ
+GATBPS_PROG_ZIP
+
+dnl---------------------------------------------------------------------
 
 [
 
@@ -24,21 +68,10 @@ m4_include([build-aux/gatbps.ac])
   [AC_],
   [PACKAGE_DATE],
   m4_esyscmd_s([
-    sh build-aux/DATE.sh
-  ])m4_if(m4_sysval, [0], [], [m4_fatal([DATE.sh failed])]))[
-
-]AC_CONFIG_AUX_DIR([build-aux])[
-]AC_CONFIG_MACRO_DIR([m4])[
-]AC_CONFIG_MACRO_DIRS([m4])[
-]AC_CONFIG_SRCDIR([src/c_cpp/include/pfss.h])[
-
-]AM_INIT_AUTOMAKE([
-  -Wall
-  foreign
-  nostdinc
-  subdir-objects
-  tar-ustar
-])[
+    sh build-aux/gatbps-gen-date.sh
+  ])m4_if(m4_sysval, 0, [], [
+    m4_fatal([gatbps-gen-date.sh failed])
+  ]))[
 
 ]m4_include([build-aux/autogen.ac])[
 
@@ -66,7 +99,6 @@ m4_include([build-aux/gatbps.ac])
 ]GATBPS_CONFIG_FILE_SUBST[
 ]GATBPS_CONFIG_LATER_SUBST[
 ]GATBPS_CP_SUBST[
-]GATBPS_DOCKER_BUILD_SUBST[
 ]GATBPS_GIT_ARCHIVE_SUBST[
 ]GATBPS_GIT_BUNDLE_SUBST[
 ]GATBPS_GIT_CLONE_SUBST[

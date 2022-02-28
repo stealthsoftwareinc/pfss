@@ -1,6 +1,8 @@
 ##
-## For the copyright information for this file, please search up the
-## directory tree for the first COPYING file.
+## Copyright (C) Stealth Software Technologies, Inc.
+##
+## For the complete copyright information, please see the
+## associated README file.
 ##
 
 ##
@@ -8,169 +10,201 @@
 ##
 
 EXTRA_DIST += autogen
-GATBPS_DISTFILES_0 =
+GATBPS_DISTFILES_0 = 
 GATBPS_DISTFILES_0 += doc/manual/build.phony.ag
-GATBPS_DISTFILES_1 =
-GATBPS_DISTFILES_1 += doc/manual/index.html.ag.json
+GATBPS_DISTFILES_1 = 
+GATBPS_DISTFILES_1 += build-aux/sst_ajh_asciidoctor_document_html_recipe.sh
+GATBPS_DISTFILES_2 = 
+GATBPS_DISTFILES_2 += doc/manual/index.html.ag.json
+doc_manual_index_html_children = 
+doc_manual_index_html_children += doc/manual/images
 
 #-----------------------------------------------------------------------
 # doc/manual/index.html
 #-----------------------------------------------------------------------
 
-doc_manual_index_html_child_prerequisites =
-doc_manual_index_html_leaves =
-
 doc/manual/images:
 	$(AM_V_at)$(MKDIR_P) $@
 
-doc_manual_index_html_child_prerequisites += doc/manual/images
+GATBPS_DISTFILES_3 = 
+GATBPS_DISTFILES_3 += doc/manual/benchmarking.adoc
+doc_manual_index_html_children += doc/manual/benchmarking.adoc
+doc_manual_index_html_leaves = 
 doc_manual_index_html_leaves += doc/manual/benchmarking.adoc
-GATBPS_DISTFILES_2 =
-GATBPS_DISTFILES_2 += doc/manual/benchmarking.adoc
+GATBPS_DISTFILES_4 = 
+GATBPS_DISTFILES_4 += doc/manual/bitstring_definition.adoc
+doc_manual_index_html_children += doc/manual/bitstring_definition.adoc
 doc_manual_index_html_leaves += doc/manual/bitstring_definition.adoc
-GATBPS_DISTFILES_3 =
-GATBPS_DISTFILES_3 += doc/manual/bitstring_definition.adoc
+GATBPS_DISTFILES_5 = 
+GATBPS_DISTFILES_5 += doc/manual/build_examples.adoc
+doc_manual_index_html_children += doc/manual/build_examples.adoc
 doc_manual_index_html_leaves += doc/manual/build_examples.adoc
-GATBPS_DISTFILES_4 =
-GATBPS_DISTFILES_4 += doc/manual/build_examples.adoc
+GATBPS_DISTFILES_6 = 
+GATBPS_DISTFILES_6 += doc/manual/c_api.adoc
+doc_manual_index_html_children += doc/manual/c_api.adoc
 doc_manual_index_html_leaves += doc/manual/c_api.adoc
-GATBPS_DISTFILES_5 =
-GATBPS_DISTFILES_5 += doc/manual/c_api.adoc
+GATBPS_DISTFILES_7 = 
+GATBPS_DISTFILES_7 += doc/manual/c_api_pfss_gen.adoc
+doc_manual_index_html_children += doc/manual/c_api_pfss_gen.adoc
 doc_manual_index_html_leaves += doc/manual/c_api_pfss_gen.adoc
-GATBPS_DISTFILES_6 =
-GATBPS_DISTFILES_6 += doc/manual/c_api_pfss_gen.adoc
+GATBPS_DISTFILES_8 = 
+GATBPS_DISTFILES_8 += doc/manual/cl_complete_grid_fragment.adoc
+doc_manual_index_html_children += doc/manual/cl_complete_grid_fragment.adoc
 doc_manual_index_html_leaves += doc/manual/cl_complete_grid_fragment.adoc
-GATBPS_DISTFILES_7 =
-GATBPS_DISTFILES_7 += doc/manual/cl_complete_grid_fragment.adoc
+GATBPS_DISTFILES_9 = 
+GATBPS_DISTFILES_9 += doc/manual/cl_domain_element_array_blurb.adoc
+doc_manual_index_html_children += doc/manual/cl_domain_element_array_blurb.adoc
 doc_manual_index_html_leaves += doc/manual/cl_domain_element_array_blurb.adoc
-GATBPS_DISTFILES_8 =
-GATBPS_DISTFILES_8 += doc/manual/cl_domain_element_array_blurb.adoc
+GATBPS_DISTFILES_10 = 
+GATBPS_DISTFILES_10 += doc/manual/cl_homogeneous_key_array_fragment.adoc
+doc_manual_index_html_children += doc/manual/cl_homogeneous_key_array_fragment.adoc
 doc_manual_index_html_leaves += doc/manual/cl_homogeneous_key_array_fragment.adoc
-GATBPS_DISTFILES_9 =
-GATBPS_DISTFILES_9 += doc/manual/cl_homogeneous_key_array_fragment.adoc
+GATBPS_DISTFILES_11 = 
+GATBPS_DISTFILES_11 += doc/manual/cl_key_concurrency_blurb.adoc
+doc_manual_index_html_children += doc/manual/cl_key_concurrency_blurb.adoc
 doc_manual_index_html_leaves += doc/manual/cl_key_concurrency_blurb.adoc
-GATBPS_DISTFILES_10 =
-GATBPS_DISTFILES_10 += doc/manual/cl_key_concurrency_blurb.adoc
+GATBPS_DISTFILES_12 = 
+GATBPS_DISTFILES_12 += doc/manual/cl_logging_fragment.adoc
+doc_manual_index_html_children += doc/manual/cl_logging_fragment.adoc
 doc_manual_index_html_leaves += doc/manual/cl_logging_fragment.adoc
-GATBPS_DISTFILES_11 =
-GATBPS_DISTFILES_11 += doc/manual/cl_logging_fragment.adoc
+GATBPS_DISTFILES_13 = 
+GATBPS_DISTFILES_13 += doc/manual/cl_pfss_eval.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_eval.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval.adoc
-GATBPS_DISTFILES_12 =
-GATBPS_DISTFILES_12 += doc/manual/cl_pfss_eval.adoc
+GATBPS_DISTFILES_14 = 
+GATBPS_DISTFILES_14 += doc/manual/cl_pfss_eval_all.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all.adoc
-GATBPS_DISTFILES_13 =
-GATBPS_DISTFILES_13 += doc/manual/cl_pfss_eval_all.adoc
+GATBPS_DISTFILES_15 = 
+GATBPS_DISTFILES_15 += doc/manual/cl_pfss_eval_all_dot.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_dot.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_dot.adoc
-GATBPS_DISTFILES_14 =
-GATBPS_DISTFILES_14 += doc/manual/cl_pfss_eval_all_dot.adoc
+GATBPS_DISTFILES_16 = 
+GATBPS_DISTFILES_16 += doc/manual/cl_pfss_eval_all_dot_example_1_output.txt
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_dot_example_1_output.txt
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_dot_example_1_output.txt
-GATBPS_DISTFILES_15 =
-GATBPS_DISTFILES_15 += doc/manual/cl_pfss_eval_all_dot_example_1_output.txt
+GATBPS_DISTFILES_17 = 
+GATBPS_DISTFILES_17 += doc/manual/cl_pfss_eval_all_dot_example_1_program.cpp
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_dot_example_1_program.cpp
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_dot_example_1_program.cpp
-GATBPS_DISTFILES_16 =
-GATBPS_DISTFILES_16 += doc/manual/cl_pfss_eval_all_dot_example_1_program.cpp
+GATBPS_DISTFILES_18 = 
+GATBPS_DISTFILES_18 += doc/manual/cl_pfss_eval_all_example_1_output.txt
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_example_1_output.txt
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_example_1_output.txt
-GATBPS_DISTFILES_17 =
-GATBPS_DISTFILES_17 += doc/manual/cl_pfss_eval_all_example_1_output.txt
+GATBPS_DISTFILES_19 = 
+GATBPS_DISTFILES_19 += doc/manual/cl_pfss_eval_all_example_1_program.cpp
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_example_1_program.cpp
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_example_1_program.cpp
-GATBPS_DISTFILES_18 =
-GATBPS_DISTFILES_18 += doc/manual/cl_pfss_eval_all_example_1_program.cpp
+GATBPS_DISTFILES_20 = 
+GATBPS_DISTFILES_20 += doc/manual/cl_pfss_eval_all_sum.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_sum.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_sum.adoc
-GATBPS_DISTFILES_19 =
-GATBPS_DISTFILES_19 += doc/manual/cl_pfss_eval_all_sum.adoc
+GATBPS_DISTFILES_21 = 
+GATBPS_DISTFILES_21 += doc/manual/cl_pfss_eval_all_sum_example_1_output.txt
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_sum_example_1_output.txt
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_sum_example_1_output.txt
-GATBPS_DISTFILES_20 =
-GATBPS_DISTFILES_20 += doc/manual/cl_pfss_eval_all_sum_example_1_output.txt
+GATBPS_DISTFILES_22 = 
+GATBPS_DISTFILES_22 += doc/manual/cl_pfss_eval_all_sum_example_1_program.cpp
+doc_manual_index_html_children += doc/manual/cl_pfss_eval_all_sum_example_1_program.cpp
 doc_manual_index_html_leaves += doc/manual/cl_pfss_eval_all_sum_example_1_program.cpp
-GATBPS_DISTFILES_21 =
-GATBPS_DISTFILES_21 += doc/manual/cl_pfss_eval_all_sum_example_1_program.cpp
+GATBPS_DISTFILES_23 = 
+GATBPS_DISTFILES_23 += doc/manual/cl_pfss_get_domain_bits.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_get_domain_bits.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_get_domain_bits.adoc
-GATBPS_DISTFILES_22 =
-GATBPS_DISTFILES_22 += doc/manual/cl_pfss_get_domain_bits.adoc
+GATBPS_DISTFILES_24 = 
+GATBPS_DISTFILES_24 += doc/manual/cl_pfss_get_log_file.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_get_log_file.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_get_log_file.adoc
-GATBPS_DISTFILES_23 =
-GATBPS_DISTFILES_23 += doc/manual/cl_pfss_get_log_file.adoc
+GATBPS_DISTFILES_25 = 
+GATBPS_DISTFILES_25 += doc/manual/cl_pfss_get_range_bits.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_get_range_bits.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_get_range_bits.adoc
-GATBPS_DISTFILES_24 =
-GATBPS_DISTFILES_24 += doc/manual/cl_pfss_get_range_bits.adoc
+GATBPS_DISTFILES_26 = 
+GATBPS_DISTFILES_26 += doc/manual/cl_pfss_get_status_name.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_get_status_name.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_get_status_name.adoc
-GATBPS_DISTFILES_25 =
-GATBPS_DISTFILES_25 += doc/manual/cl_pfss_get_status_name.adoc
+GATBPS_DISTFILES_27 = 
+GATBPS_DISTFILES_27 += doc/manual/cl_pfss_map_eval.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_map_eval.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_map_eval.adoc
-GATBPS_DISTFILES_26 =
-GATBPS_DISTFILES_26 += doc/manual/cl_pfss_map_eval.adoc
+GATBPS_DISTFILES_28 = 
+GATBPS_DISTFILES_28 += doc/manual/cl_pfss_map_eval_reduce_sum.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_map_eval_reduce_sum.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_map_eval_reduce_sum.adoc
-GATBPS_DISTFILES_27 =
-GATBPS_DISTFILES_27 += doc/manual/cl_pfss_map_eval_reduce_sum.adoc
+GATBPS_DISTFILES_29 = 
+GATBPS_DISTFILES_29 += doc/manual/cl_pfss_set_log_file.adoc
+doc_manual_index_html_children += doc/manual/cl_pfss_set_log_file.adoc
 doc_manual_index_html_leaves += doc/manual/cl_pfss_set_log_file.adoc
-GATBPS_DISTFILES_28 =
-GATBPS_DISTFILES_28 += doc/manual/cl_pfss_set_log_file.adoc
+GATBPS_DISTFILES_30 = 
+GATBPS_DISTFILES_30 += doc/manual/cl_range_element_array_blurb_1a.adoc
+doc_manual_index_html_children += doc/manual/cl_range_element_array_blurb_1a.adoc
 doc_manual_index_html_leaves += doc/manual/cl_range_element_array_blurb_1a.adoc
-GATBPS_DISTFILES_29 =
-GATBPS_DISTFILES_29 += doc/manual/cl_range_element_array_blurb_1a.adoc
+GATBPS_DISTFILES_31 = 
+GATBPS_DISTFILES_31 += doc/manual/cl_range_element_array_blurb_1b.adoc
+doc_manual_index_html_children += doc/manual/cl_range_element_array_blurb_1b.adoc
 doc_manual_index_html_leaves += doc/manual/cl_range_element_array_blurb_1b.adoc
-GATBPS_DISTFILES_30 =
-GATBPS_DISTFILES_30 += doc/manual/cl_range_element_array_blurb_1b.adoc
+GATBPS_DISTFILES_32 = 
+GATBPS_DISTFILES_32 += doc/manual/cl_return_status_blurb.adoc
+doc_manual_index_html_children += doc/manual/cl_return_status_blurb.adoc
 doc_manual_index_html_leaves += doc/manual/cl_return_status_blurb.adoc
-GATBPS_DISTFILES_31 =
-GATBPS_DISTFILES_31 += doc/manual/cl_return_status_blurb.adoc
+GATBPS_DISTFILES_33 = 
+GATBPS_DISTFILES_33 += doc/manual/cl_single_range_element_blurb_1a.adoc
+doc_manual_index_html_children += doc/manual/cl_single_range_element_blurb_1a.adoc
 doc_manual_index_html_leaves += doc/manual/cl_single_range_element_blurb_1a.adoc
-GATBPS_DISTFILES_32 =
-GATBPS_DISTFILES_32 += doc/manual/cl_single_range_element_blurb_1a.adoc
+GATBPS_DISTFILES_34 = 
+GATBPS_DISTFILES_34 += doc/manual/cl_single_range_element_blurb_1b.adoc
+doc_manual_index_html_children += doc/manual/cl_single_range_element_blurb_1b.adoc
 doc_manual_index_html_leaves += doc/manual/cl_single_range_element_blurb_1b.adoc
-GATBPS_DISTFILES_33 =
-GATBPS_DISTFILES_33 += doc/manual/cl_single_range_element_blurb_1b.adoc
+GATBPS_DISTFILES_35 = 
+GATBPS_DISTFILES_35 += doc/manual/cl_thread_count_parameter_fragment.adoc
+doc_manual_index_html_children += doc/manual/cl_thread_count_parameter_fragment.adoc
 doc_manual_index_html_leaves += doc/manual/cl_thread_count_parameter_fragment.adoc
-GATBPS_DISTFILES_34 =
-GATBPS_DISTFILES_34 += doc/manual/cl_thread_count_parameter_fragment.adoc
+GATBPS_DISTFILES_36 = 
+GATBPS_DISTFILES_36 += doc/manual/hardware_acceleration.adoc
+doc_manual_index_html_children += doc/manual/hardware_acceleration.adoc
 doc_manual_index_html_leaves += doc/manual/hardware_acceleration.adoc
-GATBPS_DISTFILES_35 =
-GATBPS_DISTFILES_35 += doc/manual/hardware_acceleration.adoc
+GATBPS_DISTFILES_37 = 
+GATBPS_DISTFILES_37 += doc/manual/index.adoc
+doc_manual_index_html_children += doc/manual/index.adoc
 doc_manual_index_html_leaves += doc/manual/index.adoc
-GATBPS_DISTFILES_36 =
-GATBPS_DISTFILES_36 += doc/manual/index.adoc
+GATBPS_DISTFILES_38 = 
+GATBPS_DISTFILES_38 += doc/manual/logging.adoc
+doc_manual_index_html_children += doc/manual/logging.adoc
 doc_manual_index_html_leaves += doc/manual/logging.adoc
-GATBPS_DISTFILES_37 =
-GATBPS_DISTFILES_37 += doc/manual/logging.adoc
+GATBPS_DISTFILES_39 = 
+GATBPS_DISTFILES_39 += doc/manual/node-bindings.adoc
+doc_manual_index_html_children += doc/manual/node-bindings.adoc
 doc_manual_index_html_leaves += doc/manual/node-bindings.adoc
-GATBPS_DISTFILES_38 =
-GATBPS_DISTFILES_38 += doc/manual/node-bindings.adoc
+GATBPS_DISTFILES_40 = 
+GATBPS_DISTFILES_40 += doc/manual/refs.adoc
+doc_manual_index_html_children += doc/manual/refs.adoc
 doc_manual_index_html_leaves += doc/manual/refs.adoc
-GATBPS_DISTFILES_39 =
-GATBPS_DISTFILES_39 += doc/manual/refs.adoc
-doc_manual_index_html_leaves += doc/manual/with_feat_or_die_1.adoc
-GATBPS_DISTFILES_40 =
-GATBPS_DISTFILES_40 += doc/manual/with_feat_or_die_1.adoc
-doc_manual_index_html_leaves += doc/manual/with_feat_or_die_2.adoc
-GATBPS_DISTFILES_41 =
-GATBPS_DISTFILES_41 += doc/manual/with_feat_or_die_2.adoc
-doc_manual_index_html_leaves += doc/manual/with_feat_or_die_3.adoc
-GATBPS_DISTFILES_42 =
-GATBPS_DISTFILES_42 += doc/manual/with_feat_or_die_3.adoc
-
-doc/manual/index.html: $(doc_manual_index_html_child_prerequisites)
-doc/manual/index.html: $(doc_manual_index_html_leaves)
-doc/manual/index.html$(doc_manual_index_html_disable_wrapper_recipe):
+doc/manual/index.html$(doc_manual_index_html_disable_wrapper_recipe): \
+  build-aux/sst_ajh_asciidoctor_document_html_recipe.sh \
+  $(doc_manual_index_html_children) \
+  $(doc_manual_index_html_children_nodist) \
+$(empty)
+GATBPS_DISTFILES_41 = 
+GATBPS_DISTFILES_41 += doc/manual/index.html.children
+GATBPS_DISTFILES_42 = 
+GATBPS_DISTFILES_42 += doc/manual/index.html.children_nodist
 	$(AM_V_at)rm -f -r \
 	  $@ \
 	  $@$(TSUF)* \
 	  doc/manual/images/diag-* \
 	;
-	$(AM_V_at){ \
-	  flags='-a imagesdir=images '; \
-	  $(SHELL) - \
-	    '$(srcdir)'/build-aux/echo.sh -q -- \
-	    $(ASCIIDOCTOR_FLAGS) \
-	    >$@$(TSUF) \
-	  || exit $$?; \
-	  flags=$$flags`cat $@$(TSUF)` || exit $$?; \
-	  rm -f -r $@$(TSUF)*; \
-	  $(MAKE) \
-	    doc_manual_index_html_disable_wrapper_recipe=/x \
-	    ASCIIDOCTOR_FLAGS="$$flags" \
-	    $@ \
-	  || exit $$?; \
-	}
+	$(AM_V_at)( \
+	  x=ASCIIDOCTOR_FLAGS; set x $(ASCIIDOCTOR_FLAGS); $(GATBPS_EXPORT); \
+	  x=MAKE; set x $(MAKE); $(GATBPS_EXPORT); \
+	  x=SED; set x $(SED); $(GATBPS_EXPORT); \
+	  x=TSUF; set x $(TSUF); $(GATBPS_EXPORT); \
+	  x=dst; set x $@; $(GATBPS_EXPORT); \
+	  x=imagesdir; set x images; $(GATBPS_EXPORT); \
+	  x=prefix; set x doc/manual/; $(GATBPS_EXPORT); \
+	  x=slug; set x doc_manual_index_html; $(GATBPS_EXPORT); \
+	  x=srcdir; set x $(srcdir); $(GATBPS_EXPORT); \
+	  sh $(srcdir)/build-aux/sst_ajh_asciidoctor_document_html_recipe.sh || exit $$?; \
+	)
 
 doc/manual/index.html/clean: FORCE
 	-rm -f -r \
@@ -185,46 +219,78 @@ doc/manual.tar: doc/manual/index.html
 	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
 	$(AM_V_at)$(MKDIR_P) $@$(TSUF)1/manual
 	$(AM_V_at)cp doc/manual/index.html $@$(TSUF)1/manual
-	@{ \
+	$(GATBPS_at)( \
+	\
 	  xs=; \
-	  for ext in \
-	    .css \
-	    .gif \
-	    .jpg \
-	    .js \
-	    .png \
-	    .svg \
+	\
+	  for y in \
+	    doc/manual/index.html.children \
+	    doc/manual/index.html.children_nodist \
+	  ; do \
+	    ys=`cat $$y` || exit $$?; \
+	    for x in $$ys; do \
+	      case $$x in *.adoc) \
+	        : \
+	      ;; *) \
+	        case $$xs in *" $$x "*) \
+	          : \
+	        ;; *) \
+	          xs="$$xs $$x "; \
+	        esac; \
+	      esac; \
+	    done; \
+	  done; \
+	\
+	  for x in \
+	    css \
+	    gif \
+	    jpg \
+	    js \
+	    png \
+	    svg \
+	    woff \
+	    woff2 \
 	  ; do \
 	    xs="$$xs "` \
-	      find doc/manual/. -name "*$$ext" -type f \
-	    ` || exit $$?; \
+	      find -L doc/manual -name "*.$$x" -type f \
+	    `" " || exit $$?; \
 	  done; \
+	\
 	  for x in $$xs; do \
-	    y=$${x#doc/manual/./}; \
+	    y='doc/manual/\(.*\)'; \
+	    y=`expr $$x : $$y` || exit $$?; \
 	    case $$y in \
 	      */*) \
-	        d=$${y%/*}; \
-	        $(AM_V_P) && echo $(MKDIR_P) \
-	          $@$(TSUF)1/manual/$$d \
-	        ; \
-	        $(MKDIR_P) \
-	          $@$(TSUF)1/manual/$$d \
-	        || exit $$?; \
-	      ;; \
-	      *) \
-	        d=.; \
+	        d=`dirname $$y` || exit $$?; \
+	        if test -d $@$(TSUF)1/manual/$$d; then \
+	          :; \
+	        else \
+	          $(AM_V_P) && echo $(MKDIR_P) \
+	            $@$(TSUF)1/manual/$$d \
+	          ; \
+	          $(MKDIR_P) \
+	            $@$(TSUF)1/manual/$$d \
+	          || exit $$?; \
+	        fi; \
 	      ;; \
 	    esac; \
-	    $(AM_V_P) && echo cp \
-	      $$x \
-	      $@$(TSUF)1/manual/$$d \
-	    ; \
-	    cp \
-	      $$x \
-	      $@$(TSUF)1/manual/$$d \
-	    || exit $$?; \
+	    y=$@$(TSUF)1/manual/$$y; \
+	    if test -d $$x && test -r $$y; then \
+	      echo uh oh 1 >&2; \
+	      exit 1; \
+	    fi; \
+	    if test -f $$x && test -d $$y; then \
+	      echo uh oh 2 >&2; \
+	      exit 1; \
+	    fi; \
+	    if test -f $$y; then \
+	      :; \
+	    else \
+	      $(AM_V_P) && echo cp -R -L $$x $$y; \
+	      cp -R -L $$x $$y || exit $$?; \
+	    fi; \
 	  done; \
-	}
+	)
 	$(AM_V_at)(cd $@$(TSUF)1 && $(TAR) c manual) >$@$(TSUF)2
 	$(AM_V_at)mv -f $@$(TSUF)2 $@
 
@@ -252,11 +318,8 @@ $(manual_dst): doc/manual.tar
 
 manual_dst_leaves = $(doc_manual_tar_leaves)
 
-$(manual_dst)/clean: FORCE
+GATBPS_MOSTLYCLEANFILES += $(manual_dst)/clean
 $(manual_dst)/clean: doc/manual.tar/clean
-	-rm -f -r $(@D) $(@D)$(TSUF)*
-
-mostlyclean-local: $(manual_dst)/clean
 
 EXTRA_DIST += $(manual_dst).tar.xz
 EXTRA_DIST += doc/$(PACKAGE_TARNAME)-manual.tar.xz
@@ -267,12 +330,16 @@ manual: $(manual_dst)
 clean-manual: FORCE
 clean-manual: $(manual_dst)/clean
 
-GATBPS_DISTFILES_43 =
+GATBPS_DISTFILES_43 = 
 GATBPS_DISTFILES_43 += doc/pages/build.phony.ag
-pages_src_leaves =
-pages_src_clean =
-pages_src =
-pages_src_nodist =
+pages_src_leaves = 
+pages_src_leaves += 
+pages_src_clean = 
+pages_src_clean += 
+pages_src = 
+pages_src += 
+pages_src_nodist = 
+pages_src_nodist += 
 pages_src_leaves += doc/pages/Gemfile
 pages_src += doc/pages/Gemfile
 pages_src_leaves += doc/pages/README.adoc
@@ -295,11 +362,10 @@ pages_src_leaves += doc/pages/_includes/main.md
 pages_src += doc/pages/_includes/main.md
 pages_src_leaves += doc/pages/_includes/section_files.liquid
 pages_src += doc/pages/_includes/section_files.liquid
-pages_src_leaves += doc/pages/_includes/source.md
-pages_src += doc/pages/_includes/source.md
+pages_src_leaves += doc/pages/_includes/source_code.md
+pages_src += doc/pages/_includes/source_code.md
 pages_src_leaves += doc/pages/_layouts/root.html
 pages_src += doc/pages/_layouts/root.html
-include $(srcdir)/doc/pages/build.phony.am
 pages_src_leaves += doc/pages/index.md
 pages_src += doc/pages/index.md
 include $(srcdir)/doc/pages/manual.am
@@ -308,38 +374,220 @@ pages_src_nodist += doc/pages/manual
 pages_src_leaves += doc/pages/style.scss
 pages_src += doc/pages/style.scss
 pages_src_nodist += doc/pages/$(PACKAGE_TARNAME)-manual.tar.xz
-GATBPS_DISTFILES_44 =
-GATBPS_DISTFILES_44 += doc/readme/build.phony.ag
-GATBPS_DISTFILES_45 =
-GATBPS_DISTFILES_45 += doc/readme/.gitignore
-GATBPS_DISTFILES_46 =
-GATBPS_DISTFILES_46 += doc/readme/acknowledgments.adoc
-GATBPS_DISTFILES_47 =
-GATBPS_DISTFILES_47 += doc/readme/archive_entry_fragment.adoc
-GATBPS_DISTFILES_48 =
-GATBPS_DISTFILES_48 += doc/readme/artifact_links_fragment.adoc
-GATBPS_DISTFILES_49 =
-GATBPS_DISTFILES_49 += doc/readme/build.phony.ag
-GATBPS_DISTFILES_50 =
-GATBPS_DISTFILES_50 += doc/readme/common.adoc
-GATBPS_DISTFILES_51 =
-GATBPS_DISTFILES_51 += doc/readme/config.adoc.in
-GATBPS_DISTFILES_52 =
-GATBPS_DISTFILES_52 += doc/readme/config_source.adoc
-GATBPS_DISTFILES_53 =
-GATBPS_DISTFILES_53 += doc/readme/documentation.adoc
-GATBPS_DISTFILES_54 =
-GATBPS_DISTFILES_54 += doc/readme/flatten.gawk
-GATBPS_DISTFILES_55 =
-GATBPS_DISTFILES_55 += doc/readme/license.adoc
-GATBPS_DISTFILES_56 =
-GATBPS_DISTFILES_56 += doc/readme/main.adoc
-GATBPS_DISTFILES_57 =
-GATBPS_DISTFILES_57 += doc/readme/source.adoc
-GATBPS_DISTFILES_58 =
-GATBPS_DISTFILES_58 += doc/readme/config.adoc
 
-doc/readme/diag:
+EXTRA_DIST += $(pages_src)
+
+##------------------------------------------------------------------
+
+pages_jekyll_version = latest
+
+##------------------------------------------------------------------
+
+doc_pages__site_leaves = $(pages_src_leaves)
+
+doc/pages/_site: $(pages_src)
+doc/pages/_site: $(pages_src_nodist)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@
+	$(AM_V_at){ \
+	  test -t 0 && t=-t || t=; \
+	  readonly t; \
+	  pwd=`pwd` || exit $$?; \
+	  readonly pwd; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in x) \
+	    chmod -R a+rw doc/pages || exit $$?; \
+	  esac; \
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll build \
+	  || exit $$?; \
+	}
+	$(AM_V_at)touch $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+.PHONY: doc/pages/_site/clean
+doc/pages/_site/clean: FORCE
+doc/pages/_site/clean: $(pages_src_clean)
+	-rm -f -r $(@D)
+	-{ \
+	  test -t 0 && t=-t || t=; \
+	  readonly t; \
+	  pwd=`pwd` || exit $$?; \
+	  readonly pwd; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in x) \
+	    chmod -R a+rw doc/pages || exit $$?; \
+	  esac; \
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll clean \
+	  || exit $$?; \
+	}
+
+mostlyclean-local: doc/pages/_site/clean
+
+##------------------------------------------------------------------
+
+pages_dst = doc/$(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-pages
+
+pages_dst_leaves = $(doc_pages__site_leaves)
+
+$(pages_dst): doc/pages/_site
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
+	$(AM_V_at)$(MKDIR_P) $@$(TSUF)
+	$(AM_V_at)rmdir $@$(TSUF)
+	$(AM_V_at)cp -R doc/pages/_site $@$(TSUF)
+	$(AM_V_at)touch $@$(TSUF)
+	$(AM_V_at)mv -f $@$(TSUF) $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+GATBPS_MOSTLYCLEANFILES += $(pages_dst)/clean
+
+##------------------------------------------------------------------
+## GitHub pages site
+##------------------------------------------------------------------
+
+docs: $(pages_dst_leaves)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_GEN)$(GATBPS_V_NOP)
+	$(AM_V_at)rm -f -r $@ $@$(TSUF)*
+	$(AM_V_at)$(MAKE) $(pages_dst).tar.xz
+	$(AM_V_at)$(XZ) -d <$(pages_dst).tar.xz >$@$(TSUF)1
+	$(AM_V_at)$(MKDIR_P) $@$(TSUF)2
+	$(AM_V_at)(cd $@$(TSUF)2 && $(TAR) x) <$@$(TSUF)1
+	$(AM_V_at)cp -R $@$(TSUF)2/* $@$(TSUF)3
+	$(AM_V_at)touch $@$(TSUF)3
+	$(AM_V_at)mv -f $@$(TSUF)3 $@
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+GATBPS_MAINTAINERCLEANFILES += docs/clean
+
+EXTRA_DIST += docs
+
+##------------------------------------------------------------------
+
+pages_preview_host = 0.0.0.0
+pages_preview_port = 4000
+pages_preview_name = $$d-pages-preview
+
+pages_livereload = 1
+pages_livereload_port = 35729
+
+pages_touch_all =
+
+pages-preview: FORCE
+pages-preview: $(pages_src)
+pages-preview: $(pages_src_nodist)
+	{ \
+	  test -t 0 && t=-t || t=; \
+	  readonly t; \
+	  pwd=`pwd` || exit $$?; \
+	  readonly pwd; \
+	  d=`basename "$$pwd"` || exit $$?; \
+	  readonly d; \
+	  case $${CI_DISPOSABLE_ENVIRONMENT+x} in x) \
+	    chmod -R a+rw doc/pages || exit $$?; \
+	  esac; \
+	\
+	  case "$(pages_livereload)" in 1) \
+	    f1="-p $(pages_preview_host):$(pages_livereload_port):35729"; \
+	    f2="--livereload --livereload_port $(pages_livereload_port)"; \
+	  ;; *) \
+	    f1=; \
+	    f2=; \
+	  esac; \
+	  readonly f1; \
+	  readonly f2; \
+	\
+	  $(DOCKER) run --rm -i $$t \
+	    -v "$$pwd"/doc/pages:/srv/jekyll \
+	    -p $(pages_preview_host):$(pages_preview_port):4000 \
+	    $$f1 \
+	    --name "$(pages_preview_name)" \
+	    jekyll/jekyll:$(pages_jekyll_version) \
+	    jekyll serve $$f2 \
+	  || exit $$?; \
+	}
+
+pages-update: FORCE
+pages-update: $(pages_src_nodist)
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
+	$(AM_V_at){ \
+	  case "$(pages_touch_all)" in 1) \
+	    for x in $(pages_src_nodist) ""; do \
+	      case $$x in ?*) \
+	        touch $$x || exit $$?; \
+	      esac; \
+	    done; \
+	  esac; \
+	}
+	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
+
+##------------------------------------------------------------------
+
+.PHONY: pages
+pages: FORCE
+pages: doc/pages/_site
+
+.PHONY: clean-pages
+clean-pages: FORCE
+clean-pages: doc/pages/_site/clean
+
+GATBPS_DISTFILES_44 = 
+GATBPS_DISTFILES_44 += doc/readme/build.phony.ag
+GATBPS_DISTFILES_45 = 
+GATBPS_DISTFILES_45 += doc/readme/acknowledgments.adoc
+doc_readme_children = 
+doc_readme_children += doc/readme/acknowledgments.adoc
+doc_readme_leaves = 
+doc_readme_leaves += doc/readme/acknowledgments.adoc
+GATBPS_DISTFILES_46 = 
+GATBPS_DISTFILES_46 += doc/readme/archive_entry_fragment.adoc
+doc_readme_children += doc/readme/archive_entry_fragment.adoc
+doc_readme_leaves += doc/readme/archive_entry_fragment.adoc
+GATBPS_DISTFILES_47 = 
+GATBPS_DISTFILES_47 += doc/readme/artifact_links_fragment.adoc
+doc_readme_children += doc/readme/artifact_links_fragment.adoc
+doc_readme_leaves += doc/readme/artifact_links_fragment.adoc
+GATBPS_DISTFILES_48 = 
+GATBPS_DISTFILES_48 += doc/readme/common.adoc
+doc_readme_children += doc/readme/common.adoc
+doc_readme_leaves += doc/readme/common.adoc
+doc_readme_children_nodist = 
+doc_readme_children_nodist += doc/readme/config.adoc
+doc_readme_leaves += $(doc_readme_config_adoc_leaves)
+GATBPS_DISTFILES_49 = 
+GATBPS_DISTFILES_49 += doc/readme/config_source.adoc
+doc_readme_children += doc/readme/config_source.adoc
+doc_readme_leaves += doc/readme/config_source.adoc
+GATBPS_DISTFILES_50 = 
+GATBPS_DISTFILES_50 += doc/readme/documentation.adoc
+doc_readme_children += doc/readme/documentation.adoc
+doc_readme_leaves += doc/readme/documentation.adoc
+GATBPS_DISTFILES_51 = 
+GATBPS_DISTFILES_51 += doc/readme/flatten.gawk
+doc_readme_children += doc/readme/flatten.gawk
+doc_readme_leaves += doc/readme/flatten.gawk
+GATBPS_DISTFILES_52 = 
+GATBPS_DISTFILES_52 += doc/readme/license.adoc
+doc_readme_children += doc/readme/license.adoc
+doc_readme_leaves += doc/readme/license.adoc
+GATBPS_DISTFILES_53 = 
+GATBPS_DISTFILES_53 += doc/readme/main.adoc
+doc_readme_children += doc/readme/main.adoc
+doc_readme_leaves += doc/readme/main.adoc
+GATBPS_DISTFILES_54 = 
+GATBPS_DISTFILES_54 += doc/readme/source_code.adoc
+doc_readme_children += doc/readme/source_code.adoc
+doc_readme_leaves += doc/readme/source_code.adoc
+GATBPS_DISTFILES_55 = 
+GATBPS_DISTFILES_55 += doc/readme/config.adoc
+
+doc/readme/diagrams:
 	$(AM_V_at)$(GATBPS_RECIPE_MARKER_TOP)
 	$(AM_V_GEN)$(GATBPS_V_NOP)
 	$(GATBPS_at)rm -f -r $@
@@ -353,280 +601,489 @@ doc/readme/diag:
 	$(GATBPS_at)touch $@
 	$(AM_V_at)$(GATBPS_RECIPE_MARKER_BOT)
 
-EXTRA_DIST += doc/readme/diag
+EXTRA_DIST += doc/readme/diagrams
 
-GATBPS_DISTFILES_59 =
-GATBPS_DISTFILES_59 += src/c_cpp/include/pfss/switch_db_rb.h.ag
+GATBPS_DISTFILES_56 = 
+GATBPS_DISTFILES_56 += src/c_cpp/build.phony.ag
+include_pfss_sstdir = $(includedir)/pfss/sst
+include_pfss_sst_HEADERS =
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/PFSS_SST_CPP_CONSTEXPR.hpp
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/PFSS_SST_CPP_OR_LATER.hpp
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/PFSS_SST_CPP_VALUE.hpp
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/PFSS_SST_C_OR_LATER.h
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/PFSS_SST_C_VALUE.h
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/bit.h
+include_pfss_sst_catalogdir = $(includedir)/pfss/sst/catalog
+include_pfss_sst_catalog_HEADERS =
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_ASSERT.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C11_OR_LATER.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C11_VALUE.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C17_OR_LATER.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C17_VALUE.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C18_OR_LATER.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C18_VALUE.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C99_OR_LATER.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_C99_VALUE.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_COMPILES.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CONSTEXPR_ASSERT.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP03_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP03_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP11_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP11_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP14_CONSTEXPR.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP14_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP14_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP17_CONSTEXPR.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP17_INLINE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP17_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP17_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP20_CONSTEXPR.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP20_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP20_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP97_OR_LATER.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_CPP97_VALUE.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_DEBUG.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_DEFINE_ALGORITHM.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_DEFINE_BOOLEAN_TRAIT_1.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_DEFINE_BOOLEAN_TRAIT_2.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_STATIC_ASSERT.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_STATIC_ASSERT.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/PFSS_SST_WITH_OPENSSL_CRYPTO.h
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/begin.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/bigint_marker.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/bit_scan_reverse.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/boxed.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/can_represent_all.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/cbegin.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/cend.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/char_bit.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/char_bit_v.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/checked.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/checked_cast.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/checked_overflow.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/copy_cv.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/crypto_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/crypto_rng_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/decay_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/dependent_false.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/dependent_true.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/dev_urandom_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/enable_if.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/enable_if_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/enable_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/end.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/file_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/file_rng_core.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/fixed_file_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/from_bits.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/get_bit.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/integer_to_string_options.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_big_endian.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_bigint.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_bool.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_byte.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_byte_pointer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_char.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_char_input_iterable.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_char_input_iterator.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_enum.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_exact_width_integer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_floating.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_input_iterable.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_input_iterator.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_integer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_iterator.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_little_endian.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_negative.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_non_bool_integer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_ones_complement.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_output_iterator.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_representable_as.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_sentinel_for.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_sign_magnitude.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_signed_integer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_twos_complement.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_unscoped_enum.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/is_unsigned_integer.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/max.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/min.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/mono_time.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/mono_time_ns.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/mono_time_ns_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/mono_time_zero.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/moved_from.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/ones_mask.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/openssl_rand_bytes_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/openssl_rand_bytes_rng_core.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_eq.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_ge.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_gt.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_le.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_lt.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/perfect_ne.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/promote.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/promote_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/promote_unsigned.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/promote_with_sign.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/promotes.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/remove_cv_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/remove_cvref.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/remove_cvref_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/remove_reference_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/rng_shell.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/set_bit.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/size_max.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/size_max_v.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/to_bits.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/to_string.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/to_string_functor.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/to_unsigned.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/type_identity.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/type_max.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/type_min.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/type_msb.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/uchar_max.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/uchar_max_v.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/uchar_msb.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/underlying_type.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/underlying_type_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unix_time.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unix_time_ns.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unix_time_ns_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_eq.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_ge.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_gt.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_le.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_lt.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/unsigned_ne.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/value_bits.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/value_type.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/value_type_t.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/width_bits.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/windows_bcrypt_rng.hpp
+include_pfss_sst_catalog_HEADERS += src/c_cpp/sst/include/pfss/sst/catalog/windows_bcrypt_rng_core.hpp
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/config.h
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/integer.h
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/language.h
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/limits.h
+include_pfss_sst_privatedir = $(includedir)/pfss/sst/private
+include_pfss_sst_private_HEADERS =
+include_pfss_sst_private_HEADERS += src/c_cpp/sst/include/pfss/sst/private/PFSS_SST_DLL_EXPORT.h
+include_pfss_sst_private_to_stringdir = $(includedir)/pfss/sst/private/to_string
+include_pfss_sst_private_to_string_HEADERS =
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_char_input_iterable.hpp
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_char_input_iterator.hpp
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_floating.hpp
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_integer.hpp
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_member_function.hpp
+include_pfss_sst_private_to_string_HEADERS += src/c_cpp/sst/include/pfss/sst/private/to_string/from_unscoped_enum.hpp
+include_pfss_sst_private_value_typedir = $(includedir)/pfss/sst/private/value_type
+include_pfss_sst_private_value_type_HEADERS =
+include_pfss_sst_private_value_type_HEADERS += src/c_cpp/sst/include/pfss/sst/private/value_type/of_input_iterable.hpp
+include_pfss_sst_private_value_type_HEADERS += src/c_cpp/sst/include/pfss/sst/private/value_type/of_input_iterator.hpp
+include_pfss_sst_HEADERS += src/c_cpp/sst/include/pfss/sst/type.h
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/crypto_rng.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/dev_urandom_rng.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/file_rng_core.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/mono_time.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/mono_time_zero.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/openssl_rand_bytes_rng_core.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/unix_time.cpp
+src_c_cpp_libpfss_la_SOURCES += src/c_cpp/sst/lib/pfss/sst/catalog/windows_bcrypt_rng_core.cpp
+GATBPS_DISTFILES_57 = 
+GATBPS_DISTFILES_57 += src/c_cpp/include/pfss/switch_db_rb.h.ag
 include $(srcdir)/src/c_cpp/include/pfss/switch_db_rb.h.am
 EXTRA_DIST += src/c_cpp/include/pfss/switch_db_rb.h.awk
 EXTRA_DIST += switch_db_rb.cfg
-GATBPS_DISTFILES_60 =
-GATBPS_DISTFILES_60 += .clang-format
-GATBPS_DISTFILES_61 =
-GATBPS_DISTFILES_61 += .gitattributes
-GATBPS_DISTFILES_62 =
-GATBPS_DISTFILES_62 += COPYING
-GATBPS_DISTFILES_63 =
-GATBPS_DISTFILES_63 += README.adoc
-GATBPS_DISTFILES_64 =
-GATBPS_DISTFILES_64 += build-aux/DATE.sh
-GATBPS_DISTFILES_65 =
-GATBPS_DISTFILES_65 += build-aux/LTCURRENT.sh
-GATBPS_DISTFILES_66 =
-GATBPS_DISTFILES_66 += build-aux/VERSION.sh
-GATBPS_DISTFILES_67 =
-GATBPS_DISTFILES_67 += build-aux/adock
-GATBPS_DISTFILES_68 =
-GATBPS_DISTFILES_68 += build-aux/echo.sh
-GATBPS_DISTFILES_69 =
-GATBPS_DISTFILES_69 += doc/manual/benchmarking.adoc
-GATBPS_DISTFILES_70 =
-GATBPS_DISTFILES_70 += doc/manual/bitstring_definition.adoc
-GATBPS_DISTFILES_71 =
-GATBPS_DISTFILES_71 += doc/manual/build.phony.ag
-GATBPS_DISTFILES_72 =
-GATBPS_DISTFILES_72 += doc/manual/build_examples.adoc
-GATBPS_DISTFILES_73 =
-GATBPS_DISTFILES_73 += doc/manual/c_api.adoc
-GATBPS_DISTFILES_74 =
-GATBPS_DISTFILES_74 += doc/manual/c_api_pfss_gen.adoc
-GATBPS_DISTFILES_75 =
-GATBPS_DISTFILES_75 += doc/manual/cl_complete_grid_fragment.adoc
-GATBPS_DISTFILES_76 =
-GATBPS_DISTFILES_76 += doc/manual/cl_domain_element_array_blurb.adoc
-GATBPS_DISTFILES_77 =
-GATBPS_DISTFILES_77 += doc/manual/cl_homogeneous_key_array_fragment.adoc
-GATBPS_DISTFILES_78 =
-GATBPS_DISTFILES_78 += doc/manual/cl_key_concurrency_blurb.adoc
-GATBPS_DISTFILES_79 =
-GATBPS_DISTFILES_79 += doc/manual/cl_logging_fragment.adoc
-GATBPS_DISTFILES_80 =
-GATBPS_DISTFILES_80 += doc/manual/cl_pfss_eval.adoc
-GATBPS_DISTFILES_81 =
-GATBPS_DISTFILES_81 += doc/manual/cl_pfss_eval_all.adoc
-GATBPS_DISTFILES_82 =
-GATBPS_DISTFILES_82 += doc/manual/cl_pfss_eval_all_dot.adoc
-GATBPS_DISTFILES_83 =
-GATBPS_DISTFILES_83 += doc/manual/cl_pfss_eval_all_dot_example_1_output.txt
-GATBPS_DISTFILES_84 =
-GATBPS_DISTFILES_84 += doc/manual/cl_pfss_eval_all_dot_example_1_program.cpp
-GATBPS_DISTFILES_85 =
-GATBPS_DISTFILES_85 += doc/manual/cl_pfss_eval_all_example_1_output.txt
-GATBPS_DISTFILES_86 =
-GATBPS_DISTFILES_86 += doc/manual/cl_pfss_eval_all_example_1_program.cpp
-GATBPS_DISTFILES_87 =
-GATBPS_DISTFILES_87 += doc/manual/cl_pfss_eval_all_sum.adoc
-GATBPS_DISTFILES_88 =
-GATBPS_DISTFILES_88 += doc/manual/cl_pfss_eval_all_sum_example_1_output.txt
-GATBPS_DISTFILES_89 =
-GATBPS_DISTFILES_89 += doc/manual/cl_pfss_eval_all_sum_example_1_program.cpp
-GATBPS_DISTFILES_90 =
-GATBPS_DISTFILES_90 += doc/manual/cl_pfss_get_domain_bits.adoc
-GATBPS_DISTFILES_91 =
-GATBPS_DISTFILES_91 += doc/manual/cl_pfss_get_log_file.adoc
-GATBPS_DISTFILES_92 =
-GATBPS_DISTFILES_92 += doc/manual/cl_pfss_get_range_bits.adoc
-GATBPS_DISTFILES_93 =
-GATBPS_DISTFILES_93 += doc/manual/cl_pfss_get_status_name.adoc
-GATBPS_DISTFILES_94 =
-GATBPS_DISTFILES_94 += doc/manual/cl_pfss_map_eval.adoc
-GATBPS_DISTFILES_95 =
-GATBPS_DISTFILES_95 += doc/manual/cl_pfss_map_eval_reduce_sum.adoc
-GATBPS_DISTFILES_96 =
-GATBPS_DISTFILES_96 += doc/manual/cl_pfss_set_log_file.adoc
-GATBPS_DISTFILES_97 =
-GATBPS_DISTFILES_97 += doc/manual/cl_range_element_array_blurb_1a.adoc
-GATBPS_DISTFILES_98 =
-GATBPS_DISTFILES_98 += doc/manual/cl_range_element_array_blurb_1b.adoc
-GATBPS_DISTFILES_99 =
-GATBPS_DISTFILES_99 += doc/manual/cl_return_status_blurb.adoc
-GATBPS_DISTFILES_0 += doc/manual/cl_single_range_element_blurb_1a.adoc
-GATBPS_DISTFILES_1 += doc/manual/cl_single_range_element_blurb_1b.adoc
-GATBPS_DISTFILES_2 += doc/manual/cl_thread_count_parameter_fragment.adoc
-GATBPS_DISTFILES_3 += doc/manual/hardware_acceleration.adoc
-GATBPS_DISTFILES_4 += doc/manual/index.adoc
-GATBPS_DISTFILES_5 += doc/manual/index.html.ag.json
-GATBPS_DISTFILES_6 += doc/manual/logging.adoc
-GATBPS_DISTFILES_7 += doc/manual/node-bindings.adoc
-GATBPS_DISTFILES_8 += doc/manual/refs.adoc
-GATBPS_DISTFILES_9 += doc/manual/with_feat_or_die_1.adoc
-GATBPS_DISTFILES_10 += doc/manual/with_feat_or_die_2.adoc
-GATBPS_DISTFILES_11 += doc/manual/with_feat_or_die_3.adoc
-GATBPS_DISTFILES_12 += install/on-centos
-GATBPS_DISTFILES_13 += install/on-ubuntu
-GATBPS_DISTFILES_14 += pfss-ios-benchmark/.gitignore
-GATBPS_DISTFILES_15 += pfss-ios-benchmark/download
-GATBPS_DISTFILES_16 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.pbxproj
-GATBPS_DISTFILES_17 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-GATBPS_DISTFILES_18 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-GATBPS_DISTFILES_19 += pfss-ios-benchmark/pfss-ios-benchmark/AppDelegate.h
-GATBPS_DISTFILES_20 += pfss-ios-benchmark/pfss-ios-benchmark/AppDelegate.m
-GATBPS_DISTFILES_21 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/AccentColor.colorset/Contents.json
-GATBPS_DISTFILES_22 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/AppIcon.appiconset/Contents.json
-GATBPS_DISTFILES_23 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/Contents.json
-GATBPS_DISTFILES_24 += pfss-ios-benchmark/pfss-ios-benchmark/Base.lproj/LaunchScreen.storyboard
-GATBPS_DISTFILES_25 += pfss-ios-benchmark/pfss-ios-benchmark/Base.lproj/Main.storyboard
-GATBPS_DISTFILES_26 += pfss-ios-benchmark/pfss-ios-benchmark/Info.plist
-GATBPS_DISTFILES_27 += pfss-ios-benchmark/pfss-ios-benchmark/SceneDelegate.h
-GATBPS_DISTFILES_28 += pfss-ios-benchmark/pfss-ios-benchmark/SceneDelegate.m
-GATBPS_DISTFILES_29 += pfss-ios-benchmark/pfss-ios-benchmark/ViewController.h
-GATBPS_DISTFILES_30 += pfss-ios-benchmark/pfss-ios-benchmark/ViewController.mm
-GATBPS_DISTFILES_31 += pfss-ios-benchmark/pfss-ios-benchmark/main.m
-GATBPS_DISTFILES_32 += pfss-ios-benchmark/setup
-GATBPS_DISTFILES_33 += src/bash/functions/array/array_contains.bash
-GATBPS_DISTFILES_34 += src/bash/functions/autogen/autogen_ac_append.bash
-GATBPS_DISTFILES_35 += src/bash/functions/autogen/autogen_ac_finish.bash
-GATBPS_DISTFILES_36 += src/bash/functions/autogen/autogen_ac_start.bash
-GATBPS_DISTFILES_37 += src/bash/functions/autogen/autogen_am_finish.bash
-GATBPS_DISTFILES_38 += src/bash/functions/autogen/autogen_am_start.bash
-GATBPS_DISTFILES_39 += src/bash/functions/autogen/autogen_am_var_append.bash
-GATBPS_DISTFILES_40 += src/bash/functions/autogen/autogen_am_var_append_files.bash
-GATBPS_DISTFILES_41 += src/bash/functions/autogen/autogen_print_ac_header.bash
-GATBPS_DISTFILES_42 += src/bash/functions/autogen/autogen_print_am_header.bash
-GATBPS_DISTFILES_43 += src/bash/functions/autogen/autogen_texinfo.bash
-GATBPS_DISTFILES_44 += src/bash/functions/config_h_get_string.bash
-GATBPS_DISTFILES_45 += src/bash/functions/expect_safe_path.bash
-GATBPS_DISTFILES_46 += src/bash/functions/gitlab_ci_docker_push_here.bash
-GATBPS_DISTFILES_47 += src/bash/functions/install_local_git.bash
-GATBPS_DISTFILES_48 += src/bash/functions/jq/jq_expect_array.bash
-GATBPS_DISTFILES_49 += src/bash/functions/jq/jq_expect_array_or_null.bash
-GATBPS_DISTFILES_50 += src/bash/functions/jq/jq_expect_arrays.bash
-GATBPS_DISTFILES_51 += src/bash/functions/jq/jq_expect_arrays_or_null.bash
-GATBPS_DISTFILES_52 += src/bash/functions/jq/jq_expect_boolean.bash
-GATBPS_DISTFILES_53 += src/bash/functions/jq/jq_expect_boolean_or_null.bash
-GATBPS_DISTFILES_54 += src/bash/functions/jq/jq_expect_booleans.bash
-GATBPS_DISTFILES_55 += src/bash/functions/jq/jq_expect_booleans_or_null.bash
-GATBPS_DISTFILES_56 += src/bash/functions/jq/jq_expect_null.bash
-GATBPS_DISTFILES_57 += src/bash/functions/jq/jq_expect_nulls.bash
-GATBPS_DISTFILES_58 += src/bash/functions/jq/jq_expect_nulls_or_null.bash
-GATBPS_DISTFILES_59 += src/bash/functions/jq/jq_expect_number.bash
-GATBPS_DISTFILES_60 += src/bash/functions/jq/jq_expect_number_or_null.bash
-GATBPS_DISTFILES_61 += src/bash/functions/jq/jq_expect_numbers.bash
-GATBPS_DISTFILES_62 += src/bash/functions/jq/jq_expect_numbers_or_null.bash
-GATBPS_DISTFILES_63 += src/bash/functions/jq/jq_expect_object.bash
-GATBPS_DISTFILES_64 += src/bash/functions/jq/jq_expect_object_or_null.bash
-GATBPS_DISTFILES_65 += src/bash/functions/jq/jq_expect_objects.bash
-GATBPS_DISTFILES_66 += src/bash/functions/jq/jq_expect_objects_or_null.bash
-GATBPS_DISTFILES_67 += src/bash/functions/jq/jq_expect_string.bash
-GATBPS_DISTFILES_68 += src/bash/functions/jq/jq_expect_string_or_null.bash
-GATBPS_DISTFILES_69 += src/bash/functions/jq/jq_expect_strings.bash
-GATBPS_DISTFILES_70 += src/bash/functions/jq/jq_expect_strings_or_null.bash
-GATBPS_DISTFILES_71 += src/bash/functions/jq/jq_expect_type.bash
-GATBPS_DISTFILES_72 += src/bash/functions/jq/jq_expect_type_or_null.bash
-GATBPS_DISTFILES_73 += src/bash/functions/jq/jq_expect_types.bash
-GATBPS_DISTFILES_74 += src/bash/functions/jq/jq_expect_types_or_null.bash
-GATBPS_DISTFILES_75 += src/bash/functions/jq/jq_inline.bash
-GATBPS_DISTFILES_76 += src/bash/functions/make_j.bash
-GATBPS_DISTFILES_77 += src/bash/functions/opt/opt_parse.bash
-GATBPS_DISTFILES_78 += src/bash/functions/pick_max_procs.bash
-GATBPS_DISTFILES_79 += src/bash/functions/sst_ac_append.bash
-GATBPS_DISTFILES_80 += src/bash/functions/sst_ac_config_file.bash
-GATBPS_DISTFILES_81 += src/bash/functions/sst_ac_include.bash
-GATBPS_DISTFILES_82 += src/bash/functions/sst_ag_include.bash
-GATBPS_DISTFILES_83 += src/bash/functions/sst_ag_process_leaf.bash
-GATBPS_DISTFILES_84 += src/bash/functions/sst_ajh_asciidoctor_document.bash
-GATBPS_DISTFILES_85 += src/bash/functions/sst_ajh_build_tree_program_wrapper.bash
-GATBPS_DISTFILES_86 += src/bash/functions/sst_ajh_c_cpp_test.bash
-GATBPS_DISTFILES_87 += src/bash/functions/sst_ajh_download.bash
-GATBPS_DISTFILES_88 += src/bash/functions/sst_ajh_gitbundle.bash
-GATBPS_DISTFILES_89 += src/bash/functions/sst_ajh_java_library.bash
-GATBPS_DISTFILES_90 += src/bash/functions/sst_ajh_java_program_wrapper.bash
-GATBPS_DISTFILES_91 += src/bash/functions/sst_ajh_java_test_suite.bash
-GATBPS_DISTFILES_92 += src/bash/functions/sst_am_append.bash
-GATBPS_DISTFILES_93 += src/bash/functions/sst_am_distribute_file.bash
-GATBPS_DISTFILES_94 += src/bash/functions/sst_am_include.bash
-GATBPS_DISTFILES_95 += src/bash/functions/sst_am_var_add.bash
-GATBPS_DISTFILES_96 += src/bash/functions/sst_am_var_add_unique_file.bash
-GATBPS_DISTFILES_97 += src/bash/functions/sst_am_var_add_unique_word.bash
-GATBPS_DISTFILES_98 += src/bash/functions/sst_am_var_set.bash
-GATBPS_DISTFILES_99 += src/bash/functions/sst_array_cmp.bash
-GATBPS_DISTFILES_0 += src/bash/functions/sst_array_from_zterm.bash
-GATBPS_DISTFILES_1 += src/bash/functions/sst_array_to_string.bash
-GATBPS_DISTFILES_2 += src/bash/functions/sst_barf.bash
-GATBPS_DISTFILES_3 += src/bash/functions/sst_centos_get_distro_version.bash
-GATBPS_DISTFILES_4 += src/bash/functions/sst_centos_install_raw.bash
-GATBPS_DISTFILES_5 += src/bash/functions/sst_centos_install_utility.bash
-GATBPS_DISTFILES_6 += src/bash/functions/sst_csf.bash
-GATBPS_DISTFILES_7 += src/bash/functions/sst_cygwin_install_raw.bash
-GATBPS_DISTFILES_8 += src/bash/functions/sst_cygwin_install_utility.bash
-GATBPS_DISTFILES_9 += src/bash/functions/sst_dot_slash.bash
-GATBPS_DISTFILES_10 += src/bash/functions/sst_echo_eval.bash
-GATBPS_DISTFILES_11 += src/bash/functions/sst_environment_slug.bash
-GATBPS_DISTFILES_12 += src/bash/functions/sst_expect_ag_json.bash
-GATBPS_DISTFILES_13 += src/bash/functions/sst_expect_any_file.bash
-GATBPS_DISTFILES_14 += src/bash/functions/sst_expect_argument_count.bash
-GATBPS_DISTFILES_15 += src/bash/functions/sst_expect_at_most_one_call.bash
-GATBPS_DISTFILES_16 += src/bash/functions/sst_expect_basic_identifier.bash
-GATBPS_DISTFILES_17 += src/bash/functions/sst_expect_extension.bash
-GATBPS_DISTFILES_18 += src/bash/functions/sst_expect_file.bash
-GATBPS_DISTFILES_19 += src/bash/functions/sst_expect_no_subshell.bash
-GATBPS_DISTFILES_20 += src/bash/functions/sst_expect_source_path.bash
-GATBPS_DISTFILES_21 += src/bash/functions/sst_extract_archive.bash
-GATBPS_DISTFILES_22 += src/bash/functions/sst_find_dist_archive.bash
-GATBPS_DISTFILES_23 += src/bash/functions/sst_find_dist_date.bash
-GATBPS_DISTFILES_24 += src/bash/functions/sst_find_dist_version.bash
-GATBPS_DISTFILES_25 += src/bash/functions/sst_get_distro.bash
-GATBPS_DISTFILES_26 += src/bash/functions/sst_get_distro_version.bash
-GATBPS_DISTFILES_27 += src/bash/functions/sst_get_prefix.bash
-GATBPS_DISTFILES_28 += src/bash/functions/sst_ihd.bash
-GATBPS_DISTFILES_29 += src/bash/functions/sst_ihs.bash
-GATBPS_DISTFILES_30 += src/bash/functions/sst_install_utility.bash
-GATBPS_DISTFILES_31 += src/bash/functions/sst_join.bash
-GATBPS_DISTFILES_32 += src/bash/functions/sst_jq_expect.bash
-GATBPS_DISTFILES_33 += src/bash/functions/sst_jq_get_boolean_or_null.bash
-GATBPS_DISTFILES_34 += src/bash/functions/sst_jq_get_string.bash
-GATBPS_DISTFILES_35 += src/bash/functions/sst_jq_get_string_or_null.bash
-GATBPS_DISTFILES_36 += src/bash/functions/sst_jq_get_strings.bash
-GATBPS_DISTFILES_37 += src/bash/functions/sst_jq_quote.bash
-GATBPS_DISTFILES_38 += src/bash/functions/sst_mkdir_p_only.bash
-GATBPS_DISTFILES_39 += src/bash/functions/sst_nl.bash
-GATBPS_DISTFILES_40 += src/bash/functions/sst_popd.bash
-GATBPS_DISTFILES_41 += src/bash/functions/sst_pushd.bash
-GATBPS_DISTFILES_42 += src/bash/functions/sst_quote.bash
-GATBPS_DISTFILES_43 += src/bash/functions/sst_trap_append.bash
-GATBPS_DISTFILES_44 += src/bash/functions/sst_ubuntu_get_distro_version.bash
-GATBPS_DISTFILES_45 += src/bash/functions/sst_ubuntu_install_raw.bash
-GATBPS_DISTFILES_46 += src/bash/functions/sst_ubuntu_install_utility.bash
-GATBPS_DISTFILES_47 += src/bash/functions/sst_underscore_slug.bash
-GATBPS_DISTFILES_48 += src/bash/functions/sst_unknown_get_distro_version.bash
-GATBPS_DISTFILES_49 += src/bash/functions/sst_warn.bash
-GATBPS_DISTFILES_50 += src/bash/prelude.bash
-GATBPS_DISTFILES_51 += src/bash/preludes/gitlab-ci.bash
-GATBPS_DISTFILES_52 += src/bash/preludes/standard.bash
-GATBPS_DISTFILES_53 += src/bash/scripts/build-pages.bash
-GATBPS_DISTFILES_54 += src/bash/scripts/gitlab-ci/android-benchmark
-GATBPS_DISTFILES_55 += src/bash/scripts/gitlab-ci/desktop-benchmark
-GATBPS_DISTFILES_56 += src/bash/scripts/gitlab-ci/dist
-GATBPS_DISTFILES_57 += src/bash/scripts/gitlab-ci/distcheck
-GATBPS_DISTFILES_58 += src/bash/scripts/gitlab-ci/pipe-staging-update-script
-GATBPS_DISTFILES_59 += src/bash/scripts/gitlab-ci/public-staging-post-update-script.bash
-GATBPS_DISTFILES_60 += src/bash/scripts/prepare-dist-repo.bash
-GATBPS_DISTFILES_61 += src/bash/scripts/publish-dist-repo.bash
-GATBPS_DISTFILES_62 += src/c_cpp/misc/pfss/standard_benchmark_runner.cpp
-GATBPS_DISTFILES_63 += src/c_cpp/misc/pfss/standard_benchmark_runner.hpp
-GATBPS_DISTFILES_64 += src/install/from-dist/on-centos
-GATBPS_DISTFILES_65 += src/install/from-dist/on-centos-7
-GATBPS_DISTFILES_66 += src/install/from-dist/on-centos-8
-GATBPS_DISTFILES_67 += src/install/from-dist/on-ubuntu
-GATBPS_DISTFILES_68 += src/install/from-dist/on-ubuntu-18.04
-GATBPS_DISTFILES_69 += src/install/from-dist/on-ubuntu-20.04
-GATBPS_DISTFILES_70 += src/install/from-repo/on-centos
-GATBPS_DISTFILES_71 += src/install/from-repo/on-centos-7
-GATBPS_DISTFILES_72 += src/install/from-repo/on-centos-8
-GATBPS_DISTFILES_73 += src/install/from-repo/on-ubuntu
-GATBPS_DISTFILES_74 += src/install/from-repo/on-ubuntu-18.04
-GATBPS_DISTFILES_75 += src/install/from-repo/on-ubuntu-20.04
-GATBPS_DISTFILES_76 += src/install/on-x
-GATBPS_DISTFILES_77 += src/install/on-x-symbolic-link-test
-GATBPS_DISTFILES_78 += src/java/com/stealthsoftwareinc/pfss/Example.java
-GATBPS_DISTFILES_79 += src/java/com/stealthsoftwareinc/pfss/pfss.java
-GATBPS_DISTFILES_80 += src/node/Dockerfile
-GATBPS_DISTFILES_81 += src/node/binding.gyp
-GATBPS_DISTFILES_82 += src/node/example.js
-GATBPS_DISTFILES_83 += src/node/package.json
-GATBPS_DISTFILES_84 += src/node/pfss-node.cpp
-GATBPS_DISTFILES_85 += build-aux/downloads/android-ndk-r21d-linux-x86_64.zip.ag.json
-GATBPS_DISTFILES_86 += build-aux/downloads/gpl-3.0.txt.ag.json
+GATBPS_DISTFILES_58 = 
+GATBPS_DISTFILES_58 += .clang-format
+GATBPS_DISTFILES_59 = 
+GATBPS_DISTFILES_59 += .gitattributes
+GATBPS_DISTFILES_60 = 
+GATBPS_DISTFILES_60 += COPYING.adoc
+GATBPS_DISTFILES_61 = 
+GATBPS_DISTFILES_61 += README.adoc
+GATBPS_DISTFILES_62 = 
+GATBPS_DISTFILES_62 += build-aux/adock
+GATBPS_DISTFILES_63 = 
+GATBPS_DISTFILES_63 += build-aux/gatbps-echo.sh
+GATBPS_DISTFILES_64 = 
+GATBPS_DISTFILES_64 += build-aux/gatbps-gen-date.sh
+GATBPS_DISTFILES_65 = 
+GATBPS_DISTFILES_65 += build-aux/gatbps-gen-date.sh.cache
+GATBPS_DISTFILES_66 = 
+GATBPS_DISTFILES_66 += build-aux/gatbps-gen-libtool-c.sh
+GATBPS_DISTFILES_67 = 
+GATBPS_DISTFILES_67 += build-aux/gatbps-gen-libtool-c.sh.cache
+GATBPS_DISTFILES_68 = 
+GATBPS_DISTFILES_68 += build-aux/gatbps-gen-version.sh
+GATBPS_DISTFILES_69 = 
+GATBPS_DISTFILES_69 += build-aux/gatbps-gen-version.sh.cache
+GATBPS_DISTFILES_70 = 
+GATBPS_DISTFILES_70 += build-aux/pfss.srcdir
+GATBPS_DISTFILES_71 = 
+GATBPS_DISTFILES_71 += doc/manual/define_attributes.adoc
+GATBPS_DISTFILES_72 = 
+GATBPS_DISTFILES_72 += install/on-centos
+GATBPS_DISTFILES_73 = 
+GATBPS_DISTFILES_73 += install/on-ubuntu
+GATBPS_DISTFILES_74 = 
+GATBPS_DISTFILES_74 += pfss-ios-benchmark/.gitignore
+GATBPS_DISTFILES_75 = 
+GATBPS_DISTFILES_75 += pfss-ios-benchmark/download
+GATBPS_DISTFILES_76 = 
+GATBPS_DISTFILES_76 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.pbxproj
+GATBPS_DISTFILES_77 = 
+GATBPS_DISTFILES_77 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+GATBPS_DISTFILES_78 = 
+GATBPS_DISTFILES_78 += pfss-ios-benchmark/pfss-ios-benchmark.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+GATBPS_DISTFILES_79 = 
+GATBPS_DISTFILES_79 += pfss-ios-benchmark/pfss-ios-benchmark/AppDelegate.h
+GATBPS_DISTFILES_80 = 
+GATBPS_DISTFILES_80 += pfss-ios-benchmark/pfss-ios-benchmark/AppDelegate.m
+GATBPS_DISTFILES_81 = 
+GATBPS_DISTFILES_81 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/AccentColor.colorset/Contents.json
+GATBPS_DISTFILES_82 = 
+GATBPS_DISTFILES_82 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/AppIcon.appiconset/Contents.json
+GATBPS_DISTFILES_83 = 
+GATBPS_DISTFILES_83 += pfss-ios-benchmark/pfss-ios-benchmark/Assets.xcassets/Contents.json
+GATBPS_DISTFILES_84 = 
+GATBPS_DISTFILES_84 += pfss-ios-benchmark/pfss-ios-benchmark/Base.lproj/LaunchScreen.storyboard
+GATBPS_DISTFILES_85 = 
+GATBPS_DISTFILES_85 += pfss-ios-benchmark/pfss-ios-benchmark/Base.lproj/Main.storyboard
+GATBPS_DISTFILES_86 = 
+GATBPS_DISTFILES_86 += pfss-ios-benchmark/pfss-ios-benchmark/Info.plist
+GATBPS_DISTFILES_87 = 
+GATBPS_DISTFILES_87 += pfss-ios-benchmark/pfss-ios-benchmark/SceneDelegate.h
+GATBPS_DISTFILES_88 = 
+GATBPS_DISTFILES_88 += pfss-ios-benchmark/pfss-ios-benchmark/SceneDelegate.m
+GATBPS_DISTFILES_89 = 
+GATBPS_DISTFILES_89 += pfss-ios-benchmark/pfss-ios-benchmark/ViewController.h
+GATBPS_DISTFILES_90 = 
+GATBPS_DISTFILES_90 += pfss-ios-benchmark/pfss-ios-benchmark/ViewController.mm
+GATBPS_DISTFILES_91 = 
+GATBPS_DISTFILES_91 += pfss-ios-benchmark/pfss-ios-benchmark/main.m
+GATBPS_DISTFILES_92 = 
+GATBPS_DISTFILES_92 += pfss-ios-benchmark/setup
+GATBPS_DISTFILES_93 = 
+GATBPS_DISTFILES_93 += src/bash/include/array/array_contains.bash
+GATBPS_DISTFILES_94 = 
+GATBPS_DISTFILES_94 += src/bash/include/autogen/autogen_ac_append.bash
+GATBPS_DISTFILES_95 = 
+GATBPS_DISTFILES_95 += src/bash/include/autogen/autogen_ac_finish.bash
+GATBPS_DISTFILES_96 = 
+GATBPS_DISTFILES_96 += src/bash/include/autogen/autogen_ac_start.bash
+GATBPS_DISTFILES_97 = 
+GATBPS_DISTFILES_97 += src/bash/include/autogen/autogen_am_finish.bash
+GATBPS_DISTFILES_98 = 
+GATBPS_DISTFILES_98 += src/bash/include/autogen/autogen_am_start.bash
+GATBPS_DISTFILES_99 = 
+GATBPS_DISTFILES_99 += src/bash/include/autogen/autogen_am_var_append.bash
+GATBPS_DISTFILES_0 += src/bash/include/autogen/autogen_am_var_append_files.bash
+GATBPS_DISTFILES_1 += src/bash/include/autogen/autogen_print_ac_header.bash
+GATBPS_DISTFILES_2 += src/bash/include/autogen/autogen_print_am_header.bash
+GATBPS_DISTFILES_3 += src/bash/include/autogen/autogen_texinfo.bash
+GATBPS_DISTFILES_4 += src/bash/include/config_h_get_string.bash
+GATBPS_DISTFILES_5 += src/bash/include/expect_safe_path.bash
+GATBPS_DISTFILES_6 += src/bash/include/gitlab_ci_docker_push_here.bash
+GATBPS_DISTFILES_7 += src/bash/include/install_local_git.bash
+GATBPS_DISTFILES_8 += src/bash/include/jq/jq_expect_array.bash
+GATBPS_DISTFILES_9 += src/bash/include/jq/jq_expect_array_or_null.bash
+GATBPS_DISTFILES_10 += src/bash/include/jq/jq_expect_arrays.bash
+GATBPS_DISTFILES_11 += src/bash/include/jq/jq_expect_arrays_or_null.bash
+GATBPS_DISTFILES_12 += src/bash/include/jq/jq_expect_boolean.bash
+GATBPS_DISTFILES_13 += src/bash/include/jq/jq_expect_boolean_or_null.bash
+GATBPS_DISTFILES_14 += src/bash/include/jq/jq_expect_booleans.bash
+GATBPS_DISTFILES_15 += src/bash/include/jq/jq_expect_booleans_or_null.bash
+GATBPS_DISTFILES_16 += src/bash/include/jq/jq_expect_null.bash
+GATBPS_DISTFILES_17 += src/bash/include/jq/jq_expect_nulls.bash
+GATBPS_DISTFILES_18 += src/bash/include/jq/jq_expect_nulls_or_null.bash
+GATBPS_DISTFILES_19 += src/bash/include/jq/jq_expect_number.bash
+GATBPS_DISTFILES_20 += src/bash/include/jq/jq_expect_number_or_null.bash
+GATBPS_DISTFILES_21 += src/bash/include/jq/jq_expect_numbers.bash
+GATBPS_DISTFILES_22 += src/bash/include/jq/jq_expect_numbers_or_null.bash
+GATBPS_DISTFILES_23 += src/bash/include/jq/jq_expect_object.bash
+GATBPS_DISTFILES_24 += src/bash/include/jq/jq_expect_object_or_null.bash
+GATBPS_DISTFILES_25 += src/bash/include/jq/jq_expect_objects.bash
+GATBPS_DISTFILES_26 += src/bash/include/jq/jq_expect_objects_or_null.bash
+GATBPS_DISTFILES_27 += src/bash/include/jq/jq_expect_string.bash
+GATBPS_DISTFILES_28 += src/bash/include/jq/jq_expect_string_or_null.bash
+GATBPS_DISTFILES_29 += src/bash/include/jq/jq_expect_strings.bash
+GATBPS_DISTFILES_30 += src/bash/include/jq/jq_expect_strings_or_null.bash
+GATBPS_DISTFILES_31 += src/bash/include/jq/jq_expect_type.bash
+GATBPS_DISTFILES_32 += src/bash/include/jq/jq_expect_type_or_null.bash
+GATBPS_DISTFILES_33 += src/bash/include/jq/jq_expect_types.bash
+GATBPS_DISTFILES_34 += src/bash/include/jq/jq_expect_types_or_null.bash
+GATBPS_DISTFILES_35 += src/bash/include/jq/jq_inline.bash
+GATBPS_DISTFILES_36 += src/bash/include/sst_abs_prefix.bash
+GATBPS_DISTFILES_37 += src/bash/include/sst_ac_append.bash
+GATBPS_DISTFILES_38 += src/bash/include/sst_ac_config_file.bash
+GATBPS_DISTFILES_39 += src/bash/include/sst_ac_include.bash
+GATBPS_DISTFILES_40 += src/bash/include/sst_add_slash.bash
+GATBPS_DISTFILES_41 += src/bash/include/sst_add_slash_abs_prefix.bash
+GATBPS_DISTFILES_42 += src/bash/include/sst_add_slash_dot_slash.bash
+GATBPS_DISTFILES_43 += src/bash/include/sst_ag_call_defun_once_macros.bash
+GATBPS_DISTFILES_44 += src/bash/include/sst_ag_define_ordering_macros.bash
+GATBPS_DISTFILES_45 += src/bash/include/sst_ag_include.bash
+GATBPS_DISTFILES_46 += src/bash/include/sst_ag_process_leaf.bash
+GATBPS_DISTFILES_47 += src/bash/include/sst_ajh_asciidoctor_document.bash
+GATBPS_DISTFILES_48 += src/bash/include/sst_ajh_build_tree_program_wrapper.bash
+GATBPS_DISTFILES_49 += src/bash/include/sst_ajh_c_cpp_test.bash
+GATBPS_DISTFILES_50 += src/bash/include/sst_ajh_download.bash
+GATBPS_DISTFILES_51 += src/bash/include/sst_ajh_gitbundle.bash
+GATBPS_DISTFILES_52 += src/bash/include/sst_ajh_java_library.bash
+GATBPS_DISTFILES_53 += src/bash/include/sst_ajh_java_program_wrapper.bash
+GATBPS_DISTFILES_54 += src/bash/include/sst_ajh_java_test_suite.bash
+GATBPS_DISTFILES_55 += src/bash/include/sst_am_append.bash
+GATBPS_DISTFILES_56 += src/bash/include/sst_am_distribute.bash
+GATBPS_DISTFILES_57 += src/bash/include/sst_am_distribute_if_not_dir.bash
+GATBPS_DISTFILES_58 += src/bash/include/sst_am_elif.bash
+GATBPS_DISTFILES_59 += src/bash/include/sst_am_else.bash
+GATBPS_DISTFILES_60 += src/bash/include/sst_am_endif.bash
+GATBPS_DISTFILES_61 += src/bash/include/sst_am_if.bash
+GATBPS_DISTFILES_62 += src/bash/include/sst_am_include.bash
+GATBPS_DISTFILES_63 += src/bash/include/sst_am_var_add.bash
+GATBPS_DISTFILES_64 += src/bash/include/sst_am_var_add_unique_file.bash
+GATBPS_DISTFILES_65 += src/bash/include/sst_am_var_add_unique_word.bash
+GATBPS_DISTFILES_66 += src/bash/include/sst_am_var_set.bash
+GATBPS_DISTFILES_67 += src/bash/include/sst_am_var_set_const.bash
+GATBPS_DISTFILES_68 += src/bash/include/sst_array_cmp.bash
+GATBPS_DISTFILES_69 += src/bash/include/sst_array_contains.bash
+GATBPS_DISTFILES_70 += src/bash/include/sst_array_from_zterm.bash
+GATBPS_DISTFILES_71 += src/bash/include/sst_array_to_string.bash
+GATBPS_DISTFILES_72 += src/bash/include/sst_barf.bash
+GATBPS_DISTFILES_73 += src/bash/include/sst_centos_get_distro_version.bash
+GATBPS_DISTFILES_74 += src/bash/include/sst_centos_install_raw.bash
+GATBPS_DISTFILES_75 += src/bash/include/sst_centos_install_utility.bash
+GATBPS_DISTFILES_76 += src/bash/include/sst_copyright_notice.bash
+GATBPS_DISTFILES_77 += src/bash/include/sst_csf.bash
+GATBPS_DISTFILES_78 += src/bash/include/sst_curl_slurp.bash
+GATBPS_DISTFILES_79 += src/bash/include/sst_cygwin_get_distro_version.bash
+GATBPS_DISTFILES_80 += src/bash/include/sst_cygwin_install_raw.bash
+GATBPS_DISTFILES_81 += src/bash/include/sst_cygwin_install_utility.bash
+GATBPS_DISTFILES_82 += src/bash/include/sst_dot_slash.bash
+GATBPS_DISTFILES_83 += src/bash/include/sst_echo_eval.bash
+GATBPS_DISTFILES_84 += src/bash/include/sst_environment_slug.bash
+GATBPS_DISTFILES_85 += src/bash/include/sst_exec.bash
+GATBPS_DISTFILES_86 += src/bash/include/sst_expect_ag_json.bash
+GATBPS_DISTFILES_87 += src/bash/include/sst_expect_any_file.bash
+GATBPS_DISTFILES_88 += src/bash/include/sst_expect_argument_count.bash
+GATBPS_DISTFILES_89 += src/bash/include/sst_expect_at_most_one_call.bash
+GATBPS_DISTFILES_90 += src/bash/include/sst_expect_basic_identifier.bash
+GATBPS_DISTFILES_91 += src/bash/include/sst_expect_exit_status.bash
+GATBPS_DISTFILES_92 += src/bash/include/sst_expect_extension.bash
+GATBPS_DISTFILES_93 += src/bash/include/sst_expect_file.bash
+GATBPS_DISTFILES_94 += src/bash/include/sst_expect_maybe_file.bash
+GATBPS_DISTFILES_95 += src/bash/include/sst_expect_not_exist.bash
+GATBPS_DISTFILES_96 += src/bash/include/sst_expect_not_subshell.bash
+GATBPS_DISTFILES_97 += src/bash/include/sst_expect_prefix.bash
+GATBPS_DISTFILES_98 += src/bash/include/sst_expect_source_path.bash
+GATBPS_DISTFILES_99 += src/bash/include/sst_expect_utf8.bash
+GATBPS_DISTFILES_0 += src/bash/include/sst_extract_archive.bash
+GATBPS_DISTFILES_1 += src/bash/include/sst_find_dist_archive.bash
+GATBPS_DISTFILES_2 += src/bash/include/sst_find_dist_date.bash
+GATBPS_DISTFILES_3 += src/bash/include/sst_find_dist_version.bash
+GATBPS_DISTFILES_4 += src/bash/include/sst_get_distro.bash
+GATBPS_DISTFILES_5 += src/bash/include/sst_get_distro_version.bash
+GATBPS_DISTFILES_6 += src/bash/include/sst_get_environment_variables.bash
+GATBPS_DISTFILES_7 += src/bash/include/sst_get_have_make_j.bash
+GATBPS_DISTFILES_8 += src/bash/include/sst_get_max_procs.bash
+GATBPS_DISTFILES_9 += src/bash/include/sst_get_prefix.bash
+GATBPS_DISTFILES_10 += src/bash/include/sst_get_variables.bash
+GATBPS_DISTFILES_11 += src/bash/include/sst_grep.bash
+GATBPS_DISTFILES_12 += src/bash/include/sst_human_list.bash
+GATBPS_DISTFILES_13 += src/bash/include/sst_ihd.bash
+GATBPS_DISTFILES_14 += src/bash/include/sst_ihs.bash
+GATBPS_DISTFILES_15 += src/bash/include/sst_include.bash
+GATBPS_DISTFILES_16 += src/bash/include/sst_info.bash
+GATBPS_DISTFILES_17 += src/bash/include/sst_install_utility.bash
+GATBPS_DISTFILES_18 += src/bash/include/sst_install_utility_from_map.bash
+GATBPS_DISTFILES_19 += src/bash/include/sst_join.bash
+GATBPS_DISTFILES_20 += src/bash/include/sst_jq_expect.bash
+GATBPS_DISTFILES_21 += src/bash/include/sst_jq_get_boolean_or_null.bash
+GATBPS_DISTFILES_22 += src/bash/include/sst_jq_get_string.bash
+GATBPS_DISTFILES_23 += src/bash/include/sst_jq_get_string_or_null.bash
+GATBPS_DISTFILES_24 += src/bash/include/sst_jq_get_strings.bash
+GATBPS_DISTFILES_25 += src/bash/include/sst_json_escape.bash
+GATBPS_DISTFILES_26 += src/bash/include/sst_json_quote.bash
+GATBPS_DISTFILES_27 += src/bash/include/sst_kill_all_jobs.bash
+GATBPS_DISTFILES_28 += src/bash/include/sst_make_j.bash
+GATBPS_DISTFILES_29 += src/bash/include/sst_mkdir_p_only.bash
+GATBPS_DISTFILES_30 += src/bash/include/sst_nl.bash
+GATBPS_DISTFILES_31 += src/bash/include/sst_parse_opt.bash
+GATBPS_DISTFILES_32 += src/bash/include/sst_pop_var.bash
+GATBPS_DISTFILES_33 += src/bash/include/sst_popd.bash
+GATBPS_DISTFILES_34 += src/bash/include/sst_push_postmortem_job_container.bash
+GATBPS_DISTFILES_35 += src/bash/include/sst_push_var.bash
+GATBPS_DISTFILES_36 += src/bash/include/sst_pushd.bash
+GATBPS_DISTFILES_37 += src/bash/include/sst_quote.bash
+GATBPS_DISTFILES_38 += src/bash/include/sst_quote_list.bash
+GATBPS_DISTFILES_39 += src/bash/include/sst_regex_escape.bash
+GATBPS_DISTFILES_40 += src/bash/include/sst_regex_escape_list.bash
+GATBPS_DISTFILES_41 += src/bash/include/sst_set_exit.bash
+GATBPS_DISTFILES_42 += src/bash/include/sst_smart_quote.bash
+GATBPS_DISTFILES_43 += src/bash/include/sst_squish_slashes.bash
+GATBPS_DISTFILES_44 += src/bash/include/sst_test.bash
+GATBPS_DISTFILES_45 += src/bash/include/sst_test_fail.bash
+GATBPS_DISTFILES_46 += src/bash/include/sst_trap_append.bash
+GATBPS_DISTFILES_47 += src/bash/include/sst_trim_slashes.bash
+GATBPS_DISTFILES_48 += src/bash/include/sst_type.bash
+GATBPS_DISTFILES_49 += src/bash/include/sst_ubuntu_get_distro_version.bash
+GATBPS_DISTFILES_50 += src/bash/include/sst_ubuntu_install_raw.bash
+GATBPS_DISTFILES_51 += src/bash/include/sst_ubuntu_install_utility.bash
+GATBPS_DISTFILES_52 += src/bash/include/sst_underscore_slug.bash
+GATBPS_DISTFILES_53 += src/bash/include/sst_unimplemented.bash
+GATBPS_DISTFILES_54 += src/bash/include/sst_unix_like_install_docker_compose.bash
+GATBPS_DISTFILES_55 += src/bash/include/sst_unknown_get_distro_version.bash
+GATBPS_DISTFILES_56 += src/bash/include/sst_unknown_opt.bash
+GATBPS_DISTFILES_57 += src/bash/include/sst_warn.bash
+GATBPS_DISTFILES_58 += src/bash/prelude.bash
+GATBPS_DISTFILES_59 += src/bash/scripts/build-dist-archive.bash
+GATBPS_DISTFILES_60 += src/bash/scripts/build-pages.bash
+GATBPS_DISTFILES_61 += src/bash/scripts/check-dist-archive.bash
+GATBPS_DISTFILES_62 += src/bash/scripts/gitlab-ci/android-benchmark
+GATBPS_DISTFILES_63 += src/bash/scripts/gitlab-ci/desktop-benchmark
+GATBPS_DISTFILES_64 += src/bash/scripts/gitlab-ci/pipe-staging-update-script
+GATBPS_DISTFILES_65 += src/bash/scripts/gitlab-ci/public-staging-post-update-script.bash
+GATBPS_DISTFILES_66 += src/bash/scripts/prepare-dist-repo.bash
+GATBPS_DISTFILES_67 += src/bash/scripts/publish-dist-repo.bash
+GATBPS_DISTFILES_68 += src/bash/sst.bash
+GATBPS_DISTFILES_69 += src/c_cpp/misc/pfss/standard_benchmark_runner.cpp
+GATBPS_DISTFILES_70 += src/c_cpp/misc/pfss/standard_benchmark_runner.hpp
+GATBPS_DISTFILES_71 += src/install/from-dist/on-centos
+GATBPS_DISTFILES_72 += src/install/from-dist/on-centos-7
+GATBPS_DISTFILES_73 += src/install/from-dist/on-centos-8
+GATBPS_DISTFILES_74 += src/install/from-dist/on-ubuntu
+GATBPS_DISTFILES_75 += src/install/from-dist/on-ubuntu-18.04
+GATBPS_DISTFILES_76 += src/install/from-dist/on-ubuntu-20.04
+GATBPS_DISTFILES_77 += src/install/from-repo/on-centos
+GATBPS_DISTFILES_78 += src/install/from-repo/on-centos-7
+GATBPS_DISTFILES_79 += src/install/from-repo/on-centos-8
+GATBPS_DISTFILES_80 += src/install/from-repo/on-ubuntu
+GATBPS_DISTFILES_81 += src/install/from-repo/on-ubuntu-18.04
+GATBPS_DISTFILES_82 += src/install/from-repo/on-ubuntu-20.04
+GATBPS_DISTFILES_83 += src/install/on-x
+GATBPS_DISTFILES_84 += src/install/on-x-symbolic-link-test
+GATBPS_DISTFILES_85 += src/java/com/stealthsoftwareinc/pfss/Example.java
+GATBPS_DISTFILES_86 += src/java/com/stealthsoftwareinc/pfss/pfss.java
+GATBPS_DISTFILES_87 += src/node/Dockerfile
+GATBPS_DISTFILES_88 += src/node/binding.gyp
+GATBPS_DISTFILES_89 += src/node/example.js
+GATBPS_DISTFILES_90 += src/node/package.json
+GATBPS_DISTFILES_91 += src/node/pfss-node.cpp
+GATBPS_DISTFILES_92 += sst.bash
+GATBPS_DISTFILES_93 += build-aux/downloads/android-ndk-r21d-linux-x86_64.zip.ag.json
+GATBPS_DISTFILES_94 += build-aux/downloads/gpl-3.0.txt.ag.json
+GATBPS_DISTFILES_95 += src/c_cpp/test/TEST_EXIT.h
+GATBPS_DISTFILES_96 += src/c_cpp/test/cpp_helpers.h
+GATBPS_DISTFILES_97 += src/c_cpp/test/helpers.h
+GATBPS_DISTFILES_98 += src/c_cpp/test/pfss/cnf_fss_test_helper.h
+GATBPS_DISTFILES_99 += src/c_cpp/test/pfss/ms_dpf_plus_test_helper.h
+GATBPS_DISTFILES_0 += src/c_cpp/test/pfss/scheme_test_1.h
+GATBPS_DISTFILES_1 += src/c_cpp/test/pfss/scheme_test_2.h
+GATBPS_DISTFILES_2 += src/c_cpp/test/pfss/scheme_test_eval_all.h
+GATBPS_DISTFILES_3 += src/c_cpp/test/pfss/scheme_test_serialization.h
+GATBPS_DISTFILES_4 += src/c_cpp/test/pfss/two_party_ms_dpf_plus_test_helper.h
 include $(srcdir)/src/c_cpp/test/PFSS_DEFINE_DIRECT_EVAL.gitignorable.am
 include $(srcdir)/src/c_cpp/test/eval-1.gitignorable.am
 include $(srcdir)/src/c_cpp/test/eval-sweep.gitignorable.am
@@ -701,10 +1158,15 @@ include $(srcdir)/src/c_cpp/test/bgi1-m128i-nettle-urandom.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi1-serialize-deserialize-key-members.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi1-serialize-deserialize.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi1-serialize-size.gitignorable.am
+include $(srcdir)/src/c_cpp/test/bgi1-z2nGroup-aes-ni-1-with_serialization.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi4-aes-ni-1-with_serialization.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi4-aes-ni-1.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi_p_party-aes-ni-eval_all.gitignorable.am
 include $(srcdir)/src/c_cpp/test/bgi_p_party-aes-ni-large-p.gitignorable.am
+include $(srcdir)/src/c_cpp/test/bko_1-3_cnf_fss.gitignorable.am
+include $(srcdir)/src/c_cpp/test/bko_1-3_cnf_fss_v.gitignorable.am
+include $(srcdir)/src/c_cpp/test/bko_ms_dpf_plus-aes-ni_with_serialization.gitignorable.am
+include $(srcdir)/src/c_cpp/test/bko_two_party_ms_dpf_plus-aes-ni_with_serialization.gitignorable.am
 include $(srcdir)/src/c_cpp/test/blocks.gitignorable.am
 include $(srcdir)/src/c_cpp/test/deserialize_integer-garbage.gitignorable.am
 include $(srcdir)/src/c_cpp/test/ds-aes-ni-1.gitignorable.am
@@ -730,10 +1192,3 @@ include $(srcdir)/src/c_cpp/test/pfss_uint_buf-get_lsb-little_endian.gitignorabl
 include $(srcdir)/src/c_cpp/test/pfss_uint_buf-get_lsb-native_endian.gitignorable.am
 include $(srcdir)/src/c_cpp/test/pfss_uint_buf-large_buf_size.gitignorable.am
 include $(srcdir)/src/c_cpp/test/pfss_uint_buf-small_buf_size.gitignorable.am
-noinst_HEADERS += src/c_cpp/test/TEST_EXIT.h
-noinst_HEADERS += src/c_cpp/test/cpp_helpers.h
-noinst_HEADERS += src/c_cpp/test/helpers.h
-noinst_HEADERS += src/c_cpp/test/pfss/scheme_test_1.h
-noinst_HEADERS += src/c_cpp/test/pfss/scheme_test_2.h
-noinst_HEADERS += src/c_cpp/test/pfss/scheme_test_eval_all.h
-noinst_HEADERS += src/c_cpp/test/pfss/scheme_test_serialization.h

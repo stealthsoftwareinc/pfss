@@ -1,6 +1,8 @@
 //
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
+// Copyright (C) Stealth Software Technologies, Inc.
+//
+// For the complete copyright information, please see the
+// associated README file.
 //
 
 //
@@ -13,13 +15,21 @@
 // well.
 //
 
+//
+// The readme_diagrams attribute can be either unset, set to the empty
+// string, or set to any nonempty string. Unset means diagrams are not
+// being generated, the empty string means diagrams are being generated
+// for the distribution archive, and any nonempty string means diagrams
+// are being generated for the source repository.
+//
+
 ifdef::readme_diagrams[]
 ifeval::["{readme_diagrams}" != ""]
 :in_source_repo:
 endif::[]
 endif::[]
 ifndef::readme_diagrams[]
-:in_source_repo: x
+:in_source_repo:
 endif::[]
 
 ifdef::in_source_repo[]

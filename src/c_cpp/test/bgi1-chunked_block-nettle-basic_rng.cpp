@@ -14,7 +14,7 @@ using namespace pfss;
 
 int main() {
   try {
-#if PFSS_HAVE_NETTLE
+#if PFSS_WITH_NETTLE
     using block_type = chunked_block<std::uint64_t, 2>;
     using scheme_type = bgi1<
         20,

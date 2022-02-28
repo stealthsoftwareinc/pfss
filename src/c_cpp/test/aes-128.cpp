@@ -189,7 +189,7 @@ std::string unwrap(char const * const s) {
 int main() {
   try {
 
-#if PFSS_HAVE_NETTLE
+#if PFSS_WITH_NETTLE
     TEST(
         (pfss::chunked_block<std::uint64_t, 2>),
         (pfss::rand_perm_nettle_aes128<
@@ -201,7 +201,7 @@ int main() {
             pfss::chunked_block<std::uint64_t, 2>>));
 #endif
 
-#if PFSS_HAVE_NETTLE && PFSS_HAVE_SSE2
+#if PFSS_WITH_NETTLE && PFSS_WITH_SSE2
     TEST(
         (pfss::m128i_block),
         (pfss::rand_perm_nettle_aes128<pfss::m128i_block>));
@@ -211,13 +211,13 @@ int main() {
         (pfss::rand_perm_nettle_aes128<pfss::m128i_block>));
 #endif
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
     TEST((pfss::m128i_block), (pfss::aes_ni_128_rand_perm<>));
 #else
     SKIP((pfss::m128i_block), (pfss::aes_ni_128_rand_perm<>));
 #endif
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
     TEST((pfss::uint8x16_block), (pfss::arm_crypto_aes_128_rand_perm));
 #else
     SKIP((pfss::uint8x16_block), (pfss::arm_crypto_aes_128_rand_perm));

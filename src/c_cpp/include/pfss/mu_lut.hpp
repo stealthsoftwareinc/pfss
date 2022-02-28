@@ -132,16 +132,16 @@ constexpr std::uintmax_t mu_lut[127] = {0,
                                         6521908912666391552};
 
   template<class T>
-  constexpr T compute_mu(int const n, int const p) noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<T>::value);
-    PFSS_CONSTEXPR_ASSERT(n > 0);
-    PFSS_CONSTEXPR_ASSERT(p > 1);
-    PFSS_CONSTEXPR_ASSERT(n <= 127); // These two together ensure we can
-    PFSS_CONSTEXPR_ASSERT(p <= 127); // compute n+p-1 without overflowing.
-    PFSS_CONSTEXPR_ASSERT(n + p - 1 >= 1);
-    PFSS_CONSTEXPR_ASSERT(n + p - 1 <= 127);
-    PFSS_CONSTEXPR_ASSERT(n + p - 1 < sizeof(mu_lut) / sizeof(*mu_lut));
-    PFSS_CONSTEXPR_ASSERT(mu_lut[n + p - 1] <= type_max<T>::value);
+  constexpr T compute_mu(int const n, std::size_t const p) noexcept {
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
+    PFSS_SST_CONSTEXPR_ASSERT(n > 0);
+    PFSS_SST_CONSTEXPR_ASSERT(p > 1);
+    PFSS_SST_CONSTEXPR_ASSERT(n <= 127); // These two together ensure we can
+    PFSS_SST_CONSTEXPR_ASSERT(p <= 127); // compute n+p-1 without overflowing.
+    PFSS_SST_CONSTEXPR_ASSERT(n + p - 1 >= 1);
+    PFSS_SST_CONSTEXPR_ASSERT(n + p - 1 <= 127);
+    PFSS_SST_CONSTEXPR_ASSERT(n + p - 1 < sizeof(mu_lut) / sizeof(*mu_lut));
+    PFSS_SST_CONSTEXPR_ASSERT(mu_lut[n + p - 1] <= type_max<T>::value);
     return T(mu_lut[n + p - 1]);
   }
 
@@ -149,10 +149,10 @@ constexpr std::uintmax_t mu_lut[127] = {0,
   template<class T1, class T2>
   constexpr decltype(T1() / T2()) ceil_div(T1 const x,
                                            T2 const y) noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<T1>::value);
-    PFSS_STATIC_ASSERT(std::is_integral<T2>::value);
-    PFSS_CONSTEXPR_ASSERT(x >= 0);
-    PFSS_CONSTEXPR_ASSERT(y > 0);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T1>::value);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T2>::value);
+    PFSS_SST_CONSTEXPR_ASSERT(x >= 0);
+    PFSS_SST_CONSTEXPR_ASSERT(y > 0);
     return x / y + (x % y != 0);
   }
 
@@ -165,10 +165,10 @@ constexpr std::uintmax_t mu_lut[127] = {0,
   template<class T>
   constexpr unsigned long long compute_nu(int const n,
                                           T const mu) noexcept {
-    PFSS_STATIC_ASSERT(std::is_integral<T>::value);
-    PFSS_CONSTEXPR_ASSERT(n > 0);
-    PFSS_CONSTEXPR_ASSERT(n <= 64);
-    PFSS_CONSTEXPR_ASSERT(mu > 1);
+    PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
+    PFSS_SST_CONSTEXPR_ASSERT(n > 0);
+    PFSS_SST_CONSTEXPR_ASSERT(n <= 64);
+    PFSS_SST_CONSTEXPR_ASSERT(mu > 1);
     // Note: Given two integers x,y > 0, if x-1 is divisible by y, then
     // ceil(x/y) = (x-1)/y+1. If x nor x-1 is divisible by y, then
     // ceil(x/y) = ceil((x-1)/y).

@@ -14,7 +14,7 @@ using namespace pfss;
 
 int main() {
   try {
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
     using block_type = uint8x16_block;
     using scheme_type = bgi1<
         20,

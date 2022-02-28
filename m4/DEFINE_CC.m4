@@ -1,9 +1,11 @@
 dnl
-dnl For the copyright information for this file, please search up the
-dnl directory tree for the first COPYING file.
+dnl Copyright (C) Stealth Software Technologies, Inc.
+dnl
+dnl For the complete copyright information, please see the
+dnl associated README file.
 dnl
 
-AC_DEFUN([DEFINE_CC], [[{
+AC_DEFUN_ONCE([DEFINE_CC], [[{
 
 #
 # The block that contains this comment is the expansion of the

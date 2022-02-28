@@ -1,6 +1,8 @@
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
 #
 
 ---
@@ -19,7 +21,8 @@ AlignConsecutiveMacros: false
 
 AlignEscapedNewlines: Right
 
-AlignOperands: true
+AlignOperands: Align
+
 AlignTrailingComments: false
 AllowAllArgumentsOnNextLine: false
 AllowAllConstructorInitializersOnNextLine: false
@@ -69,6 +72,11 @@ Cpp11BracedListStyle: true
 DeriveLineEnding: false
 DerivePointerAlignment: false
 DisableFormat: false
+
+EmptyLineAfterAccessModifier: Leave
+
+EmptyLineBeforeAccessModifier: Leave
+
 FixNamespaceComments: true
 IncludeBlocks: Preserve
 IndentCaseLabels: true
@@ -80,7 +88,30 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
 PointerAlignment: Middle
+
+PPIndentWidth: -1
+
+QualifierAlignment: Custom
+
+QualifierOrder:
+  - static
+  - inline
+  - constexpr
+  - type
+  - const
+  - restrict
+  - volatile
+
+ReferenceAlignment: Pointer
+
 ReflowComments: false
+
+RemoveBracesLLVM: false
+
+SeparateDefinitionBlocks: Leave
+
+ShortNamespaceLines: 0
+
 SortIncludes: true
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
@@ -90,13 +121,26 @@ SpaceBeforeAssignmentOperators: true
 SpaceBeforeCpp11BracedList: false
 SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
-SpaceBeforeParens: ControlStatements
+
+SpaceBeforeParens: Custom
+
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDeclarationName: false
+  AfterFunctionDefinitionName: false
+  AfterIfMacros: true
+  AfterOverloadedOperator: false
+  BeforeNonEmptyParentheses: false
+
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false
 SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
-SpacesInAngles: false
+
+SpacesInAngles: Never
+
 SpacesInCStyleCastParentheses: false
 SpacesInConditionalStatement: false
 SpacesInContainerLiterals: false
@@ -106,6 +150,109 @@ TabWidth: 8
 UseCRLF: false
 UseTab: Never
 ---
+
 Language: Cpp
+
+IncludeBlocks: Regroup
+
+#
+# Keep the IncludeCategories entries in sorted order. The Priority
+# values define the groups and the group order, and the SortPriority
+# values for the same Priority value define the include order within
+# that group. For sanity, each SortPriority value should be in [a,b),
+# where a and b are the Priority values of the current group and the
+# next group, respectively. If you don't follow this convention, the
+# behavior is confusing (it first sorts all includes by SortPriority,
+# then it inserts a blank line at every Priority change).
+#
+# To recompute the Priority and SortPriority values in Vim while still
+# allowing gaps for manual editing, put your cursor anywhere in this
+# comment and run the following ex command:
+#
+#       /^IncludeCategories:/;/^[^ ]/!awk '$1 == "Priority:" { if ($2 \!= a) { a = $2; b = NR * 100 } sub(/[0-9]+/, b) } $1 == "SortPriority:" { sub(/[0-9]+/, NR * 100) } 1'
+#
+
+## begin_c_cpp_include_categories
+
+IncludeCategories:
+
+  # Standard C headers
+  - Regex: '^<(assert|complex|ctype|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdalign|stdarg|stdatomic|stdbool|stddef|stdint|stdio|stdlib|stdnoreturn|string|tgmath|threads|time|uchar|wchar|wctype)\.h>$'
+    Priority: 500
+    SortPriority: 600
+
+  # Standard C++ headers
+  - Regex: '^<(algorithm|any|array|atomic|barrier|bit|bitset|cassert|cctype|cerrno|cfenv|cfloat|charconv|chrono|cinttypes|climits|clocale|cmath|compare|complex|concepts|condition_variable|coroutine|csetjmp|csignal|cstdarg|cstddef|cstdint|cstdio|cstdlib|cstring|cuchar|cwchar|cwctype|deque|exception|execution|filesystem|format|forward_list|fstream|functional|future|initializer_list|iomanip|ios|iosfwd|iostream|istream|iterator|latch|limits|list|locale|map|memory|memory_resource|mutex|new|numbers|numeric|optional|ostream|queue|random|ranges|ratio|regex|scoped_allocator|semaphore|set|shared_mutex|source_location|span|sstream|stack|stdexcept|stop_token|streambuf|string|string_view|syncstream|system_error|thread|tuple|type_traits|typeindex|typeinfo|unordered_map|unordered_set|utility|valarray|variant|vector|version)>$'
+    Priority: 1000
+    SortPriority: 1100
+
+  # POSIX headers (minus any standard C headers)
+  - Regex: '^<(aio|arpa/inet|cpio|dirent|dlfcn|fcntl|fmtmsg|fnmatch|ftw|glob|grp|iconv|langinfo|libgen|monetary|mqueue|ndbm|net/if|netdb|netinet/in|netinet/tcp|nl_types|poll|pthread|pwd|regex|sched|search|semaphore|spawn|strings|stropts|sys/ipc|sys/mman|sys/msg|sys/resource|sys/select|sys/sem|sys/shm|sys/socket|sys/stat|sys/statvfs|sys/time|sys/times|sys/types|sys/uio|sys/un|sys/utsname|sys/wait|syslog|tar|termios|trace|ulimit|unistd|utime|utmpx|wordexp)\.h>$'
+    Priority: 1500
+    SortPriority: 1600
+
+  # Non POSIX Unix-like headers
+  - Regex: '^<(ifaddrs|sys/param)\.h>$'
+    Priority: 2000
+    SortPriority: 2100
+
+  # Windows headers 1
+  - Regex: '^<(winsock2)\.h>$'
+    Priority: 2500
+    SortPriority: 2600
+
+  # Windows headers 2
+  - Regex: '^<(ws2tcpip)\.h>$'
+    Priority: 2500
+    SortPriority: 3100
+
+  # Windows headers 3
+  - Regex: '^<(windows)\.h>$'
+    Priority: 2500
+    SortPriority: 3600
+
+  # SST headers
+  - Regex: ^.sst[./]
+    Priority: 4000
+    SortPriority: 4100
+
+  # PFSS headers
+  - Regex: '^[<"]pfss(\.h|/.*)[>"]$'
+    Priority: 4500
+    SortPriority: 4600
+
+  # Boost headers
+  - Regex: '^[<"]boost(\.h|/.*)[>"]$'
+    Priority: 5000
+    SortPriority: 5100
+
+  # Nettle headers
+  - Regex: '^[<"]nettle(\.h|/.*)[>"]$'
+    Priority: 5500
+    SortPriority: 5600
+
+  # Nlohmann Json headers
+  - Regex: '^[<"]nlohmann(\.h|/.*)[>"]$'
+    Priority: 6000
+    SortPriority: 6100
+
+  # OpenODBC headers
+  - Regex: '^[<"](sql|sqlext|sqltypes)(\.h|/.*)[>"]$'
+    Priority: 6500
+    SortPriority: 6600
+
+  # OpenSSL headers
+  - Regex: '^[<"]openssl(\.h|/.*)[>"]$'
+    Priority: 7000
+    SortPriority: 7100
+
+  # Google Test headers
+  - Regex: '^[<"](gtest|gmock)(\.h|/.*)[>"]$'
+    Priority: 7500
+    SortPriority: 7600
+
+## end_c_cpp_include_categories
+
 Standard: c++11
+
 ...

@@ -21,7 +21,7 @@ export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
 # Run ./configure, ensuring that it detects AES-NI.
-./configure --with-aes-ni-or-die
+./configure --with-aes-ni
 
 # Compile, run the test suite, and install.
 make
@@ -56,14 +56,12 @@ export STRIP=$TOOLCHAIN/bin/$TARGET-strip
 
 # Set up our compiler flags.
 export CPPFLAGS="-DNDEBUG"
-export CFLAGS="-O2 -march=armv8-a"
+export CFLAGS="-O2 -march=armv8-a+crypto"
 export CXXFLAGS="$CFLAGS"
 
 # Run ./configure, ensuring that it detects ARM Crypto and JNI.
 ./configure --build x86_64-pc-linux-gnu --host $TARGET \
-  --with-arm-crypto-or-die --with-jni-or-die \
-  --with-cross-cflag-march-arm-crypto \
-  --with-cross-cxxflag-march-arm-crypto
+            --with-arm-crypto --with-jni
 
 # Compile and do a staged install.
 make

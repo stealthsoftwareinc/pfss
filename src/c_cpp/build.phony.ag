@@ -1,0 +1,55 @@
+#
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
+#
+
+#-----------------------------------------------------------------------
+
+f() {
+
+  declare    d
+  declare -A seen
+  declare    x
+  declare    y
+  declare    z
+
+  sst_expect_source_path "$BASH_SOURCE"
+  d=$(sst_get_prefix $BASH_SOURCE)
+  readonly d
+
+  seen=()
+
+  for x in ${d}sst/include/**; do
+    if [[ -f "$x" ]]; then
+      sst_expect_source_path "$x"
+      y=${x#${d}sst/}
+      y=${y%/*}
+      z=$(sst_underscore_slug "$y")
+      if [[ ! "${seen[$y]-}" ]]; then
+        seen[$y]=x
+        sst_ihs <<<'
+          '$z'dir = $(includedir)/'${y#include/}'
+          '$z'_HEADERS =
+        ' | sst_am_append
+      fi
+      sst_ihs <<<'
+        '$z'_HEADERS += '$x'
+      ' | sst_am_append
+    fi
+  done
+
+  for x in ${d}sst/lib/**; do
+    if [[ -f "$x" ]]; then
+      sst_expect_source_path "$x"
+      sst_ihs <<<'
+        src_c_cpp_libpfss_la_SOURCES += '$x'
+      ' | sst_am_append
+    fi
+  done
+}
+
+#-----------------------------------------------------------------------
+
+f

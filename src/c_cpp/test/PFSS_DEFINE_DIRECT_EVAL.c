@@ -4,8 +4,11 @@
  */
 
 #include <helpers.h>
+#include <pfss/config.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#if PFSS_WITH_AES_NI
 
 #define DEFINE_TEST_HELPER(domain_bits, range_type) \
 \
@@ -362,3 +365,11 @@ int main(void) {
   TEST(128);
   return exit_status;
 }
+
+#else
+
+int main(void) {
+  return TEST_EXIT_SKIP;
+}
+
+#endif

@@ -31,8 +31,8 @@ struct error : std::runtime_error {
 };
 
 using uchar = unsigned char;
-constexpr uchar uchar_max = static_cast<uchar>(-1);
-constexpr uchar uchar_msb = uchar_max ^ (uchar_max >> 1);
+constexpr uchar uchar_max = pfss::uchar_max::value;
+constexpr uchar uchar_msb = pfss::uchar_msb::value;
 
 template<class Block>
 struct tester final {
@@ -119,13 +119,13 @@ int main() {
 
     TEST((pfss::chunked_block<std::uint64_t, 2>));
 
-#if PFSS_HAVE_SSE2
+#if PFSS_WITH_SSE2
     TEST((pfss::m128i_block));
 #else
     SKIP((pfss::m128i_block));
 #endif
 
-#if PFSS_HAVE_ARM_CRYPTO
+#if PFSS_WITH_ARM_CRYPTO
     TEST((pfss::uint8x16_block));
 #else
     SKIP((pfss::uint8x16_block));

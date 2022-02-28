@@ -1,7 +1,0 @@
-//
-// For the copyright information for this file, please search up the
-// directory tree for the first COPYING file.
-//
-Make sure to specify _all_ of the above options whose corresponding test
-programs would have succeeded, as neglecting to specify some of them may
-cascade and cause others to have no effect.

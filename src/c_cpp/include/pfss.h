@@ -14,11 +14,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#if PFSS_HAVE_SSE2
+#if PFSS_WITH_SSE2
 #include <emmintrin.h>
 #endif
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 #include <wmmintrin.h>
 #endif
 
@@ -551,7 +551,7 @@ PFSS_DEFINE_DIRECT_EVAL(my_eval, 128, uint16_t)
 end::c_api_PFSS_DEFINE_DIRECT_EVAL[]
 */
 
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
 
 #define PFSS_DEFINE_DIRECT_EVAL(f, domain_bits, range_type) \
   static range_type f(void const * const k, void const * const x) { \

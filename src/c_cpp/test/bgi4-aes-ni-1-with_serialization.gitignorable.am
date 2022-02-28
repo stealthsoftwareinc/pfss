@@ -1,6 +1,8 @@
 ##
-## For the copyright information for this file, please search up the
-## directory tree for the first COPYING file.
+## Copyright (C) Stealth Software Technologies, Inc.
+##
+## For the complete copyright information, please see the
+## associated README file.
 ##
 
 ##
@@ -16,25 +18,25 @@ check_PROGRAMS += src/c_cpp/test/bgi4-aes-ni-1-with_serialization
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_CFLAGS = \
   $(AM_CFLAGS) \
   $(EXE_CFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_CPPFLAGS = \
   $(AM_CPPFLAGS) \
   -I src/c_cpp/test \
   -I $(srcdir)/src/c_cpp/test \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_CXXFLAGS = \
   $(AM_CXXFLAGS) \
   $(EXE_CXXFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_LDADD = src/c_cpp/libpfss.la
 
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_LDFLAGS = \
   $(AM_LDFLAGS) \
   $(EXE_LDFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_bgi4_aes_ni_1_with_serialization_SOURCES = src/c_cpp/test/bgi4-aes-ni-1-with_serialization.cpp
 

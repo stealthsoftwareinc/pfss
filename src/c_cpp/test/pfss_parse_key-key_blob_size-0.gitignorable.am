@@ -1,6 +1,8 @@
 ##
-## For the copyright information for this file, please search up the
-## directory tree for the first COPYING file.
+## Copyright (C) Stealth Software Technologies, Inc.
+##
+## For the complete copyright information, please see the
+## associated README file.
 ##
 
 ##
@@ -16,25 +18,25 @@ check_PROGRAMS += src/c_cpp/test/pfss_parse_key-key_blob_size-0
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_CFLAGS = \
   $(AM_CFLAGS) \
   $(EXE_CFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_CPPFLAGS = \
   $(AM_CPPFLAGS) \
   -I src/c_cpp/test \
   -I $(srcdir)/src/c_cpp/test \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_CXXFLAGS = \
   $(AM_CXXFLAGS) \
   $(EXE_CXXFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_LDADD = src/c_cpp/libpfss.la
 
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_LDFLAGS = \
   $(AM_LDFLAGS) \
   $(EXE_LDFLAGS) \
-$(prevent_an_empty_line)
+$(empty)
 
 src_c_cpp_test_pfss_parse_key_key_blob_size_0_SOURCES = src/c_cpp/test/pfss_parse_key-key_blob_size-0.c
 

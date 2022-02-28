@@ -1,23 +1,31 @@
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
 #
 
+unset -v child
 unset -v d
-unset -v xs
+unset -v e1
+unset -v e2
+unset -v leaf
 
 sst_expect_source_path "$BASH_SOURCE"
 d=$(sst_get_prefix $BASH_SOURCE)
 
-sst_array_from_zterm xs git ls-files -z ${d}.
-sst_am_distribute_file "${xs[@]}"
+e1='@(.adoc|.gawk)'
+e2='@(.ag|.ac|.am|.im.in|.in|.im|.m4|)'
+for leaf in ${d}**/*$e1$e2; do
+  sst_expect_source_path "$leaf"
+  sst_ag_process_leaf ${d%/} $leaf child
+done
 
-sst_ac_config_file ${d}config.adoc
-sst_am_distribute_file ${d}config.adoc
+sst_am_distribute ${d}config.adoc
 
 sst_ihs <<<"
 
-  ${d}diag:
+  ${d}diagrams:
   	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_TOP)
   	\$(AM_V_GEN)\$(GATBPS_V_NOP)
   	\$(GATBPS_at)rm -f -r \$@
@@ -31,6 +39,6 @@ sst_ihs <<<"
   	\$(GATBPS_at)touch \$@
   	\$(AM_V_at)\$(GATBPS_RECIPE_MARKER_BOT)
 
-  EXTRA_DIST += ${d}diag
+  EXTRA_DIST += ${d}diagrams
 
 " | sst_am_append

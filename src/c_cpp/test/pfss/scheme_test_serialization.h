@@ -45,6 +45,50 @@ public:
   }
 };
 
+template<class Scheme>
+class runtime_z2n_test_helper {
+public:
+  int const domain_bits;
+  int const range_bits;
+  using DomainType = typename Scheme::domain_type;
+  using RangeType = typename Scheme::range_type;
+
+  typename std::vector<RangeType> ys0;
+  typename std::vector<RangeType> ys1;
+
+  unsigned char aeskey[16] = {0};
+  typename Scheme::rand_perm_type pi{aeskey};
+
+  runtime_z2n_test_helper(int const DomainBits, int const RangeBits)
+      : domain_bits(DomainBits),
+        range_bits(RangeBits) {
+    ys0 = std::vector<RangeType>(domain_mask(domain_bits) + 1,
+                                 RangeType(range_bits));
+    ys1 = std::vector<RangeType>(domain_mask(domain_bits) + 1,
+                                 RangeType(range_bits));
+  }
+
+  DomainType domain_mask(int const domain_bits) {
+    return get_mask<DomainType>(domain_bits);
+  }
+
+  void do_up_to_gen(typename Scheme::key_type keys[2],
+                    DomainType domain_slot,
+                    RangeType range_value,
+                    typename Scheme::rng_type & rng) {
+    Scheme Fss(domain_bits, range_bits);
+    Fss.gen(keys, domain_slot, range_value, pi, rng);
+  }
+
+  void
+  eval_all_deserialized(typename Scheme::key_type & deserialized_key0,
+                        typename Scheme::key_type & deserialized_key1) {
+    Scheme Fss(domain_bits, range_bits);
+    Fss.eval_all(deserialized_key0, ys0, pi);
+    Fss.eval_all(deserialized_key1, ys1, pi);
+  }
+};
+
 template<class Scheme, int NumParties>
 class p_party_test_helper {
 public:
@@ -212,6 +256,67 @@ bool scheme_test_correctness_with_serialization(
     } else {
       if (y != 0) {
         exit_status = TEST_EXIT_FAIL;
+      }
+    }
+  }
+  return exit_status == TEST_EXIT_PASS;
+}
+
+template<class Scheme>
+bool runtime_z2n_scheme_test_correctness_with_serialization(
+    typename Scheme::rng_type & r,
+    typename Scheme::domain_type const & domain_slot,
+    int const domain_bits,
+    int const range_bits) {
+  int exit_status = TEST_EXIT_PASS;
+  runtime_z2n_test_helper<Scheme> t(domain_bits, range_bits);
+  typename Scheme::range_type range_value(range_bits);
+  range_value[0] = 2;
+
+  typename Scheme::key_type keys[2] = {
+      typename Scheme::key_type(domain_bits, range_bits),
+      typename Scheme::key_type(domain_bits, range_bits)};
+  t.do_up_to_gen(keys, domain_slot, range_value, r);
+
+  typename Scheme::key_type deserialized_key0 =
+      typename Scheme::key_type(domain_bits, range_bits);
+  typename Scheme::key_type deserialized_key1 =
+      typename Scheme::key_type(domain_bits, range_bits);
+  {
+    Scheme Fss(domain_bits, range_bits);
+    std::vector<unsigned char> blob(Fss.key_blob_size());
+    keys[0].serialize(blob.begin());
+    deserialized_key0.parse(blob.cbegin());
+  }
+
+  {
+    Scheme Fss(domain_bits, range_bits);
+    std::vector<unsigned char> blob(Fss.key_blob_size());
+    keys[1].serialize(blob.begin());
+    deserialized_key1.parse(blob.cbegin());
+  }
+
+  t.eval_all_deserialized(deserialized_key0, deserialized_key1);
+
+  for (typename Scheme::domain_type x = 0; x < t.ys0.size(); ++x) {
+    auto const y = (t.ys0[x] + t.ys1[x]);
+    // std::cout << std::to_string(x) << ": " << std::to_string(t.ys0[x])
+    //           << " + " << std::to_string(t.ys1[x]) << " = "
+    //           << std::to_string(y) << std::endl;
+    if (x == domain_slot) {
+      if (y[0] != 2) {
+        exit_status = TEST_EXIT_FAIL;
+      }
+      for (std::size_t i = 1; i < y.size(); i++) {
+        if (y[i] != 0) {
+          exit_status = TEST_EXIT_FAIL;
+        }
+      }
+    } else {
+      for (std::size_t i = 0; i < y.size(); i++) {
+        if (y[i] != 0) {
+          exit_status = TEST_EXIT_FAIL;
+        }
       }
     }
   }

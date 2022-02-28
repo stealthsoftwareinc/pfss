@@ -1,11 +1,27 @@
-#! /bin/bash -
+#! /bin/sh -
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
+#
+# This script uses the SST Bash library to bootstrap from /bin/sh into
+# bash. See the Bash library > Bootstrapping section of the SST manual
+# for more information.
 #
 
-set -e
-. src/bash/preludes/gitlab-ci.bash
+#-----------------------------------------------------------------------
+# Include the SST Bash library
+#-----------------------------------------------------------------------
+
+set -e || exit $?
+if test -f sst.bash; then
+  . ./sst.bash
+else
+  . sst.bash
+fi
+
+#-----------------------------------------------------------------------
 
 sst_ubuntu_install_raw \
   g++ \
@@ -61,16 +77,14 @@ cd "$tmpdir"
   CPPFLAGS+=' -I/usr/lib/jvm/java-11-openjdk-amd64/include/linux'
   export CPPFLAGS
 
-  export CFLAGS="-O2 -march=armv8-a"
+  export CFLAGS="-O2 -march=armv8-a+crypto"
   export CXXFLAGS="$CFLAGS"
 
   ./configure \
     --build x86_64-pc-linux-gnu \
     --host $TARGET \
-    --with-arm-crypto-or-die \
-    --with-cross-cflag-march-arm-crypto \
-    --with-cross-cxxflag-march-arm-crypto \
-    --with-jni-or-die \
+    --with-arm-crypto \
+    --with-jni \
   ;
   cp config.log "$rundir"
 

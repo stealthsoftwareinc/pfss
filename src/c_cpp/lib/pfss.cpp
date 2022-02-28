@@ -198,7 +198,7 @@ using uint_buf_type = uint_buf<uint32_t>;
 
 template<class T>
 void validate_domain_bits(T const domain_bits) {
-  PFSS_STATIC_ASSERT(std::is_integral<T>::value);
+  PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
   if (domain_bits < 1) {
     throw error(PFSS_INVALID_DOMAIN);
   }
@@ -209,7 +209,7 @@ void validate_domain_bits(T const domain_bits) {
 
 template<class T>
 void validate_range_bits(T const range_bits) {
-  PFSS_STATIC_ASSERT(std::is_integral<T>::value);
+  PFSS_SST_STATIC_ASSERT(std::is_integral<T>::value);
   if (range_bits < 1) {
     throw error(PFSS_INVALID_RANGE);
   }
@@ -1320,7 +1320,7 @@ Y reduce_sum(
     uint32_t const range_bits,
     uint8_t const * ys,
     uint32_t ys_count) noexcept {
-  PFSS_STATIC_ASSERT(
+  PFSS_SST_STATIC_ASSERT(
       (std::is_same<Y, std::uint8_t>::value ||
        std::is_same<Y, std::uint16_t>::value ||
        std::is_same<Y, std::uint32_t>::value ||
@@ -1770,16 +1770,16 @@ T1 get_num_threads(T2 const thread_count,
                    T3 const domain_bits) noexcept {
   assert(thread_count > 0);
   assert(domain_bits > 0);
-  constexpr T1 T1_max = sst::type_max<T1>::value;
-  constexpr int T1_bits = sst::width_bits<T1>::value;
-  T1 const n = sst::unsigned_lt(thread_count, T1_max) ?
+  constexpr T1 T1_max = pfss::type_max<T1>::value;
+  constexpr int T1_bits = pfss::width_bits<T1>::value;
+  T1 const n = pfss::unsigned_lt(thread_count, T1_max) ?
                    T1(thread_count) :
                    T1_max;
-  if (sst::unsigned_ge(domain_bits, T1_bits)) {
+  if (pfss::unsigned_ge(domain_bits, T1_bits)) {
     return n;
   }
   T1 const domain_size = T1(T1(1) << domain_bits);
-  return sst::min(n, domain_size);
+  return pfss::min(n, domain_size);
 }
 
 // Thread i will own step + (i < slop) + 1 cells.
@@ -1788,13 +1788,13 @@ std::pair<T1, T1> get_step_and_slop(T1 const num_threads,
                                     T2 const domain_bits) noexcept {
   assert(num_threads > 0);
   assert(domain_bits > 0);
-  constexpr T1 T1_max = sst::type_max<T1>::value;
-  constexpr int T1_bits = sst::width_bits<T1>::value;
-  assert(sst::unsigned_le(domain_bits, T1_bits));
+  constexpr T1 T1_max = pfss::type_max<T1>::value;
+  constexpr int T1_bits = pfss::width_bits<T1>::value;
+  assert(pfss::unsigned_le(domain_bits, T1_bits));
   if (num_threads == 1) {
     return std::make_pair(get_mask<T1>(domain_bits), T1(0));
   }
-  if (sst::unsigned_eq(domain_bits, T1_bits)) {
+  if (pfss::unsigned_eq(domain_bits, T1_bits)) {
     return std::make_pair(T1(T1_max / num_threads - T1(1)),
                           T1(T1_max % num_threads + T1(1)));
   }
@@ -1817,7 +1817,7 @@ void pfss_eval_all_sum_helper_2(pfss_key const * const * const keys,
                                 std::size_t const x_first,
                                 std::size_t const x_last,
                                 uint8_t * const ys) {
-  PFSS_STATIC_ASSERT((std::is_same<Y, std::uint8_t>::value
+  PFSS_SST_STATIC_ASSERT((std::is_same<Y, std::uint8_t>::value
                       || std::is_same<Y, std::uint16_t>::value
                       || std::is_same<Y, std::uint32_t>::value
                       || std::is_same<Y, std::uint64_t>::value));
@@ -2007,8 +2007,8 @@ pfss_eval_all_sum_nolog(pfss_key const * const * const keys,
         }
       }
     }
-    if (sst::unsigned_gt(keys[0]->domain_bits,
-                         sst::width_bits<std::size_t>::value)) {
+    if (pfss::unsigned_gt(keys[0]->domain_bits,
+                         pfss::width_bits<std::size_t>::value)) {
       throw error(PFSS_DOMAIN_OVERFLOW);
     }
     validate_pointer(ys);
@@ -2079,7 +2079,7 @@ void pfss_eval_all_dot_helper_2(
     std::size_t const x_last,
     uint8_t const * const ys,
     std::vector<unsigned long long> & partials) {
-  PFSS_STATIC_ASSERT((std::is_same<Y, std::uint8_t>::value
+  PFSS_SST_STATIC_ASSERT((std::is_same<Y, std::uint8_t>::value
                       || std::is_same<Y, std::uint16_t>::value
                       || std::is_same<Y, std::uint32_t>::value
                       || std::is_same<Y, std::uint64_t>::value));
@@ -2287,8 +2287,8 @@ pfss_eval_all_dot_nolog(pfss_key const * const * const keys,
         }
       }
     }
-    if (sst::unsigned_gt(keys[0]->domain_bits,
-                         sst::width_bits<std::size_t>::value)) {
+    if (pfss::unsigned_gt(keys[0]->domain_bits,
+                         pfss::width_bits<std::size_t>::value)) {
       throw error(PFSS_DOMAIN_OVERFLOW);
     }
     validate_pointer(ys);

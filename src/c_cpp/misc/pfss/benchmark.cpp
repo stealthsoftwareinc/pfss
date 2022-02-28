@@ -31,6 +31,8 @@
 #include <utility>
 #include <vector>
 
+#include <pfss/sst/catalog/crypto_rng_t.hpp>
+
 namespace pfss {
 
 namespace {
@@ -39,7 +41,6 @@ thread_local char const * g_argv0;
 thread_local std::istream * g_cin;
 thread_local std::ostream * g_cout;
 thread_local std::ostream * g_cerr;
-thread_local std::ifstream * g_urandom;
 
 void print_to_stderr(std::string const & message) noexcept {
   try {
@@ -192,7 +193,7 @@ struct parser_t<double> {
 
 template<class T, std::map<std::string, T> const * M>
 struct map_parser_t {
-  PFSS_STATIC_ASSERT(M != nullptr);
+  PFSS_SST_STATIC_ASSERT(M != nullptr);
 
   // Parses the RHS of a parameter=value command-line argument.
   static T parse(std::string const & rhs) {
@@ -353,7 +354,7 @@ nanoseconds_t ms_to_ns(parameter_t<Integer> const & ms) {
     pfss::checked<nanoseconds_t::value_type> ns(ms.value());
     ns *= 1000000;
     return nanoseconds_t(ns.value());
-  } catch (pfss::checked_error const &) {
+  } catch (std::overflow_error const &) {
     ms.reject();
   }
   throw std::logic_error("unreachable");
@@ -384,13 +385,9 @@ double measure_throughput(nanoseconds_t const max_time_ns,
 
 template<class OutputIt>
 void fill_with_random_bytes(OutputIt first, OutputIt const last) {
-  try {
-    auto random = std::istreambuf_iterator<char>(*g_urandom);
-    while (first != last) {
-      *first++ = *random++;
-    }
-  } catch (std::ios_base::failure const &) {
-    throw fatal_t("error reading from /dev/urandom");
+  auto & rng = sst::crypto_rng();
+  while (first != last) {
+    *first++ = rng();
   }
 }
 
@@ -799,8 +796,6 @@ int benchmark(int const argc,
 
   g_cerr = &cerr;
 
-  std::ifstream urandom;
-
   try {
 
     if (argc == 0) {
@@ -811,10 +806,6 @@ int benchmark(int const argc,
     old_cout_exceptions = cout.exceptions();
     have_old_cout_exceptions = true;
     cout.exceptions(cout.badbit | cout.failbit);
-
-    urandom.exceptions(urandom.badbit | urandom.failbit);
-    urandom.open("/dev/urandom", std::ios::in | std::ios::binary);
-    g_urandom = &urandom;
 
     for (int argi = 1; argi < argc; ++argi) {
       std::string const arg = argv[argi];

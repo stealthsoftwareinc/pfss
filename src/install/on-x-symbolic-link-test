@@ -1,7 +1,9 @@
 #! /bin/sh -
 #
-# For the copyright information for this file, please search up the
-# directory tree for the first COPYING file.
+# Copyright (C) Stealth Software Technologies, Inc.
+#
+# For the complete copyright information, please see the
+# associated README file.
 #
 
 #
@@ -41,32 +43,41 @@
 # is only performed when installing from a repository, as distribution
 # archives flatten symbolic links, which avoids any problems.
 #
-# Technically we could avoid symbolic links entirely by keeping them
-# flattened in the repository, but this would cause some difficulties
-# regarding keeping the copies in sync. It seems like a poor tradeoff.
-# It's better to just refrain from doing development work in strange
-# environments.
+# Technically we could avoid all symbolic link problems by simply never
+# using symbolic links, but this would make some aspects of development
+# work extremely tedious and error-prone. It's best to simply refrain
+# from doing development work in strange environments.
 #
 
-argv0=$1
-case $argv0 in
-  '' | */ | *'
-')
-    cat >&2 <<'EOF'
-argv0 is insane.
-EOF
-    exit 1
-  ;;
-  /*)
-  ;;
-  *)
-    argv0=./$argv0
-  ;;
+case $# in 0)
+  printf '%s\n' "Invalid argument count: 0" >&2
+  exit 1
 esac
+
+argv0=$1
+argv0_is_invalid=false
+case $argv0 in *[!/0-9A-Z_a-z-]* | install/*/*)
+  argv0_is_invalid=:
+;; install/on-[0-9A-Za-z]*[0-9A-Za-z])
+  :
+;; *)
+  argv0_is_invalid=:
+esac
+if $argv0_is_invalid; then
+  sed '
+    s/'\''/&\\&&/g
+    1 s/^/Invalid initial argument: '\''/
+    $ s/$/'\''/
+  ' <<EOF >&2
+$argv0
+EOF
+  exit 1
+fi
 readonly argv0
+readonly argv0_is_invalid
 shift
 
-on_x=`basename "$argv0"` || exit $?
+on_x=`basename $argv0` || exit $?
 readonly on_x
 export on_x
 
@@ -204,18 +215,11 @@ EOF
 fi
 
 #-----------------------------------------------------------------------
+# Run the next script
+#-----------------------------------------------------------------------
 
-#
-# The GNU Autoconf manual suggests avoiding "$@" when $# is zero to be
-# as portable as possible. This is probably never a problem these days,
-# but let's do it anyway.
-#
-
-case $# in
-  0)
-    $next
-  ;;
-  *)
-    $next "$@"
-  ;;
+case $# in 0)
+  exec $next
+;; *)
+  exec $next "$@"
 esac

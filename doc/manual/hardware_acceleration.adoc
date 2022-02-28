@@ -2,16 +2,15 @@
 // For the copyright information for this file, please search up the
 // directory tree for the first COPYING file.
 //
+
 [[hardware_acceleration]]
 = Hardware acceleration
 
 PFSS can optionally be compiled to use special CPU instructions for
 increased performance.
 The `./configure` step of the build system automatically detects which
-of these instructions are available and enables them in the code
-accordingly.
-However, the detection process sometimes needs user intervention to
-ensure that the instructions are being detected properly.
+of these instructions are available under the specified compiler flags
+and enables them in the code accordingly.
 
 The terms _build system_ and _host system_ are generally used to refer
 to the system on which you are compiling the code and the system on
@@ -22,56 +21,28 @@ from context.
 
 == x86 acceleration
 
-For the x86 family of CPUs, there are two CPU instruction groups that
-can be enabled: SSE2 and AES-NI.
+For the x86 family of CPUs, there is one CPU instruction set that can be
+enabled: AES-NI.
 
-If you're not cross compiling, `./configure` is usually able to detect
-these instruction groups properly without any user intervention.
+You can generally enable AES-NI by adding `-maes` to both `CFLAGS` and
+`CXXFLAGS`.
+If you're not cross-compiling, it's usually sufficient to specify
+`-march=native` without any other `-m` options.
 
-:feat: group
-:features: instruction groups
-
-include::with_feat_or_die_1.adoc[]
-
-----
---with-sse2-or-die  --with-aes-ni-or-die
-----
-
-include::with_feat_or_die_2.adoc[]
-
-----
---with-cross-cflag-msse2  --with-cross-cxxflag-msse2
---with-cross-cflag-maes   --with-cross-cxxflag-maes
-----
-
-include::with_feat_or_die_3.adoc[]
-For example, since AES-NI cannot be available without SSE2 also being
-available, neglecting to specify `--with-cross-cflag-msse2` will cause
-`--with-cross-cflag-maes` to have no effect.
+You can also specify `--with-aes-ni` to `./configure` to instruct it to
+verify that AES-NI was detected, failing if not.
 
 == ARM acceleration
 
-For the ARM family of CPUs, there is one CPU instruction group that can
-be enabled: ARM Crypto.
+For the ARM family of CPUs, there is one CPU instruction set that can be
+enabled: ARM Crypto.
 
-Regardless of whether you're cross compiling, `./configure` usually
-needs user intervention to detect this instruction group properly.
-To do this, specify at least one of the `-march=...` and `--mcpu=...`
-options in both `CFLAGS` and `CXXFLAGS` when running `./configure`.
+You can generally enable ARM Crypto by adding `-march=armv8-a+crypto` to
+both `CFLAGS` and `CXXFLAGS`.
+You can adjust this flag as needed, it is only the `+crypto` extension
+that is required.
+If you're not cross-compiling, it's usually sufficient to specify
+`-march=native` without any other `-m` options.
 
-:feat: group
-:features: instruction groups
-
-include::with_feat_or_die_1.adoc[]
-
-----
---with-arm-crypto-or-die
-----
-
-include::with_feat_or_die_2.adoc[]
-
-----
---with-cross-cflag-march-arm-crypto  --with-cross-cxxflag-march-arm-crypto
-----
-
-include::with_feat_or_die_3.adoc[]
+You can also specify `--with-arm-crypto` to `./configure` to instruct it
+to verify that ARM Crypto was detected, failing if not.

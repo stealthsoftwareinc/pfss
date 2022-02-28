@@ -14,7 +14,7 @@ using namespace pfss;
 
 int main() {
   try {
-#if PFSS_HAVE_AES_NI
+#if PFSS_WITH_AES_NI
     using block_type = m128i_block;
     using scheme_type = bgi1<
         20,

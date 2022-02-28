@@ -14,7 +14,7 @@ using namespace pfss;
 
 int main() {
   try {
-#if PFSS_HAVE_NETTLE && PFSS_HAVE_SSE2
+#if PFSS_WITH_NETTLE && PFSS_WITH_SSE2
     using block_type = m128i_block;
     using scheme_type = ds<
         20,
